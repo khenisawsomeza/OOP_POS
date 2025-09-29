@@ -1,0 +1,65 @@
+package com.mycompany.j_pos.ui.components.cashier_sections.cart;
+
+import com.mycompany.j_pos.models.Cart;
+import com.mycompany.j_pos.ui.factories.ButtonFactory;
+import com.mycompany.j_pos.ui.factories.LabelFactory;
+import com.mycompany.j_pos.ui.factories.PanelFactory;
+import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class CartTitle extends JPanel {
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 50;
+    private static final int PADDING = 20;
+    private static final int ICON_SIZE = 30;
+
+    private final Cart cart;
+    private final Runnable handleClearCart;
+
+    public CartTitle(Cart cart, Runnable handleClearCart) {
+        this.cart = cart;
+        this.handleClearCart = handleClearCart;
+
+        setupMainPanel();
+        add(buildTitlePanel(), BorderLayout.NORTH);
+    }
+
+    private void setupMainPanel() {
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setBorder(BorderFactory.createMatteBorder(
+            0, 0, 1, 0, themeManager.getInstance().getStaticBorderGray()
+        ));
+    }
+
+    private JPanel buildTitlePanel() {
+        JPanel titlePanel = PanelFactory.createSectionPanel(new BorderLayout(), new Dimension(WIDTH, HEIGHT));
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(0, PADDING, 0, PADDING));
+
+        titlePanel.add(createHeaderLabel(), BorderLayout.WEST);
+        titlePanel.add(createClearButton(), BorderLayout.EAST);
+
+        return titlePanel;
+    }
+
+    private JLabel createHeaderLabel() {
+        return LabelFactory.createLabel(
+            "Cart", Font.BOLD, 30, themeManager.getInstance().getTextForeground()
+        );
+    }
+
+    private JButton createClearButton() {
+        JButton clearButton = ButtonFactory.createIconButton(
+            ICON_SIZE, ICON_SIZE, themeManager.getInstance().getTrashIcon(), handleClearCart
+        );
+        clearButton.setName("trashIcon");
+        return clearButton;
+    }
+}
