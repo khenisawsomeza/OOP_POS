@@ -1,12 +1,6 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
 import com.mycompany.j_pos.models.Cart;
-import com.mycompany.j_pos.models.CartEntry;
-import com.mycompany.j_pos.models.Item;
-import com.mycompany.j_pos.ui.factories.ButtonFactory;
-import com.mycompany.j_pos.ui.factories.LabelFactory;
-import com.mycompany.j_pos.ui.factories.PanelFactory;
-import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import java.awt.*;
 import javax.swing.*;

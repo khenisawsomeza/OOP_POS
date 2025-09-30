@@ -3,6 +3,7 @@ package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 import com.mycompany.j_pos.models.Cart;
 import com.mycompany.j_pos.models.CartEntry;
 import com.mycompany.j_pos.models.Item;
+import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.factories.ButtonFactory;
 import com.mycompany.j_pos.ui.factories.LabelFactory;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
@@ -50,10 +51,25 @@ public class CartItemsSection extends JPanel {
         );
         itemRow.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        JLabel name = LabelFactory.createLabel(item.getName(), Font.BOLD, 14, themeManager.getInstance().getTextForeground());
-        JLabel qty = LabelFactory.createLabel(String.valueOf(quantity), Font.BOLD, 14, themeManager.getInstance().getTextForeground());
-        JLabel price = LabelFactory.createLabel(item.getFormattedPrice(), Font.BOLD, 14, themeManager.getInstance().getTextForeground());
+        JLabel qty = new LabelBuilder()
+                .withText(String.valueOf(quantity))
+                .withFont(Font.BOLD, 14)
+                .withForeground(themeManager.getInstance().getTextForeground())
+                .build();
 
+        JLabel price = new LabelBuilder()
+                .withText(item.getFormattedPrice())
+                .withFont(Font.BOLD, 14)
+                .withForeground(themeManager.getInstance().getTextForeground())
+                .build();
+
+        JLabel name = new LabelBuilder()
+                .withText(item.getName())
+                .withFont(Font.BOLD, 14)
+                .withForeground(themeManager.getInstance().getTextForeground())
+                .build();
+
+        
         name.setHorizontalAlignment(SwingConstants.LEFT);
         qty.setHorizontalAlignment(SwingConstants.CENTER);
         price.setHorizontalAlignment(SwingConstants.CENTER);
