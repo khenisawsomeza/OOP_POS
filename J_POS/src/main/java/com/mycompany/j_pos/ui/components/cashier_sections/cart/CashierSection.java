@@ -1,5 +1,6 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
+import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.factories.LabelFactory;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
@@ -29,11 +30,13 @@ public class CashierSection extends JPanel {
         JPanel contentPanel = PanelFactory.createSectionPanel(new BorderLayout(), new Dimension(WIDTH, HEIGHT));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, PADDING, 0, PADDING));
         add(contentPanel, BorderLayout.CENTER);
-
-        cashierNameLabel = LabelFactory.createLabel(
-            "Cashier Name: " + AppConstants.DEFAULT_CASHIER_NAME,
-            Font.BOLD, 13, themeManager.getInstance().getTextForeground()
-        );
+        
+        cashierNameLabel = new LabelBuilder()
+                .withText("Cashier Name: " + AppConstants.DEFAULT_CASHIER_NAME)
+                .withFont(Font.BOLD, 13)
+                .withForeground(themeManager.getInstance().getTextForeground())
+                .build();
+        
 
         contentPanel.add(cashierNameLabel, BorderLayout.WEST);
     }

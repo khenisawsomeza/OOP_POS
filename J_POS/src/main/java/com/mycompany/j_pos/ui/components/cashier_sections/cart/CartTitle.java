@@ -1,6 +1,7 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
 import com.mycompany.j_pos.models.Cart;
+import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.factories.ButtonFactory;
 import com.mycompany.j_pos.ui.factories.LabelFactory;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
@@ -50,9 +51,12 @@ public class CartTitle extends JPanel {
     }
 
     private JLabel createHeaderLabel() {
-        return LabelFactory.createLabel(
-            "Cart", Font.BOLD, 30, themeManager.getInstance().getTextForeground()
-        );
+      
+        return new LabelBuilder()
+                .withText("Cart")
+                .withFont(Font.BOLD, 30)
+                .withForeground(themeManager.getInstance().getTextForeground())
+                .build();
     }
 
     private JButton createClearButton() {

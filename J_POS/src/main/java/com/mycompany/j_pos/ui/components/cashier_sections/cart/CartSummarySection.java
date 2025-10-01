@@ -1,6 +1,7 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
 import com.mycompany.j_pos.models.Cart;
+import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.factories.LabelFactory;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
@@ -47,9 +48,18 @@ public class CartSummarySection extends JPanel {
     private JPanel createRow(String labelText, String amountText) {
         JPanel row = PanelFactory.createSectionPanel(new BorderLayout(), new Dimension(WIDTH, 40));
         row.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, themeManager.getInstance().getStaticBorderGray()));
-
-        JLabel label = LabelFactory.createLabel(labelText, Font.BOLD, 15, themeManager.getInstance().getTextForeground());
-        JLabel amount = LabelFactory.createLabel(amountText, Font.BOLD, 15, themeManager.getInstance().getTextForeground());
+        
+        JLabel label = new LabelBuilder()
+                .withText(labelText)
+                .withFont(Font.BOLD, 15)
+                .withForeground(themeManager.getInstance().getTextForeground())
+                .build();
+        
+        JLabel amount = new LabelBuilder()
+                .withText(amountText)
+                .withFont(Font.BOLD, 15)
+                .withForeground(themeManager.getInstance().getTextForeground())
+                .build();
 
         row.add(label, BorderLayout.WEST);
         row.add(amount, BorderLayout.EAST);

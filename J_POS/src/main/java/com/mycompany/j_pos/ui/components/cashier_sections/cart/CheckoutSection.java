@@ -37,6 +37,8 @@ public class CheckoutSection extends JPanel {
 
         JLabel title = LabelFactory.createLabel("Checkout: ", Font.BOLD, 30, themeManager.getInstance().getStaticBlack());
         checkoutAmountLabel = LabelFactory.createLabel("0", Font.BOLD, 30, themeManager.getInstance().getStaticBlack());
+        
+        
 
         content.add(title);
         content.add(checkoutAmountLabel);
