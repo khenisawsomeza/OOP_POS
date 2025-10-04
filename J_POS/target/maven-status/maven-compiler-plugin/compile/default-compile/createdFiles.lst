@@ -1,5 +1,7 @@
 com/mycompany/j_pos/ui/components/cashier_sections/items/CategoriesPanel.class
 com/mycompany/j_pos/ui/builders/LabelBuilder$1.class
 com/mycompany/j_pos/ui/builders/LabelBuilder.class
+com/mycompany/j_pos/ui/builders/ButtonBuilder.class
 com/mycompany/j_pos/ui/components/cashier_sections/items/ItemsGridPanel.class
 com/mycompany/j_pos/ui/components/cashier_sections/items/ItemsGridPanel$CartPanelRefresher.class
+com/mycompany/j_pos/ui/builders/ButtonBuilder$1.class

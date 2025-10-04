@@ -1,7 +1,6 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
-import com.mycompany.j_pos.ui.factories.LabelFactory;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;

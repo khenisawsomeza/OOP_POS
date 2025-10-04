@@ -3,9 +3,8 @@ package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 import com.mycompany.j_pos.models.Cart;
 import com.mycompany.j_pos.models.CartEntry;
 import com.mycompany.j_pos.models.Item;
+import com.mycompany.j_pos.ui.builders.ButtonBuilder;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
-import com.mycompany.j_pos.ui.factories.ButtonFactory;
-import com.mycompany.j_pos.ui.factories.LabelFactory;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
@@ -74,10 +73,14 @@ public class CartItemsSection extends JPanel {
         qty.setHorizontalAlignment(SwingConstants.CENTER);
         price.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JButton removeBtn = ButtonFactory.createItemRemoveButton(
-            15, 15, themeManager.getInstance().getDeleteButtonIcon(),
-            refreshCallback, cart, item
-        );
+        JButton removeBtn = new ButtonBuilder()
+                .withSize(15, 15)
+                .withIcon(themeManager.getInstance().getDeleteButtonIcon())
+                .onClick(() -> {
+                    cart.removeItemCompletely(item);
+                    refreshCallback.run();
+                })
+                .build();
 
         itemRow.add(name);
         itemRow.add(qty);

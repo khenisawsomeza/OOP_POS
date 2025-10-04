@@ -1,9 +1,8 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
 import com.mycompany.j_pos.models.Cart;
+import com.mycompany.j_pos.ui.builders.ButtonBuilder;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
-import com.mycompany.j_pos.ui.factories.ButtonFactory;
-import com.mycompany.j_pos.ui.factories.LabelFactory;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
@@ -60,9 +59,11 @@ public class CartTitle extends JPanel {
     }
 
     private JButton createClearButton() {
-        JButton clearButton = ButtonFactory.createIconButton(
-            ICON_SIZE, ICON_SIZE, themeManager.getInstance().getTrashIcon(), handleClearCart
-        );
+        JButton clearButton = new ButtonBuilder()
+            .withSize(ICON_SIZE, ICON_SIZE)
+            .withIcon(themeManager.getInstance().getTrashIcon())
+            .onClick(handleClearCart) 
+            .build();
         clearButton.setName("trashIcon");
         return clearButton;
     }

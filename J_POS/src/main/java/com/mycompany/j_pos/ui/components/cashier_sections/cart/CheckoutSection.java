@@ -1,7 +1,7 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
 import com.mycompany.j_pos.models.Cart;
-import com.mycompany.j_pos.ui.factories.LabelFactory;
+import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
@@ -35,8 +35,17 @@ public class CheckoutSection extends JPanel {
         );
         add(content, BorderLayout.CENTER);
 
-        JLabel title = LabelFactory.createLabel("Checkout: ", Font.BOLD, 30, themeManager.getInstance().getStaticBlack());
-        checkoutAmountLabel = LabelFactory.createLabel("0", Font.BOLD, 30, themeManager.getInstance().getStaticBlack());
+        JLabel title = new LabelBuilder()
+                .withText("Checkout: ")
+                .withFont(Font.BOLD, 30)
+                .withForeground(themeManager.getInstance().getStaticBlack())
+                .build();
+
+        checkoutAmountLabel = new LabelBuilder()
+                .withText("0")
+                .withFont(Font.BOLD, 30)
+                .withForeground(themeManager.getInstance().getStaticBlack())
+                .build();
         
         
 

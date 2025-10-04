@@ -22,7 +22,7 @@ public class LabelBuilder {
     private Border border = null;
     private boolean opaque = false;
     private Cursor cursor = null;
-    private Icon icon = null;
+    private ImageIcon icon = null;
     private Runnable onClick; // optional action
 
     public LabelBuilder withText(String text) {
@@ -63,8 +63,11 @@ public class LabelBuilder {
         return this;
     }
 
-    public LabelBuilder withIcon(Icon icon) {
-        this.icon = icon;
+    public LabelBuilder withIcon(ImageIcon icon, int width, int height) {
+        Image scaledImage = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        
+        this.icon = scaledIcon;
         return this;
     }
 

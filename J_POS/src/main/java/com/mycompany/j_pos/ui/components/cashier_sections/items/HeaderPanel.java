@@ -1,8 +1,8 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.items;
 
-import com.mycompany.j_pos.ui.factories.ButtonFactory;
+import com.mycompany.j_pos.ui.builders.ButtonBuilder;
+import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.factories.FieldFactory;
-import com.mycompany.j_pos.ui.factories.LabelFactory;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import java.awt.*;
@@ -31,7 +31,11 @@ public class HeaderPanel extends JPanel {
     
     //Create and add the logo section
     private void addLogoSection() {
-        JLabel companyLogoLabel = LabelFactory.createIconLabel(150, 30, SwingConstants.CENTER, SwingConstants.CENTER, themeManager.getInstance().getLogoIcon());
+//        JLabel companyLogoLabel = LabelFactory.createIconLabel(150, 30, SwingConstants.CENTER, SwingConstants.CENTER, themeManager.getInstance().getLogoIcon());
+        JLabel companyLogoLabel = new LabelBuilder()
+                .withIcon(themeManager.getInstance().getLogoIcon(), 150, 30)
+                .withAlignment(SwingConstants.CENTER, SwingConstants.CENTER)
+                .build();
         companyLogoLabel.setName("logoIcon");
         add(companyLogoLabel, BorderLayout.EAST);
     }
@@ -43,12 +47,18 @@ public class HeaderPanel extends JPanel {
         );
         
         //Menu
-        JButton menuButton = ButtonFactory.createIconButton(30, 30, themeManager.getInstance().getMenuIcon());
+        JButton menuButton = new ButtonBuilder()
+            .withSize(30, 30)
+            .withIcon(themeManager.getInstance().getMenuIcon())
+            .build();
         menuButton.setName("menuIcon");
         navigationButtonsPanel.add(menuButton);
         
         //Dark Mode
-        JButton darkModeToggleButton = ButtonFactory.createIconButton(30, 30, themeManager.getInstance().getDarkModeToggleIcon());
+        JButton darkModeToggleButton = new ButtonBuilder()
+            .withSize(30, 30)
+            .withIcon(themeManager.getInstance().getDarkModeToggleIcon())
+            .build();
         darkModeToggleButton.setName("darkModeToggleIcon");
         navigationButtonsPanel.add(darkModeToggleButton);
         darkModeToggleButton.addActionListener(e -> {
@@ -56,7 +66,10 @@ public class HeaderPanel extends JPanel {
         });
 
         //Search
-        JButton searchButton =  ButtonFactory.createIconButton(30, 30, themeManager.getInstance().getSearchIcon());
+        JButton searchButton = new ButtonBuilder()
+            .withSize(30, 30)
+            .withIcon(themeManager.getInstance().getSearchIcon())
+            .build();
         searchButton.setName("searchIcon");
         navigationButtonsPanel.add(searchButton);
 

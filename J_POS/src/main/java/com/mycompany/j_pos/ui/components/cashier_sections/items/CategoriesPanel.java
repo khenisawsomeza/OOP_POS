@@ -1,7 +1,7 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.items;
 
 import com.mycompany.j_pos.models.Category;
-import com.mycompany.j_pos.ui.factories.LabelFactory;
+import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.factories.PanelFactory;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
@@ -31,7 +31,7 @@ public class CategoriesPanel extends JPanel {
         buttonsPanel.setMaximumSize(new Dimension(500, 50));
 
         for (Category cat : availableCategories) {
-            buttonsPanel.add(LabelFactory.createButtonLabel(cat.getName()));
+            buttonsPanel.add(new LabelBuilder().withText(cat.getName()).build());
         }
 
         buttonsPanel.add(PanelFactory.addNewCategoryPanel());

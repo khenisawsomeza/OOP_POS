@@ -6,6 +6,7 @@ package com.mycompany.j_pos.ui.factories;
 
 import com.mycompany.j_pos.models.Cart;
 import com.mycompany.j_pos.models.Item;
+import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import java.awt.*;
@@ -48,11 +49,18 @@ public class PanelFactory {
         picturePanel.setName("lightGreenPanel");
         picturePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
         
-        JLabel pictureLabel = LabelFactory.createIconLabel(200, 120, JLabel.CENTER, JLabel.CENTER, item.getPicture());
+        JLabel pictureLabel = new LabelBuilder()
+            .withIcon(item.getPicture(), 200, 120)   // scaling the icon
+            .withAlignment(JLabel.CENTER, JLabel.CENTER)
+            .build();
         picturePanel.add(pictureLabel, BorderLayout.CENTER);
 
         // --- Prompt label (hover message) ---
-        JLabel promptLabel = LabelFactory.createLabel("Add " + item.getName() + " to cart?", Font.BOLD, 16, JLabel.CENTER, JLabel.CENTER);
+        JLabel promptLabel = new LabelBuilder()
+            .withText("Add " + item.getName() + " to cart?")
+            .withFont(Font.BOLD, 16)
+            .withAlignment(JLabel.CENTER, JLabel.CENTER)
+            .build();
         promptLabel.setName("promptLabel");
 
         // --- Container that switches between picture and prompt ---
@@ -66,7 +74,11 @@ public class PanelFactory {
         // --- Bottom name panel ---
         JPanel namePanel = createPanel(new BorderLayout(), new Dimension(220, 40), themeManager.getInstance().getLightGreenColor());
         namePanel.setName("lightGreenPanel");
-        JLabel nameLabel = LabelFactory.createLabel(item.getName(), Font.BOLD, 22, JLabel.CENTER, JLabel.CENTER);
+        JLabel nameLabel = new LabelBuilder()
+            .withText(item.getName())
+            .withFont(Font.BOLD, 22)
+            .withAlignment(JLabel.CENTER, JLabel.CENTER)
+            .build();
         nameLabel.setName("regularLabel");
         namePanel.add(nameLabel, BorderLayout.CENTER);
 
