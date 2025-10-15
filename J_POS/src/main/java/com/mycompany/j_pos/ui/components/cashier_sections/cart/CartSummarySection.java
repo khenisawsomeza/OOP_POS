@@ -2,7 +2,7 @@ package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
 import com.mycompany.j_pos.models.Cart;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
-import com.mycompany.j_pos.ui.factories.PanelFactory;
+import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
 import javax.swing.*;
@@ -45,7 +45,11 @@ public class CartSummarySection extends JPanel {
     }
 
     private JPanel createRow(String labelText, String amountText) {
-        JPanel row = PanelFactory.createSectionPanel(new BorderLayout(), new Dimension(WIDTH, 40));
+        JPanel row = new PanelBuilder()
+                .withLayout(new BorderLayout())
+                .withSize(WIDTH, 40)
+                .transparent()
+                .build();
         row.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, themeManager.getInstance().getStaticBorderGray()));
         
         JLabel label = new LabelBuilder()

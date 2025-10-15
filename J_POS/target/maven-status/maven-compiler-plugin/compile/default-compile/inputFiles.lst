@@ -6,6 +6,7 @@
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/MainFrame.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/builders/ButtonBuilder.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/builders/LabelBuilder.java
+/Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/builders/PanelBuilder.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/CashierUI.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/cashier_sections/cart/CartItemsSection.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/cashier_sections/cart/CartPanel.java
@@ -17,7 +18,6 @@
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/cashier_sections/items/HeaderPanel.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/cashier_sections/items/ItemsGridPanel.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/cashier_sections/items/ItemsPanel.java
-/Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/factories/ButtonFactory.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/factories/FieldFactory.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/factories/PanelFactory.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/utils/LoadResources.java

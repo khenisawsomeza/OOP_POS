@@ -5,7 +5,7 @@ import com.mycompany.j_pos.models.CartEntry;
 import com.mycompany.j_pos.models.Item;
 import com.mycompany.j_pos.ui.builders.ButtonBuilder;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
-import com.mycompany.j_pos.ui.factories.PanelFactory;
+import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
 import javax.swing.*;
@@ -43,11 +43,20 @@ public class CartItemsSection extends JPanel {
     }
 
     private JPanel createCartItemPanel(Item item, int quantity) {
-        JPanel itemRow = PanelFactory.createPanel(
-            new GridLayout(1, 4),
-            new Dimension(400, 50),
-            themeManager.getInstance().getTextBackground()
-        );
+//        JPanel itemRow = PanelFactory.createPanel(
+//            new GridLayout(1, 4),
+//            new Dimension(400, 50),
+//            themeManager.getInstance().getTextBackground()
+//        );
+        
+        JPanel itemRow = new PanelBuilder()
+                .withLayout(new GridLayout(1, 4))
+                .withSize(400, 50)
+                .withBackground(themeManager.getInstance().getTextBackground())
+                .build();
+        
+        
+        
         itemRow.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         JLabel qty = new LabelBuilder()

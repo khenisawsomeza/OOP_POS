@@ -1,7 +1,7 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
-import com.mycompany.j_pos.ui.factories.PanelFactory;
+import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
@@ -26,7 +26,11 @@ public class CashierSection extends JPanel {
             0, 0, 1, 0, themeManager.getInstance().getStaticBorderGray()
         ));
 
-        JPanel contentPanel = PanelFactory.createSectionPanel(new BorderLayout(), new Dimension(WIDTH, HEIGHT));
+        JPanel contentPanel = new PanelBuilder()
+                .withLayout(new BorderLayout())
+                .withSize(WIDTH, HEIGHT)
+                .transparent()
+                .build();
         contentPanel.setBorder(BorderFactory.createEmptyBorder(0, PADDING, 0, PADDING));
         add(contentPanel, BorderLayout.CENTER);
         

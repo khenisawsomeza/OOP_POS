@@ -3,7 +3,7 @@ package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 import com.mycompany.j_pos.models.Cart;
 import com.mycompany.j_pos.ui.builders.ButtonBuilder;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
-import com.mycompany.j_pos.ui.factories.PanelFactory;
+import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
 import java.awt.BorderLayout;
@@ -40,7 +40,11 @@ public class CartTitle extends JPanel {
     }
 
     private JPanel buildTitlePanel() {
-        JPanel titlePanel = PanelFactory.createSectionPanel(new BorderLayout(), new Dimension(WIDTH, HEIGHT));
+        JPanel titlePanel = new PanelBuilder()
+                .withLayout(new BorderLayout())
+                .withSize(WIDTH, HEIGHT)
+                .transparent()
+                .build();
         titlePanel.setBorder(BorderFactory.createEmptyBorder(0, PADDING, 0, PADDING));
 
         titlePanel.add(createHeaderLabel(), BorderLayout.WEST);

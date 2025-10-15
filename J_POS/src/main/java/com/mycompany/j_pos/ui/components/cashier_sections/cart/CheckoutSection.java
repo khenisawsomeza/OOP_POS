@@ -2,7 +2,7 @@ package com.mycompany.j_pos.ui.components.cashier_sections.cart;
 
 import com.mycompany.j_pos.models.Cart;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
-import com.mycompany.j_pos.ui.factories.PanelFactory;
+import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
 import javax.swing.*;
@@ -28,11 +28,19 @@ public class CheckoutSection extends JPanel {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
 
-        JPanel content = PanelFactory.createCheckoutPanel(
-            new FlowLayout(FlowLayout.CENTER, 10, 10),
-            new Dimension(460, 60),
-            checkoutHandler
-        );
+//        JPanel content = PanelFactory.createCheckoutPanel(
+//            new FlowLayout(FlowLayout.CENTER, 10, 10),
+//            new Dimension(460, 60),
+//            checkoutHandler
+//        );
+        
+        JPanel content = new PanelBuilder()
+                .withLayout(new FlowLayout(FlowLayout.CENTER, 10, 10))
+                .withSize(460, 60)
+                .withBackground(themeManager.getInstance().getStaticLightGreenLM())
+                .onHoverEnter(panel -> panel.setBackground(themeManager.getInstance().getStaticPrimaryGreenLM()))
+                .build();
+        
         add(content, BorderLayout.CENTER);
 
         JLabel title = new LabelBuilder()
