@@ -3,7 +3,6 @@ package com.mycompany.j_pos.ui.utils.commons;
 import com.mycompany.j_pos.ui.utils.LoadResources;
 import javax.swing.ImageIcon;
 import java.awt.Image;
-import java.io.File;
 
 public class Icons {
     private static Icons instance;

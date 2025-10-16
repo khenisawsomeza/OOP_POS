@@ -1,93 +1,117 @@
-package com.mycompany.j_pos.ui.components.cashier_sections.items;
+ package com.mycompany.j_pos.ui.components.cashier_sections.items;
 
 import com.mycompany.j_pos.ui.builders.ButtonBuilder;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
+import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.factories.FieldFactory;
-import com.mycompany.j_pos.ui.factories.PanelFactory;
+import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
+
 import java.awt.*;
 import javax.swing.*;
 
-public class HeaderPanel extends JPanel {
-    
+/**
+ * HeaderPanel displays navigation and branding elements for the cashier UI.
+ */
+public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListener{
+
+    private final themeManager theme = themeManager.getInstance();
+    JLabel companyLogoLabel;
+    JButton menuButton;
+    JButton darkModeButton;
+    JButton searchButton;
+
     public HeaderPanel() {
         initializeHeader();
+        theme.addThemeChangeListener(this);
     }
-    
-    //Initialize the header panel with all components
+
+    /**
+     * Initializes the header layout and adds major UI sections.
+     */
     private void initializeHeader() {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(780, 50));
-        setBackground(themeManager.getInstance().getLightGreenColor());
+        setBackground(theme.getLightGreenColor());
         setName("lightGreenPanel");
-        setBorder(BorderFactory.createEmptyBorder(0, 20, 0 ,20));
-        
-        // Add logo on the right
-        addLogoSection();
-        
-        // Add navigation buttons on the left
+        setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
+
         addNavigationSection();
+        addLogoSection();
     }
-    
-    //Create and add the logo section
+
+    /**
+     * Builds and adds the logo section to the right side.
+     */
     private void addLogoSection() {
-//        JLabel companyLogoLabel = LabelFactory.createIconLabel(150, 30, SwingConstants.CENTER, SwingConstants.CENTER, themeManager.getInstance().getLogoIcon());
-        JLabel companyLogoLabel = new LabelBuilder()
-                .withIcon(themeManager.getInstance().getLogoIcon(), 150, 30)
+        companyLogoLabel = new LabelBuilder()
+                .withIcon(theme.getLogoIcon(), 150, 30)
                 .withAlignment(SwingConstants.CENTER, SwingConstants.CENTER)
                 .build();
         companyLogoLabel.setName("logoIcon");
+
         add(companyLogoLabel, BorderLayout.EAST);
     }
-    
-    
-    //Create and add the navigation buttons section
+
+    /**
+     * Builds and adds the navigation buttons and search components.
+     */
     private void addNavigationSection() {
-        JPanel navigationButtonsPanel = PanelFactory.createSectionPanel(new FlowLayout(FlowLayout.LEFT, 15, 10), new Dimension(700, 50)
-        );
-        
-        //Menu
-        JButton menuButton = new ButtonBuilder()
-            .withSize(30, 30)
-            .withIcon(themeManager.getInstance().getMenuIcon())
-            .build();
-        menuButton.setName("menuIcon");
-        navigationButtonsPanel.add(menuButton);
-        
-        //Dark Mode
-        JButton darkModeToggleButton = new ButtonBuilder()
-            .withSize(30, 30)
-            .withIcon(themeManager.getInstance().getDarkModeToggleIcon())
-            .build();
-        darkModeToggleButton.setName("darkModeToggleIcon");
-        navigationButtonsPanel.add(darkModeToggleButton);
-        darkModeToggleButton.addActionListener(e -> {
-            themeManager.getInstance().toggleDarkMode();
-        });
+        JPanel navigationPanel = new PanelBuilder()
+                .withLayout(new FlowLayout(FlowLayout.LEFT, 15, 10))
+                .withSize(700, 50)
+                .transparent()
+                .build();
 
-        //Search
-        JButton searchButton = new ButtonBuilder()
-            .withSize(30, 30)
-            .withIcon(themeManager.getInstance().getSearchIcon())
-            .build();
-        searchButton.setName("searchIcon");
-        navigationButtonsPanel.add(searchButton);
+        // Menu Button
+        menuButton = createIconButton(theme.getMenuIcon());
+        navigationPanel.add(menuButton);
 
+        // Dark Mode Toggle
+        darkModeButton = createIconButton(theme.getDarkModeToggleIcon());
+        darkModeButton.addActionListener(e -> theme.toggleDarkMode());
+        navigationPanel.add(darkModeButton);
+
+        // Search Button + Field
+        searchButton = createIconButton(theme.getSearchIcon());
         JTextField searchField = FieldFactory.createTextField("Search Item");
-        navigationButtonsPanel.add(searchField);
         searchField.setVisible(false);
-        
-        attachSearchToggle(searchButton, searchField, navigationButtonsPanel);
-        
-        add(navigationButtonsPanel, BorderLayout.WEST);
+        navigationPanel.add(searchButton);
+        navigationPanel.add(searchField);
+
+        attachSearchToggle(searchButton, searchField, navigationPanel);
+
+        add(navigationPanel, BorderLayout.WEST);
     }
-    
-    private void attachSearchToggle(JButton button, JTextField searchField, JPanel navigationButtonsPanel) {
-        button.addActionListener(e -> {
-            boolean newValue = !searchField.isVisible();
-            searchField.setVisible(newValue);
-            navigationButtonsPanel.revalidate();
-            navigationButtonsPanel.repaint();
+
+    /**
+     * Helper method to create standardized icon buttons.
+     */
+    private JButton createIconButton(ImageIcon icon) {
+        JButton button = new ButtonBuilder()
+                .withSize(30, 30)
+                .withIcon(icon)
+                .build();
+        return button;
+    }
+
+    /**
+     * Toggles visibility of the search field when the search button is pressed.
+     */
+    private void attachSearchToggle(JButton toggleButton, JTextField searchField, JPanel parentPanel) {
+        toggleButton.addActionListener(e -> {
+            searchField.setVisible(!searchField.isVisible());
+            parentPanel.revalidate();
+            parentPanel.repaint();
         });
+    }
+
+    @Override
+    public void onThemeChange(boolean isDarkMode) {
+        setBackground(theme.getLightGreenColor());
+        companyLogoLabel.setIcon(Icons.getScaledIcon(theme.getLogoIcon(), 150, 30));
+        menuButton.setIcon(Icons.getScaledIcon(theme.getMenuIcon(), 30, 30));
+        darkModeButton.setIcon(Icons.getScaledIcon(theme.getDarkModeToggleIcon(), 30, 30));
+        searchButton.setIcon(Icons.getScaledIcon(theme.getSearchIcon(), 30, 30));
     }
 }

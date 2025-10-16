@@ -39,7 +39,6 @@ public class CartItemsSection extends JPanel {
 
         revalidate();
         repaint();
-        themeManager.getInstance().applyThemeToAllComponents();
     }
 
     private JPanel createCartItemPanel(Item item, int quantity) {
@@ -89,6 +88,7 @@ public class CartItemsSection extends JPanel {
                     cart.removeItemCompletely(item);
                     refreshCallback.run();
                 })
+                .withHoverEffect(true)
                 .build();
 
         itemRow.add(name);

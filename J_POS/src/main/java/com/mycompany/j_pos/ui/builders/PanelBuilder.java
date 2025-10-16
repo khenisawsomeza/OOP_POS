@@ -22,7 +22,7 @@ public class PanelBuilder {
     // Mouse behaviors
     private Runnable onClick;
     private Consumer<JPanel> onHoverEnter;
-    private Runnable onHoverExit;
+    private Consumer<JPanel> onHoverExit;
     private Runnable onPress;
     private Runnable onRelease;
     
@@ -67,7 +67,7 @@ public class PanelBuilder {
         return this;
     }
 
-    public PanelBuilder onHoverExit(Runnable action) {
+    public PanelBuilder onHoverExit(Consumer<JPanel> action) {
         this.onHoverExit = action;
         return this;
     }
@@ -101,12 +101,12 @@ public class PanelBuilder {
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    onHoverEnter.accept(panel);
+                    if (onHoverEnter != null) onHoverEnter.accept(panel);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    if (onHoverExit != null) onHoverExit.run();
+                    if (onHoverExit != null) onHoverExit.accept(panel);
                 }
 
                 @Override

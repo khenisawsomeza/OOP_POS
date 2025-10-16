@@ -3,7 +3,6 @@ package com.mycompany.j_pos.ui.components.cashier_sections.items;
 import com.mycompany.j_pos.models.Category;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
-import com.mycompany.j_pos.ui.factories.PanelFactory;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
 import javax.swing.*;
@@ -33,23 +32,51 @@ public class CategoriesPanel extends JPanel {
         buttonsPanel.setMaximumSize(new Dimension(500, 50));
 
         for (Category cat : availableCategories) {
-        JLabel label = new LabelBuilder()
-        .withText(cat.getName())
-        .withBackground(themeManager.getInstance().getStaticLightGreenLM()) // default color
-        .onHoverEnter(lbl -> {
-                    lbl.setOpaque(true);
-                    lbl.setBackground(themeManager.getInstance().getStaticPrimaryGreenLM());
-                })
-                .onHoverExit(lbl -> {
-                    lbl.setOpaque(true);
-                    lbl.setBackground(themeManager.getInstance().getStaticLightGreenLM());
-                })
-                .build();
+            JLabel label = new LabelBuilder()
+                    .withText(cat.getName())
+                    .withBackground(themeManager.getInstance().getStaticLightGreenLM())
+                    .withForeground(themeManager.getInstance().getTextForeground())
+                    .withCursor(new Cursor(Cursor.HAND_CURSOR))
+                    .withBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20))
+                    .withFont(Font.BOLD, 20)
+                    .onHoverEnter(lbl -> {
+                        lbl.setOpaque(true);
+                        lbl.setBackground(themeManager.getInstance().getStaticPrimaryGreenLM());
+                    })
+                    .onHoverExit(lbl -> {
+                        lbl.setOpaque(true);
+                        lbl.setBackground(themeManager.getInstance().getStaticLightGreenLM());
+                    })
+                    .build();
 
             buttonsPanel.add(label);
         }
-
-        buttonsPanel.add(PanelFactory.addNewCategoryPanel());
+        
+        JLabel imageLabel = new LabelBuilder()
+                .withAlignment(SwingConstants.CENTER, SwingConstants.CENTER)
+                .withIcon(themeManager.getInstance().getPlusIcon(), 32, 32)
+                .build();
+            
+        JPanel newCategoryPanel = new PanelBuilder()
+                .withLayout(new BorderLayout())
+                .withSize(120, 50)
+                .withBackground(themeManager.getInstance().getLightGreenColor())
+                .withCursor(new Cursor(Cursor.HAND_CURSOR))
+                .withBorder(BorderFactory.createDashedBorder(themeManager.getInstance().getTextForeground(), 2, 10, 5, true))
+                .onHoverEnter(panel -> {
+                    System.out.println("test2");
+                    panel.setBackground(themeManager.getInstance().getStaticPrimaryGreenLM());
+                })
+                .onHoverExit(panel -> {
+                    System.out.println("test");
+                    panel.setBackground(themeManager.getInstance().getLightGreenColor());
+                })
+                .build();
+        
+        newCategoryPanel.add(imageLabel, BorderLayout.CENTER);
+        buttonsPanel.add(newCategoryPanel);
+        
+        
         add(buttonsPanel, BorderLayout.CENTER);
     }
 }
