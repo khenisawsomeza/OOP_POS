@@ -1,15 +1,13 @@
 package com.mycompany.j_pos.ui.builders;
 
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
-import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.function.Consumer;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-/**
- * Builder pattern for creating JLabels with flexible styling and behavior.
- * Keeps UI creation reusable and clean.
- */
 public class LabelBuilder {
     private final String fontFamily = AppConstants.DEFAULT_FONT;
     private String text;
@@ -23,7 +21,9 @@ public class LabelBuilder {
     private boolean opaque = false;
     private Cursor cursor = null;
     private ImageIcon icon = null;
-    private Runnable onClick; // optional action
+    private Runnable onClick;
+    private Consumer<JLabel> onHoverEnter;
+    private Consumer<JLabel> onHoverExit;
 
     public LabelBuilder withText(String text) {
         this.text = text;
@@ -65,9 +65,7 @@ public class LabelBuilder {
 
     public LabelBuilder withIcon(ImageIcon icon, int width, int height) {
         Image scaledImage = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        
-        this.icon = scaledIcon;
+        this.icon = new ImageIcon(scaledImage);
         return this;
     }
 
@@ -76,32 +74,46 @@ public class LabelBuilder {
         return this;
     }
 
+    public LabelBuilder onHoverEnter(Consumer<JLabel> action) {
+        this.onHoverEnter = action;
+        return this;
+    }
+
+    public LabelBuilder onHoverExit(Consumer<JLabel> action) {
+        this.onHoverExit = action;
+        return this;
+    }
+
     public JLabel build() {
         JLabel label = (icon != null) ? new JLabel(icon, hAlign) : new JLabel(text, hAlign);
         label.setVerticalAlignment(vAlign);
-
-        // font
         label.setFont(new Font(fontFamily, fontStyle, fontSize));
         label.setForeground(foreground);
 
-        // background
         if (background != null) {
             label.setBackground(background);
             label.setOpaque(opaque);
         }
 
-        // border
         if (border != null) label.setBorder(border);
-
-        // cursor
         if (cursor != null) label.setCursor(cursor);
 
-        // optional click action
-        if (onClick != null) {
-            label.addMouseListener(new java.awt.event.MouseAdapter() {
+        // Combine hover and click behavior
+        if (onClick != null || onHoverEnter != null || onHoverExit != null) {
+            label.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseClicked(java.awt.event.MouseEvent e) {
-                    onClick.run();
+                public void mouseClicked(MouseEvent e) {
+                    if (onClick != null) onClick.run();
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    if (onHoverEnter != null) onHoverEnter.accept(label);
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    if (onHoverExit != null) onHoverExit.accept(label);
                 }
             });
         }

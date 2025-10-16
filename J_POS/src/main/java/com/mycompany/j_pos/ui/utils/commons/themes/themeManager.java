@@ -58,6 +58,8 @@ public class themeManager {
     public void applyThemeToAllComponents(){
         for(Window window: Window.getWindows()){
             applyThemeToContainer(window);
+            window.revalidate();
+            window.repaint();
         }
     }
     
