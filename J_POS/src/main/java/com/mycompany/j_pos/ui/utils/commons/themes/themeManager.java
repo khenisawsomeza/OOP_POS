@@ -258,7 +258,7 @@ public class themeManager {
         if (!listeners.contains(listener)) {
             listeners.add(listener);
             // Apply current theme immediately when added
-            listener.onThemeChange(isDarkMode);
+//            listener.onThemeChange(isDarkMode);
         }
     }
 
