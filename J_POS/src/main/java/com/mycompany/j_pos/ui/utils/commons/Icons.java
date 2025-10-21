@@ -30,11 +30,13 @@ public class Icons {
     
     //Non dark/light Icons
     private static final ImageIcon appIcon                 = LoadResources.loadImage(IMAGES_PATH, "appIcon.png");
+    private static final ImageIcon companyIcon             = LoadResources.loadImage(IMAGES_PATH, "companyLogo.png");
     
     // Getters
     public ImageIcon getLogoIconDark()       { return logoIconDark; }
     public ImageIcon getLogoIconLight()      { return logoIconLight; }
     public ImageIcon getAppIcon()            { return appIcon; }
+    public ImageIcon getcompanyIcon()        { return companyIcon; }
     public ImageIcon getMenuIconDark()       { return menuIconDark; }
     public ImageIcon getMenuIconLight()      { return menuIconLight; }
     public ImageIcon getSearchIconDark()     { return searchIconDark; }

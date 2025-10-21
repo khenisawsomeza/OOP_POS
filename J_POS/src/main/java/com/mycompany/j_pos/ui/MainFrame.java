@@ -5,6 +5,7 @@
 package com.mycompany.j_pos.ui;
 
 import com.mycompany.j_pos.ui.components.CashierUI;
+import com.mycompany.j_pos.ui.components.LoginUI;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import java.awt.*;
@@ -37,13 +38,14 @@ public class MainFrame extends JFrame{
      private void setupUI(){
          cardLayout = new CardLayout();
          mainPanel = new JPanel(cardLayout);
+         mainPanel.add(new LoginUI(this), "LOGIN");
          mainPanel.add(new CashierUI(), "CASHIER");
          
          this.setContentPane(mainPanel);
-         changeCard("CASHIER");
+         changeCard("LOGIN");
      }
      
-     private void changeCard(String text){
+     public void changeCard(String text){
          cardLayout.show(mainPanel, text);
      }
 }
