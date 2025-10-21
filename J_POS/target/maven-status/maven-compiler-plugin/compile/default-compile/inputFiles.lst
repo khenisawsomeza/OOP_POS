@@ -14,6 +14,7 @@ C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_p
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\components\cashier_sections\cart\CheckoutSection.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\components\cashier_sections\items\CategoriesPanel.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\components\cashier_sections\items\HeaderPanel.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\components\cashier_sections\items\ItemCard.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\components\cashier_sections\items\ItemsGridPanel.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\components\cashier_sections\items\ItemsPanel.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\components\CashierUI.java
@@ -23,4 +24,5 @@ C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_p
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\utils\commons\Icons.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\utils\commons\themes\themeManager.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\utils\commons\themes\UIColors.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\utils\layouts\WrapLayout.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\utils\LoadResources.java

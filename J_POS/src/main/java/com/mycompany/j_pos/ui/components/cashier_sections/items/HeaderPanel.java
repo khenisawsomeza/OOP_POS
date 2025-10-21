@@ -7,13 +7,15 @@ import com.mycompany.j_pos.ui.factories.FieldFactory;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
+import java.util.function.Supplier;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * HeaderPanel displays navigation and branding elements for the cashier UI.
- */
 public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListener {
+
+    private static final Dimension PANEL_SIZE = new Dimension(780, 50);
+    private static final int ICON_SIZE = 30;
+    private static final Dimension LOGO_SIZE = new Dimension(150, 30);
 
     private final themeManager theme = themeManager.getInstance();
 
@@ -25,83 +27,108 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
     private JTextField searchField;
 
     public HeaderPanel() {
-        initializePanel();
-        theme.addThemeChangeListener(this);
+        initializeUI();
     }
 
-    /** Initializes layout and builds sections. */
-    private void initializePanel() {
+    // Initializes the panel structure
+    private void initializeUI() {
+        theme.addThemeChangeListener(this);
+        
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(780, 50));
-        setBackground(theme.getLightGreenColor());
+        setPreferredSize(PANEL_SIZE);
         setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
 
         buildNavigationSection();
         buildLogoSection();
+        
+        applyTheme();
     }
 
-    /** Builds and adds the company logo section. */
+
+    // Builds the navigation section (menu, dark mode, and search)
+    private void buildNavigationSection() {
+        navigationPanel = new PanelBuilder()
+                .withLayout(new FlowLayout(FlowLayout.LEFT, 15, 10))
+                .transparent()
+                .build();
+
+        menuButton = createIconButton(() -> theme.getMenuIcon());
+        navigationPanel.add(menuButton);
+
+        darkModeButton = createIconButton(() -> theme.getDarkModeToggleIcon());
+        darkModeButton.addActionListener(e -> theme.toggleDarkMode());
+        navigationPanel.add(darkModeButton);
+
+        searchButton = createIconButton(() -> theme.getSearchIcon());
+        navigationPanel.add(searchButton);
+
+        searchField = FieldFactory.createTextField("Search Item");
+        searchField.setVisible(false);
+        navigationPanel.add(searchField);
+
+        attachSearchToggle(searchButton, searchField);
+
+        add(navigationPanel, BorderLayout.WEST);
+    }
+
+    // Builds the company logo section.
     private void buildLogoSection() {
         companyLogoLabel = new LabelBuilder()
-                .withIcon(theme.getLogoIcon(), 150, 30)
+                .withIcon(theme.getLogoIcon(), LOGO_SIZE.width, LOGO_SIZE.height)
                 .withAlignment(SwingConstants.CENTER, SwingConstants.CENTER)
                 .build();
 
         add(companyLogoLabel, BorderLayout.EAST);
     }
 
-    /** Builds the navigation area with buttons and search field. */
-    private void buildNavigationSection() {
-        navigationPanel = new PanelBuilder()
-                .withLayout(new FlowLayout(FlowLayout.LEFT, 15, 10))
-                .withSize(700, 50)
-                .transparent()
+    // Creates a reusable icon button
+    private JButton createIconButton(Supplier<ImageIcon> iconSupplier) {
+        
+        JButton button = new ButtonBuilder()
+                .withSize(ICON_SIZE, ICON_SIZE)
+                .withIconSupplier(iconSupplier)
+                .withHoverEffect(true)
                 .build();
-
-        menuButton = createIconButton(theme.getMenuIcon());
-        navigationPanel.add(menuButton);
-
-        darkModeButton = createIconButton(theme.getDarkModeToggleIcon());
-        darkModeButton.addActionListener(e -> theme.toggleDarkMode());
-        navigationPanel.add(darkModeButton);
-
-        searchButton = createIconButton(theme.getSearchIcon());
-        searchField = FieldFactory.createTextField("Search Item");
-        searchField.setVisible(false);
-
-        navigationPanel.add(searchButton);
-        navigationPanel.add(searchField);
-
-        attachSearchToggle(searchButton, searchField, navigationPanel);
-        add(navigationPanel, BorderLayout.WEST);
+        
+        return button;
     }
 
-    /** Helper method to create icon buttons consistently. */
-    private JButton createIconButton(ImageIcon icon) {
-        return new ButtonBuilder()
-                .withSize(30, 30)
-                .withIcon(icon)
-                .build();
-    }
-
-    /** Toggles search field visibility. */
-    private void attachSearchToggle(JButton toggleButton, JTextField searchField, JPanel parentPanel) {
+    // Attaches toggle behavior for the search field
+    private void attachSearchToggle(JButton toggleButton, JTextField searchField) {
         toggleButton.addActionListener(e -> {
-            searchField.setVisible(!searchField.isVisible());
-            parentPanel.revalidate();
-            parentPanel.repaint();
+            boolean visible = !searchField.isVisible();
+            searchField.setVisible(visible);
+
+            navigationPanel.revalidate();
+            navigationPanel.repaint();
+
+            if (visible) searchField.requestFocusInWindow();
         });
     }
 
-    /** Applies theme colors and icons directly. */
+    //Apply the current theme
     private void applyTheme() {
         setBackground(theme.getLightGreenColor());
-        navigationPanel.setBackground(theme.getLightGreenColor());
+        if (navigationPanel != null) {
+            navigationPanel.setBackground(theme.getLightGreenColor());
+        }
 
-        companyLogoLabel.setIcon(Icons.getScaledIcon(theme.getLogoIcon(), 150, 30));
-        menuButton.setIcon(Icons.getScaledIcon(theme.getMenuIcon(), 30, 30));
-        darkModeButton.setIcon(Icons.getScaledIcon(theme.getDarkModeToggleIcon(), 30, 30));
-        searchButton.setIcon(Icons.getScaledIcon(theme.getSearchIcon(), 30, 30));
+        if (companyLogoLabel != null)
+            companyLogoLabel.setIcon(Icons.getScaledIcon(theme.getLogoIcon(), LOGO_SIZE.width, LOGO_SIZE.height));
+
+        if (menuButton != null)
+            menuButton.setIcon(Icons.getScaledIcon(theme.getMenuIcon(), ICON_SIZE, ICON_SIZE));
+
+
+        if (darkModeButton != null)
+            darkModeButton.setIcon(Icons.getScaledIcon(theme.getDarkModeToggleIcon(), ICON_SIZE, ICON_SIZE));
+
+
+        if (searchButton != null)
+            searchButton.setIcon(Icons.getScaledIcon(theme.getSearchIcon(), ICON_SIZE, ICON_SIZE));
+        
+        revalidate();
+        repaint();
     }
 
     @Override

@@ -7,6 +7,7 @@ package com.mycompany.j_pos.ui.builders;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.util.function.Supplier;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -14,6 +15,7 @@ public class ButtonBuilder {
     private int width = 50;
     private int height = 50;
     private ImageIcon icon;
+    private Supplier<ImageIcon> iconSupplier;
     private Runnable onClick;
     private boolean withHoverEffect = false;
 
@@ -25,6 +27,11 @@ public class ButtonBuilder {
 
     public ButtonBuilder withIcon(ImageIcon icon) {
         this.icon = icon;
+        return this;
+    }
+    
+    public ButtonBuilder withIconSupplier(Supplier<ImageIcon> iconSupplier) {
+        this.iconSupplier = iconSupplier;
         return this;
     }
 
@@ -48,19 +55,22 @@ public class ButtonBuilder {
 
         if (icon != null) {
             button.setIcon(Icons.getScaledIcon(icon, width, height));
+        } else if (iconSupplier != null){
+            button.setIcon(Icons.getScaledIcon(iconSupplier.get(), width, height));
         }
 
         // Hover effects
-        if (withHoverEffect && icon != null) {
+        if (withHoverEffect && (icon != null || iconSupplier != null)) {
             button.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent e) {
-                    button.setIcon(Icons.getScaledIcon(icon, width + 2, height + 2));
+                    System.out.println("test");
+                    button.setIcon(Icons.getScaledIcon(iconSupplier.get(), width + 2, height + 2));
                 }
 
                 @Override
                 public void mouseExited(java.awt.event.MouseEvent e) {
-                    button.setIcon(Icons.getScaledIcon(icon, width, height));
+                    button.setIcon(Icons.getScaledIcon(iconSupplier.get(), width, height));
                 }
             });
         }

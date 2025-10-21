@@ -42,19 +42,12 @@ public class CartItemsSection extends JPanel {
     }
 
     private JPanel createCartItemPanel(Item item, int quantity) {
-//        JPanel itemRow = PanelFactory.createPanel(
-//            new GridLayout(1, 4),
-//            new Dimension(400, 50),
-//            themeManager.getInstance().getTextBackground()
-//        );
         
         JPanel itemRow = new PanelBuilder()
                 .withLayout(new GridLayout(1, 4))
                 .withSize(400, 50)
                 .withBackground(themeManager.getInstance().getTextBackground())
                 .build();
-        
-        
         
         itemRow.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 

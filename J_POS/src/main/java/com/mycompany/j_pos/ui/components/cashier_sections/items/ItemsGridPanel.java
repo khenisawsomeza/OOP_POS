@@ -4,152 +4,120 @@ import com.mycompany.j_pos.models.Cart;
 import com.mycompany.j_pos.models.Item;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
+import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
+import com.mycompany.j_pos.ui.utils.layouts.WrapLayout;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class ItemsGridPanel extends JPanel {
+public class ItemsGridPanel extends JPanel implements themeManager.ThemeChangeListener {
+
     private static final int CARD_WIDTH = 220;
     private static final int CARD_HEIGHT = 170;
-    private static final int IMAGE_WIDTH = 200;
-    private static final int IMAGE_HEIGHT = 120;
 
     private final Cart cart;
-    private final CartPanelRefresher refresher;
+    private final Runnable cartRefresher;
     private final List<Item> availableItems;
+    private final themeManager theme = themeManager.getInstance();
+
     private JPanel itemsListPanel;
+    private JPanel addItemPanel;
+    private JLabel addItemIcon;
 
-    public interface CartPanelRefresher {
-        void refreshCartDisplay();
-    }
-
-    public ItemsGridPanel(Cart cart, CartPanelRefresher refresher, List<Item> availableItems) {
+    public ItemsGridPanel(Cart cart, Runnable refresher, List<Item> availableItems) {
         this.cart = cart;
-        this.refresher = refresher;
+        this.cartRefresher = refresher;
         this.availableItems = availableItems;
-        initializeGrid();
+
+        initializeComponents();
+        buildLayout();
+        applyTheme();
     }
 
-    private void initializeGrid() {
+    private void initializeComponents() {
+        theme.addThemeChangeListener(this);
+        
+        itemsListPanel = new PanelBuilder()
+                .withLayout(new WrapLayout(FlowLayout.CENTER, 30, 30))
+                .build();
+    }
+
+    // wrap layout with scroll
+    private void buildLayout() {
         setLayout(new BorderLayout());
 
-        itemsListPanel = new PanelBuilder()
-                .withLayout(new FlowLayout(FlowLayout.LEFT, 30, 30))
-                .withSize(780, Integer.MAX_VALUE)
-                .transparent()
-                .build();
+        JScrollPane scrollPane = new JScrollPane(
+                itemsListPanel,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        );
 
-        add(itemsListPanel, BorderLayout.CENTER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.setBorder(null);
+
+        add(scrollPane, BorderLayout.CENTER);
         refreshItemsDisplay();
     }
 
-    public void refreshItemsDisplay() {
-        itemsListPanel.removeAll();
-
-        themeManager theme = themeManager.getInstance();
-
-        for (Item item : availableItems) {
-            itemsListPanel.add(createItemCard(item, theme));
-        }
-
-        // “Add new item” button
-        JLabel imageLabel = new LabelBuilder()
-                .withAlignment(SwingConstants.CENTER, SwingConstants.CENTER)
-                .withIcon(theme.getPlusIcon(), 64, 64)
+    // creates the add new item card
+    private JPanel createAddNewItemCard() {
+        addItemIcon = new LabelBuilder()
+                .withAlignment(JLabel.CENTER, JLabel.CENTER)
                 .build();
 
-        JPanel newItemPanel = new PanelBuilder()
+        addItemPanel = new PanelBuilder()
                 .withLayout(new BorderLayout())
                 .withSize(CARD_WIDTH, CARD_HEIGHT)
-                .withBackground(theme.getLightGrayColor())
-                .withBorder(BorderFactory.createDashedBorder(theme.getTextForeground(), 2, 10, 5, true))
-                .withCursor(new Cursor(Cursor.HAND_CURSOR))
-                .onHoverEnter(panel -> panel.setBackground(theme.getStaticPrimaryGreenLM()))
-                .onHoverExit(panel -> panel.setBackground(theme.getLightGrayColor()))
+                .withCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR))
+                .onHoverEnter(panel -> {
+                    panel.setBackground(theme.getStaticPrimaryGreenLM());
+                    panel.setBorder(null);
+                })
+                .onHoverExit(panel -> {
+                    panel.setBackground(theme.getLightGrayColor());
+                    panel.setBorder(BorderFactory.createDashedBorder(
+                            theme.getTextForeground(), 2, 10, 5, true));
+                })
+                .onClick(() -> System.out.println("New item clicked"))
                 .build();
 
-        newItemPanel.add(imageLabel, BorderLayout.CENTER);
-        itemsListPanel.add(newItemPanel);
-
+        addItemPanel.add(addItemIcon, BorderLayout.CENTER);
+        return addItemPanel;
+    }
+    
+    //refreshes the items lists display
+    public void refreshItemsDisplay() {
+        itemsListPanel.removeAll();
+        availableItems.forEach(item ->
+                itemsListPanel.add(new ItemCard(item, this::handleItemClick))
+        );
+        itemsListPanel.add(createAddNewItemCard());
         itemsListPanel.revalidate();
         itemsListPanel.repaint();
     }
 
-    private JPanel createItemCard(Item item, themeManager theme) {
-        // Picture
-        JLabel pictureLabel = new LabelBuilder()
-                .withIcon(item.getPicture(), IMAGE_WIDTH, IMAGE_HEIGHT)
-                .withAlignment(JLabel.CENTER, JLabel.CENTER)
-                .build();
-
-        JPanel picturePanel = new PanelBuilder()
-                .withLayout(new BorderLayout())
-                .withBackground(theme.getStaticLightGreenLM())
-                .withBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5))
-                .build();
-        picturePanel.add(pictureLabel, BorderLayout.CENTER);
-
-        // Prompt
-        JLabel promptLabel = new LabelBuilder()
-                .withText("Add " + item.getName() + " to cart?")
-                .withFont(Font.BOLD, 16)
-                .withAlignment(JLabel.CENTER, JLabel.CENTER)
-                .build();
-
-        JPanel centerContainer = new PanelBuilder()
-                .withLayout(new CardLayout())
-                .withBackground(theme.getStaticLightGreenLM())
-                .build();
-
-        centerContainer.add(picturePanel, "PICTURE");
-        centerContainer.add(promptLabel, "PROMPT");
-
-        // Name
-        JLabel nameLabel = new LabelBuilder()
-                .withText(item.getName())
-                .withFont(Font.BOLD, 22)
-                .withAlignment(JLabel.CENTER, JLabel.CENTER)
-                .build();
-
-        JPanel namePanel = new PanelBuilder()
-                .withLayout(new BorderLayout())
-                .withSize(CARD_WIDTH, 40)
-                .withBackground(theme.getLightGreenColor())
-                .build();
-        namePanel.add(nameLabel, BorderLayout.CENTER);
-
-        // Full card
-        JPanel itemPanel = new PanelBuilder()
-                .withLayout(new BorderLayout())
-                .withSize(CARD_WIDTH, CARD_HEIGHT)
-                .withBackground(theme.getStaticLightGreenLM())
-                .withCursor(new Cursor(Cursor.HAND_CURSOR))
-                .onHoverEnter(panel -> {
-                    ((CardLayout) centerContainer.getLayout()).show(centerContainer, "PROMPT");
-                    namePanel.setVisible(false);
-                })
-                .onHoverExit(panel -> {
-                    ((CardLayout) centerContainer.getLayout()).show(centerContainer, "PICTURE");
-                    namePanel.setVisible(true);
-                })
-                .onPress(() -> centerContainer.setBackground(theme.getStaticPrimaryGreenDM()))
-                .onRelease(() -> centerContainer.setBackground(theme.getStaticLightGreenLM()))
-                .onClick(() -> {
-                    System.out.println("Clicked: " + item.getName());
-                    handleItemClick(item);
-                })
-                .build();
-
-        itemPanel.add(centerContainer, BorderLayout.CENTER);
-        itemPanel.add(namePanel, BorderLayout.SOUTH);
-
-        return itemPanel;
-    }
-
+    // updates the cart section for added items
     private void handleItemClick(Item item) {
         cart.addItem(item);
-        refresher.refreshCartDisplay();
+        cartRefresher.run();
+    }
+
+    // apply the current theme
+    private void applyTheme() {
+        itemsListPanel.setBackground(theme.getLightGrayColor());
+
+        if (addItemPanel != null && addItemIcon != null) {
+            addItemPanel.setBackground(theme.getLightGrayColor());
+            addItemPanel.setBorder(BorderFactory.createDashedBorder(
+                    theme.getTextForeground(), 2, 10, 5, true));
+            addItemIcon.setIcon(Icons.getScaledIcon(theme.getPlusIcon(), 64, 64));
+        }
+    }
+
+    @Override
+    public void onThemeChange(boolean isDarkMode) {
+        applyTheme();
     }
 }
