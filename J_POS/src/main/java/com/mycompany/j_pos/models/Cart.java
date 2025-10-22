@@ -4,15 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-
+    
+    private static Cart instance;
     private final List<CartEntry> items;
     private double taxRate;
     private double discountAmount;
 
-    public Cart() {
+    private Cart() {
         this.items = new ArrayList<>();
         this.taxRate = 0.12; // 12% tax
         this.discountAmount = 0.0;
+    }
+    
+    public static Cart getInstance(){
+        if (instance == null){
+            instance = new Cart();
+        }
+        
+        return instance;
     }
 
     // Add item or increment quantity

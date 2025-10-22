@@ -5,19 +5,16 @@
 package com.mycompany.j_pos.ui.components;
 
 import com.mycompany.j_pos.models.Cart;
-import com.mycompany.j_pos.ui.components.cashier_sections.cart.CartPanel;
-import com.mycompany.j_pos.ui.components.cashier_sections.items.ItemsPanel;
+import com.mycompany.j_pos.ui.components.cashier_sections.CartPanel;
+import com.mycompany.j_pos.ui.components.cashier_sections.ItemsPanel;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import javax.swing.*;
 
 public class CashierUI extends JPanel {
-    private Cart cart;
-    private CartPanel cartPanel;
+//    private CartPanel cartPanel;
     
     public CashierUI() {
-        // Initialize data models
-        initializeDataModels();
         
         // Setup main window
         setupMainWindow();
@@ -27,11 +24,6 @@ public class CashierUI extends JPanel {
         
         // Make window visible
         setVisible(true);
-    }
-    
-    // Initialize data models (cart, items, etc.)
-    private void initializeDataModels() {
-        cart = new Cart();
     }
     
     // Setup main window properties
@@ -44,12 +36,11 @@ public class CashierUI extends JPanel {
     //Create and add main sections to the window
     private void createComponents() {
         // Create cart panel (right side)
-        cartPanel = new CartPanel(cart);
-        add(cartPanel, BorderLayout.EAST);
+        add(CartPanel.getInstance(), BorderLayout.EAST);
         
         // Create items panel (left side)
         try {
-            ItemsPanel itemsPanel = new ItemsPanel(cart, cartPanel);
+            ItemsPanel itemsPanel = new ItemsPanel();
             add(itemsPanel);
         } catch (FileNotFoundException e) {
             System.out.println(e);

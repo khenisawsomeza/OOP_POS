@@ -2,18 +2,16 @@ package com.mycompany.j_pos.ui.components;
 
 import com.mycompany.j_pos.models.User;
 import com.mycompany.j_pos.ui.MainFrame;
-import com.mycompany.j_pos.ui.components.login_sections.items.LoginPanel;
-import com.mycompany.j_pos.ui.components.login_sections.items.WelcomePanel;
+import com.mycompany.j_pos.ui.components.login_sections.LoginPanel;
+import com.mycompany.j_pos.ui.components.login_sections.WelcomePanel;
 import java.awt.*;
 import javax.swing.*;
 
 public class LoginUI extends JPanel {
     private User user;
-    private MainFrame mainFrame;
     
-    // Constructor that receives MainFrame
-    public LoginUI(MainFrame mainFrame) {
-        this.mainFrame = mainFrame; // assign reference
+    // Constructor 
+    public LoginUI() {
         initializeDataModels();
         setupMainWindow();
         createComponents();
@@ -30,9 +28,9 @@ public class LoginUI extends JPanel {
     
     private void createComponents() {
         WelcomePanel welcomePanel = new WelcomePanel();
-        add(welcomePanel, BorderLayout.WEST);
+        add(welcomePanel, BorderLayout.CENTER);
         
-        LoginPanel loginPanel = new LoginPanel(mainFrame); // now not null
+        LoginPanel loginPanel = new LoginPanel(); // now not null
         add(loginPanel, BorderLayout.EAST);    
     }
     

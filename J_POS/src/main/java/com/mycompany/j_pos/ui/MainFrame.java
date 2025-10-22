@@ -16,14 +16,21 @@ import javax.swing.*;
  * @author khenshi
  */
 public class MainFrame extends JFrame{
+    
+     private static MainFrame instance;
      private CardLayout cardLayout;
      private JPanel mainPanel;
      
-     public MainFrame(){
+     private MainFrame(){
          initializeFrame();
          setupUI();
          setIconImage(Icons.getInstance().getAppIcon().getImage());
          this.setVisible(true);
+     }
+     
+     public static MainFrame getInstance(){
+         if (instance == null) instance = new MainFrame();
+         return instance;
      }
      
      private void initializeFrame(){
@@ -38,7 +45,7 @@ public class MainFrame extends JFrame{
      private void setupUI(){
          cardLayout = new CardLayout();
          mainPanel = new JPanel(cardLayout);
-         mainPanel.add(new LoginUI(this), "LOGIN");
+         mainPanel.add(new LoginUI(), "LOGIN");
          mainPanel.add(new CashierUI(), "CASHIER");
          
          this.setContentPane(mainPanel);
