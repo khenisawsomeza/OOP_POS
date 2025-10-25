@@ -15,7 +15,7 @@ public class J_POS {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            MainFrame main = new MainFrame();
+            MainFrame main = MainFrame.getInstance();
         });
                 
     }
