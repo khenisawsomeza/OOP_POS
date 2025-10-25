@@ -1,4 +1,4 @@
-package com.mycompany.j_pos.models;
+package com.mycompany.j_pos.models.items;
 
 import java.util.ArrayList;
 import java.util.List;

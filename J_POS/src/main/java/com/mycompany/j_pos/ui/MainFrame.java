@@ -6,6 +6,7 @@ package com.mycompany.j_pos.ui;
 
 import com.mycompany.j_pos.ui.components.CashierUI;
 import com.mycompany.j_pos.ui.components.LoginUI;
+import com.mycompany.j_pos.ui.components.cashier_sections.MenuBurgerSidebar;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import java.awt.*;

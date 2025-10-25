@@ -4,8 +4,8 @@
  */
 package com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components;
 
-import com.mycompany.j_pos.models.Cart;
-import com.mycompany.j_pos.models.Item;
+import com.mycompany.j_pos.models.cart.Cart;
+import com.mycompany.j_pos.models.items.Item;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.components.cashier_sections.CartPanel;
@@ -37,7 +37,7 @@ public class ItemCard extends JPanel implements themeManager.ThemeChangeListener
 
     public ItemCard(Item item) {
         this.item = item;
-
+        
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -56,6 +56,7 @@ public class ItemCard extends JPanel implements themeManager.ThemeChangeListener
         applyTheme();
 
         theme.addThemeChangeListener(this);
+        
     }
 
     private JLabel createPictureLabel() {

@@ -1,15 +1,23 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components;
 
+import com.mycompany.j_pos.models.items.Item;
+import com.mycompany.j_pos.ui.MainFrame;
 import com.mycompany.j_pos.ui.builders.ButtonBuilder;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
-import com.mycompany.j_pos.ui.factories.FieldFactory;
+import com.mycompany.j_pos.ui.builders.TextFieldBuilder;
+import com.mycompany.j_pos.ui.components.cashier_sections.MenuBurgerSidebar;
+import com.mycompany.j_pos.ui.components.cashier_sections.cashier_functions.SearchFunction;
+import com.mycompany.j_pos.ui.utils.LoadResources;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
 import java.util.function.Supplier;
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListener {
 
@@ -18,7 +26,8 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
     private static final Dimension LOGO_SIZE = new Dimension(150, 30);
 
     private final themeManager theme = themeManager.getInstance();
-
+    private final ItemsListPanel itemsListPanel = ItemsListPanel.getInstance();
+    
     private JPanel navigationPanel;
     private JLabel companyLogoLabel;
     private JButton menuButton;
@@ -46,12 +55,14 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
 
     // Builds the navigation section (menu, dark mode, and search)
     private void buildNavigationSection() {
+        
         navigationPanel = new PanelBuilder()
                 .withLayout(new FlowLayout(FlowLayout.LEFT, 15, 10))
                 .transparent()
                 .build();
 
         menuButton = createIconButton(() -> theme.getMenuIcon());
+        attachSidebarToggle();
         navigationPanel.add(menuButton);
 
         darkModeButton = createIconButton(() -> theme.getDarkModeToggleIcon());
@@ -59,13 +70,13 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
         navigationPanel.add(darkModeButton);
 
         searchButton = createIconButton(() -> theme.getSearchIcon());
+        attachSearchToggle();
         navigationPanel.add(searchButton);
 
-        searchField = FieldFactory.createTextField("Search Item");
+        searchField = createSearchField();
         searchField.setVisible(false);
         navigationPanel.add(searchField);
 
-        attachSearchToggle(searchButton, searchField);
 
         add(navigationPanel, BorderLayout.WEST);
     }
@@ -93,16 +104,17 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
     }
 
     // Attaches toggle behavior for the search field
-    private void attachSearchToggle(JButton toggleButton, JTextField searchField) {
-        toggleButton.addActionListener(e -> {
+    private void attachSearchToggle() {
+        searchButton.addActionListener(e -> {
             boolean visible = !searchField.isVisible();
             searchField.setVisible(visible);
-
             navigationPanel.revalidate();
             navigationPanel.repaint();
 
             if (visible) searchField.requestFocusInWindow();
         });
+        
+        
     }
 
     //Apply the current theme
@@ -130,8 +142,52 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
         repaint();
     }
 
+    private JTextField createSearchField() {
+        
+        JTextField field = new TextFieldBuilder()
+                .withPlaceholder("", 20)
+                .withFont(Font.PLAIN, 16)
+                .withBackground(Color.WHITE)
+                .withForeground(theme.getStaticBlack())
+                .build();       
+        
+        field.getDocument().addDocumentListener(new DocumentListener() {
+            private void runSearch() {
+                search(searchField.getText());    
+            }
+
+            @Override public void insertUpdate(DocumentEvent e) { runSearch(); }
+            @Override public void removeUpdate(DocumentEvent e) { runSearch(); }
+            @Override public void changedUpdate(DocumentEvent e) { runSearch(); }
+        });
+        
+        return field;
+    }
+    
+    private void search(String query){
+        
+        List<Item> items = null;
+            try {
+                items = SearchFunction.search(searchField.getText(), LoadResources.loadSampleItems());
+            } catch (Exception a){
+                System.out.println("failed to pass availble items in search");
+            }
+           
+        itemsListPanel.refreshItemsDisplay(items);
+    }
+    
+    
     @Override
     public void onThemeChange(boolean isDarkMode) {
         applyTheme();
+    }
+
+    private void attachSidebarToggle() {
+        menuButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                MenuBurgerSidebar.getInstance().onSidebar();
+            }
+        });
     }
 }

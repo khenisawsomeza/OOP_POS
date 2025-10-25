@@ -1,7 +1,7 @@
 package com.mycompany.j_pos.ui.utils;
 
-import com.mycompany.j_pos.models.Category;
-import com.mycompany.j_pos.models.Item;
+import com.mycompany.j_pos.models.items.Category;
+import com.mycompany.j_pos.models.items.Item;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

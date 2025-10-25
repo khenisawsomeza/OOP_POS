@@ -1,5 +1,6 @@
-package com.mycompany.j_pos.models;
+package com.mycompany.j_pos.models.cart;
 
+import com.mycompany.j_pos.models.items.Item;
 import java.util.ArrayList;
 import java.util.List;
 

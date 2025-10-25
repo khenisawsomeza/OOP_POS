@@ -1,8 +1,8 @@
 package com.mycompany.j_pos.ui.components.login_sections;
 
 import com.mycompany.j_pos.ui.MainFrame;
-import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
+import com.mycompany.j_pos.ui.components.login_sections.login_panel_components.InputFieldsPanel;
 import com.mycompany.j_pos.ui.components.login_sections.login_panel_components.LabelsPanel;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
@@ -45,63 +45,17 @@ public class LoginPanel extends JPanel implements themeManager.ThemeChangeListen
         textContainer.setLayout(new BoxLayout(textContainer, BoxLayout.Y_AXIS));
 
         textContainer.add(Box.createRigidArea(new Dimension(0, 100)));
-//        addTitleLabels();
-//        textContainer.add(Box.createRigidArea(new Dimension(0, 75)));
-//        addStoreLabels();
         textContainer.add(new LabelsPanel());
-        textContainer.add(Box.createRigidArea(new Dimension(0, 50)));
-        addInputFields();
-        addLoginButton();
+        textContainer.add(Box.createRigidArea(new Dimension(0, 55)));
+        textContainer.add(new InputFieldsPanel());
+        textContainer.add(Box.createRigidArea(new Dimension(0, 25)));
+        textContainer.add(createLoginButton());
 
         add(textContainer, BorderLayout.CENTER);
     }
 
-//    /** Adds main login title */
-//    private void addTitleLabels() {
-//        JLabel titleLabel = new LabelBuilder()
-//                .withText("Cha-Ching!")
-//                .withFont(Font.BOLD, 30)
-//                .withForeground(theme.getTextForeground())
-//                .withAlignment(SwingConstants.LEFT, SwingConstants.CENTER)
-//                .build();
-//
-//        textContainer.add(titleLabel);
-//    }
-//
-//    /** Adds subtext labels */
-//    private void addStoreLabels() {
-//        JLabel storeLabel = new LabelBuilder()
-//                .withText("Store Login")
-//                .withFont(Font.BOLD, 30)
-//                .withForeground(theme.getTextForeground())
-//                .withAlignment(SwingConstants.LEFT, SwingConstants.CENTER)
-//                .build();
-//
-//        JLabel subTextLabel = new LabelBuilder()
-//                .withText("Enter your credentials to access the POS system.")
-//                .withFont(Font.PLAIN, 15)
-//                .withForeground(theme.getTextForeground())
-//                .withAlignment(SwingConstants.LEFT, SwingConstants.CENTER)
-//                .build();
-//
-//        textContainer.add(storeLabel);
-//        textContainer.add(Box.createRigidArea(new Dimension(0, 20)));
-//        textContainer.add(subTextLabel);
-//    }
-
-    /** Adds username and password input fields with placeholders */
-    private void addInputFields() {
-        usernameField = buildPlaceholderField("Username");
-        passwordField = buildPasswordField("Password");
-
-        textContainer.add(Box.createRigidArea(new Dimension(0, 5)));
-        textContainer.add(usernameField);
-        textContainer.add(Box.createRigidArea(new Dimension(0, 15)));
-        textContainer.add(passwordField);
-    }
-
     /** Adds login button and hover behavior */
-    private void addLoginButton() {
+    private JButton createLoginButton() {
         loginButton = new JButton("Login");
         loginButton.setFont(new Font(AppConstants.DEFAULT_FONT, Font.BOLD, 16));
         loginButton.setPreferredSize(new Dimension(350, 40));
@@ -127,7 +81,7 @@ public class LoginPanel extends JPanel implements themeManager.ThemeChangeListen
             }
 
             @Override
-            public void mousePressed(java.awt.event.MouseEvent e) {
+            public void mousePressed(java.awt.event.MouseEvent e) {     
                 loginButton.setBackground(theme.getStaticPrimaryGreenDM());
             }
 
@@ -142,78 +96,8 @@ public class LoginPanel extends JPanel implements themeManager.ThemeChangeListen
 
         // Action listener
         loginButton.addActionListener(e -> MainFrame.getInstance().changeCard("CASHIER"));
-
-        textContainer.add(Box.createRigidArea(new Dimension(0, 25)));
-        textContainer.add(loginButton);
-    }
-
-    /** Builds a styled placeholder text field */
-    private JTextField buildPlaceholderField(String placeholder) {
-        JTextField field = new JTextField(placeholder);
-        field.setFont(new Font(AppConstants.DEFAULT_FONT, Font.PLAIN, 14));
-        field.setMaximumSize(new Dimension(350, 35));
-        field.setForeground(Color.GRAY);
-        field.setAlignmentX(Component.LEFT_ALIGNMENT);
-        field.setBorder(BorderFactory.createCompoundBorder(
-                field.getBorder(),
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)
-        ));
-
-        field.addFocusListener(new java.awt.event.FocusAdapter() {
-            @Override
-            public void focusGained(java.awt.event.FocusEvent e) {
-                if (field.getText().equals(placeholder)) {
-                    field.setText("");
-                    field.setForeground(Color.BLACK);
-                }
-            }
-
-            @Override
-            public void focusLost(java.awt.event.FocusEvent e) {
-                if (field.getText().isEmpty()) {
-                    field.setText(placeholder);
-                    field.setForeground(Color.GRAY);
-                }
-            }
-        });
-
-        return field;
-    }
-
-    /** Builds a styled placeholder password field */
-    private JPasswordField buildPasswordField(String placeholder) {
-        JPasswordField field = new JPasswordField(placeholder);
-        field.setFont(new Font(AppConstants.DEFAULT_FONT, Font.PLAIN, 14));
-        field.setMaximumSize(new Dimension(350, 35));
-        field.setForeground(Color.GRAY);
-        field.setAlignmentX(Component.LEFT_ALIGNMENT);
-        field.setBorder(BorderFactory.createCompoundBorder(
-                field.getBorder(),
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)
-        ));
-        field.setEchoChar((char) 0); // show placeholder
-
-        field.addFocusListener(new java.awt.event.FocusAdapter() {
-            @Override
-            public void focusGained(java.awt.event.FocusEvent e) {
-                if (String.valueOf(field.getPassword()).equals(placeholder)) {
-                    field.setText("");
-                    field.setForeground(Color.BLACK);
-                    field.setEchoChar('•');
-                }
-            }
-
-            @Override
-            public void focusLost(java.awt.event.FocusEvent e) {
-                if (String.valueOf(field.getPassword()).isEmpty()) {
-                    field.setText(placeholder);
-                    field.setForeground(Color.GRAY);
-                    field.setEchoChar((char) 0);
-                }
-            }
-        });
-
-        return field;
+        
+        return loginButton;
     }
 
     private void applyTheme() {

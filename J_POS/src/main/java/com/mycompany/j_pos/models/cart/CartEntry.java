@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.j_pos.models;
+package com.mycompany.j_pos.models.cart;
+
+import com.mycompany.j_pos.models.items.Item;
 
 public class CartEntry {
     private final Item item;

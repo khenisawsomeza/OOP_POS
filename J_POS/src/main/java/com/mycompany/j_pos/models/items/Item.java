@@ -1,4 +1,4 @@
-package com.mycompany.j_pos.models;
+package com.mycompany.j_pos.models.items;
 
 import com.mycompany.j_pos.ui.utils.LoadResources;
 import java.io.File;

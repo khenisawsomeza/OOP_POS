@@ -1,15 +1,18 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components;
 
-import com.mycompany.j_pos.models.Cart;
-import com.mycompany.j_pos.models.Item;
+import com.mycompany.j_pos.models.cart.Cart;
+import com.mycompany.j_pos.models.items.Item;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
+import com.mycompany.j_pos.ui.components.cashier_sections.cashier_functions.SearchFunction;
+import com.mycompany.j_pos.ui.utils.LoadResources;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import com.mycompany.j_pos.ui.utils.layouts.WrapLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeListener {
@@ -17,19 +20,31 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
     private static final int CARD_WIDTH = 220;
     private static final int CARD_HEIGHT = 170;
 
-    private final List<Item> availableItems;
+    private List<Item> availableItems;
     private final themeManager theme = themeManager.getInstance();
+    private static ItemsListPanel instance;
 
     private JPanel itemsListPanel;
     private JPanel addItemPanel;
     private JLabel addItemIcon;
 
-    public ItemsListPanel(List<Item> availableItems) {
-        this.availableItems = availableItems;
-
+    private ItemsListPanel() {
+        try {
+            availableItems = LoadResources.loadSampleItems();
+        } catch (Exception e){
+            System.out.println("Unable to load availble items");
+        }
+        
         initializeComponents();
         buildLayout();
         applyTheme();
+    }
+    
+    static public ItemsListPanel getInstance(){
+        if (instance == null) 
+            instance = new ItemsListPanel();
+        
+        return instance;
     }
 
     private void initializeComponents() {
@@ -54,7 +69,7 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
         scrollPane.setBorder(null);
 
         add(scrollPane, BorderLayout.CENTER);
-        refreshItemsDisplay();
+        refreshItemsDisplay(availableItems);
     }
 
     // creates the add new item card
@@ -83,13 +98,12 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
         return addItemPanel;
     }
     
-    //refreshes the items lists display
-    public void refreshItemsDisplay() {
-        itemsListPanel.removeAll();
-        availableItems.forEach(item ->
-                itemsListPanel.add(new ItemCard(item))
-        );
+    public void refreshItemsDisplay(List<Item> items) {
+        itemsListPanel.removeAll();    
+        items.forEach(item -> itemsListPanel.add(new ItemCard(item)));
         itemsListPanel.add(createAddNewItemCard());
+        
+        applyTheme();
         itemsListPanel.revalidate();
         itemsListPanel.repaint();
     }

@@ -5,7 +5,7 @@ import com.mycompany.j_pos.ui.components.cashier_sections.cart_panel_components.
 import com.mycompany.j_pos.ui.components.cashier_sections.cart_panel_components.cart_items_section.CartItemsPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.cart_panel_components.top_section.cashierPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.cart_panel_components.top_section.CartTitlePanel;
-import com.mycompany.j_pos.models.Cart;
+import com.mycompany.j_pos.models.cart.Cart;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import javax.swing.*;

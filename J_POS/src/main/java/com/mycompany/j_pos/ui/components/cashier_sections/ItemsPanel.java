@@ -1,8 +1,8 @@
 package com.mycompany.j_pos.ui.components.cashier_sections;
 
-import com.mycompany.j_pos.models.Cart;
-import com.mycompany.j_pos.models.Category;
-import com.mycompany.j_pos.models.Item;
+import com.mycompany.j_pos.models.cart.Cart;
+import com.mycompany.j_pos.models.items.Category;
+import com.mycompany.j_pos.models.items.Item;
 import com.mycompany.j_pos.ui.components.cashier_sections.CartPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.CategoriesPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.HeaderPanel;
@@ -17,7 +17,6 @@ import java.util.List;
 
 public class ItemsPanel extends JPanel implements themeManager.ThemeChangeListener {
 
-    private List<Item> availableItems;
     private List<Category> availableCategories;
     private final themeManager theme = themeManager.getInstance();
 
@@ -33,7 +32,6 @@ public class ItemsPanel extends JPanel implements themeManager.ThemeChangeListen
     // Loads item and category data
     private void initializeData(){
         try {
-            availableItems = LoadResources.loadSampleItems();
             availableCategories = LoadResources.loadSampleCategories();
         } catch (FileNotFoundException e){
             System.out.println("failed to load items and categories");
@@ -52,7 +50,7 @@ public class ItemsPanel extends JPanel implements themeManager.ThemeChangeListen
         add(headerPanel, BorderLayout.NORTH);
 
         // Items grid 
-        itemsGridPanel = new ItemsListPanel(availableItems);
+        itemsGridPanel = ItemsListPanel.getInstance();
         add(itemsGridPanel, BorderLayout.CENTER);
 
         // Categories section

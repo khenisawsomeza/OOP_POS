@@ -1,6 +1,8 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart_panel_components.bottom_section;
 
-import com.mycompany.j_pos.models.Cart;
+import com.mycompany.j_pos.models.cart.Cart;
+import com.mycompany.j_pos.models.sale.CheckoutService;
+import com.mycompany.j_pos.models.sale.Sale;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
@@ -61,6 +63,8 @@ public class CheckoutPanel extends JPanel implements themeManager.ThemeChangeLis
             JOptionPane.showMessageDialog(this, "Cart is empty! Add items before checkout.");
             return;
         }
+        
+        Sale sale = CheckoutService.finalizeSaleFromCart(cart);
 
         JOptionPane.showMessageDialog(this, "Processing checkout for: " + cart.getFormattedTotal());
     }
