@@ -1,0 +1,106 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.j_pos.facade;
+
+import com.mycompany.j_pos.models.cart.*;
+import com.mycompany.j_pos.models.items.*;
+import com.mycompany.j_pos.models.sale.*;
+import com.mycompany.j_pos.services.*;
+import java.util.List;
+
+public class POSFacade {
+
+    private static POSFacade instance;
+
+    private final Cart cart;
+//    private final ItemService itemService;
+    private final SaleService saleService;
+    private final ReceiptService receiptService;
+
+    private POSFacade() {
+        this.cart = Cart.getInstance();
+//        this.itemService = new ItemService();
+        this.saleService = new SaleService();
+        this.receiptService = new ReceiptService();
+    }
+
+    public static POSFacade getInstance() {
+        if (instance == null) instance = new POSFacade();
+        return instance;
+    }
+
+
+//    public List<Category> loadMenuFromDB() {
+//        return itemService.loadCategories();
+//    }
+
+//    /** Returns all available items from a given category. */
+//    public List<Item> getItemsByCategory(String categoryName) {
+//        return itemService.getItemsByCategory(categoryName);
+//    }
+
+    public void addItemToCart(Item item) {
+        cart.addItem(item);
+    }
+
+    public void removeItemFromCart(Item item) {
+        cart.removeItem(item);
+    }
+
+    public void clearCart() {
+        cart.clearCart();
+    }
+
+    public List<CartEntry> getCartItems() {
+        return cart.getItems();
+    }
+
+    public double getCartTotal() {
+        return cart.getTotal();
+    }
+
+    public String getFormattedCartTotal() {
+        return cart.getFormattedTotal();
+    }
+
+    public int getTotalItemCount() {
+        return cart.getTotalItemCount();
+    }
+
+    public void applyDiscount(double amount) {
+        cart.setDiscountAmount(amount);
+    }
+
+    public void setTaxRate(double rate) {
+        cart.setTaxRate(rate);
+    }
+
+    /** Finalizes the sale: creates Sale, saves it, prints receipt, clears cart. */
+    public Sale checkout() {
+        if (cart.isEmpty()) {
+            System.out.println("Cart is empty. Cannot checkout.");
+            return null;
+        }
+
+        // 1️⃣ Create sale from cart
+        Sale sale = saleService.createSaleFromCart(cart);
+
+        // 2️⃣ Save sale record
+        saleService.saveSale(sale);
+
+        // 3️⃣ Print receipt
+        receiptService.printReceipt(
+            sale,
+            cart.getTaxAmount(),
+            cart.getDiscountAmount()
+        );
+
+        // 4️⃣ Clear cart
+        cart.clearCart();
+        System.out.println("Checkout completed successfully!");
+
+        return sale;
+    }
+}

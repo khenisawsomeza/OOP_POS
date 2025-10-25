@@ -67,17 +67,23 @@ public class CashierUI extends JPanel {
     layeredPane.add(sidebar, JLayeredPane.PALETTE_LAYER);
     
     // auto close sidebar 
+    SwingUtilities.invokeLater(() -> {
     Toolkit.getDefaultToolkit().addAWTEventListener(event -> {
-            if (event instanceof MouseEvent me) {
-                if (me.getID() == MouseEvent.MOUSE_MOVED && sidebar.isVisible()) {
+        if (event instanceof MouseEvent me) {
+            if (me.getID() == MouseEvent.MOUSE_MOVED && sidebar.isVisible()) {
+                try {
                     Point mouseOnScreen = me.getLocationOnScreen();
                     Rectangle sidebarBounds = new Rectangle(sidebar.getLocationOnScreen(), sidebar.getSize());
                     if (!sidebarBounds.contains(mouseOnScreen)) {
                         sidebar.offSidebar();
                     }
+                } catch (IllegalComponentStateException ex) {
+                    // Sidebar not yet visible, ignore for now
                 }
             }
-        }, AWTEvent.MOUSE_MOTION_EVENT_MASK);
+        }
+    }, AWTEvent.MOUSE_MOTION_EVENT_MASK);
+});
 
 }
 

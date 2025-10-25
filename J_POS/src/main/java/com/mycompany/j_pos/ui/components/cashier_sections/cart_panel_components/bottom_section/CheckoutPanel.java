@@ -1,7 +1,7 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.cart_panel_components.bottom_section;
 
+import com.mycompany.j_pos.facade.POSFacade;
 import com.mycompany.j_pos.models.cart.Cart;
-import com.mycompany.j_pos.models.sale.CheckoutService;
 import com.mycompany.j_pos.models.sale.Sale;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
@@ -17,6 +17,7 @@ public class CheckoutPanel extends JPanel implements themeManager.ThemeChangeLis
 
     private final Cart cart = Cart.getInstance();
     private final themeManager theme = themeManager.getInstance();
+    private final POSFacade POS = POSFacade.getInstance();
 
     private JLabel checkoutAmountLabel;
     private JPanel contentPanel;
@@ -64,7 +65,7 @@ public class CheckoutPanel extends JPanel implements themeManager.ThemeChangeLis
             return;
         }
         
-        Sale sale = CheckoutService.finalizeSaleFromCart(cart);
+        Sale sale = POS.checkout();
 
         JOptionPane.showMessageDialog(this, "Processing checkout for: " + cart.getFormattedTotal());
     }

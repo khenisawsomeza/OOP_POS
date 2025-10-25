@@ -1,13 +1,16 @@
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\facade\POSFacade.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\J_POS.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\cart\Cart.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\cart\CartEntry.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\items\Category.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\items\Item.java
-C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\sale\CheckoutService.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\sale\Sale.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\sale\SaleComponent.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\sale\SaleLineItem.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\User.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\CheckoutService.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\ReceiptService.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\SaleService.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\builders\ButtonBuilder.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\builders\LabelBuilder.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\ui\builders\PanelBuilder.java
