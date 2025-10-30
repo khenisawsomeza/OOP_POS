@@ -18,6 +18,7 @@ com/mycompany/j_pos/ui/MainFrame.class
 com/mycompany/j_pos/ui/utils/commons/Icons.class
 com/mycompany/j_pos/models/items/Category.class
 com/mycompany/j_pos/models/sale/SaleComponent.class
+com/mycompany/j_pos/ui/Navigation.class
 com/mycompany/j_pos/ui/components/LoginUI.class
 com/mycompany/j_pos/ui/components/cashier_sections/cashier_functions/SearchFunction.class
 com/mycompany/j_pos/models/sale/SaleLineItem.class

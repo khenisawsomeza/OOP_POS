@@ -4,9 +4,9 @@
  */
 package com.mycompany.j_pos.ui;
 
+import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.components.CashierUI;
 import com.mycompany.j_pos.ui.components.LoginUI;
-import com.mycompany.j_pos.ui.components.cashier_sections.MenuBurgerSidebar;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import java.awt.*;
@@ -21,6 +21,8 @@ public class MainFrame extends JFrame{
      private static MainFrame instance;
      private CardLayout cardLayout;
      private JPanel mainPanel;
+     private JPanel navigation;
+     private JPanel displayPanel;
      
      private MainFrame(){
          initializeFrame();
@@ -44,16 +46,26 @@ public class MainFrame extends JFrame{
      }
      
      private void setupUI(){
+         mainPanel = new PanelBuilder()
+                 .withLayout(new BorderLayout())
+                 .build();
+         
+         navigation = new Navigation();
+         
          cardLayout = new CardLayout();
-         mainPanel = new JPanel(cardLayout);
-         mainPanel.add(new LoginUI(), "LOGIN");
-         mainPanel.add(new CashierUI(), "CASHIER");
+         displayPanel = new JPanel(cardLayout);
+         displayPanel.add(new LoginUI(), "LOGIN");
+         displayPanel.add(new CashierUI(), "CASHIER");
+         
+         changeCard("LOGIN");
+         
+         mainPanel.add(navigation, BorderLayout.WEST);
+         mainPanel.add(displayPanel, BorderLayout.CENTER);
          
          this.setContentPane(mainPanel);
-         changeCard("LOGIN");
      }
      
      public void changeCard(String text){
-         cardLayout.show(mainPanel, text);
+         cardLayout.show(displayPanel, text);
      }
 }
