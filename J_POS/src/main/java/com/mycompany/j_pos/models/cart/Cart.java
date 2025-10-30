@@ -1,6 +1,7 @@
 package com.mycompany.j_pos.models.cart;
 
 import com.mycompany.j_pos.models.items.Item;
+import com.mycompany.j_pos.ui.components.cashier_sections.CartPanel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class Cart {
     // Clear cart
     public void clearCart() {
         items.clear();
+        CartPanel.getInstance().refreshCartDisplay();
     }
 
     // Get quantity of a specific item

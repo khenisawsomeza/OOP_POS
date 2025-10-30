@@ -11,7 +11,6 @@ import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class CartPanel extends JPanel implements themeManager.ThemeChangeListener {
     
     private static CartPanel instance;
@@ -69,16 +68,23 @@ public class CartPanel extends JPanel implements themeManager.ThemeChangeListene
     private JScrollPane buildScrollableItemsSection() {
         itemsSection = new CartItemsPanel();
 
-        JScrollPane scrollPane = new JScrollPane(itemsSection);
+        JScrollPane scrollPane = new JScrollPane(
+                itemsSection, 
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        );
+        
+        scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        scrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
         scrollPane.setBorder(null);
-        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(12); // smooth scroll
+
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16); // smooth scroll
         scrollPane.getViewport().setBackground(theme.getLightGrayColor());
 
         return scrollPane;
     }
 
-    //build bottom section
+    // build bottom section
     private JPanel buildBottomSection() {
         summarySection = new CartSummaryPanel();
         checkoutSection = new CheckoutPanel();
@@ -101,7 +107,7 @@ public class CartPanel extends JPanel implements themeManager.ThemeChangeListene
         if (checkoutSection != null) checkoutSection.refreshCheckout();
     }   
 
-    //apply theme
+    // apply theme
     private void applyTheme() {
         setBackground(Color.BLUE);
     }

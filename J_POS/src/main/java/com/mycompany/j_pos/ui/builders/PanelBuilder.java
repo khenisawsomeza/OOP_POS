@@ -23,8 +23,8 @@ public class PanelBuilder {
     private Runnable onClick;
     private Consumer<JPanel> onHoverEnter;
     private Consumer<JPanel> onHoverExit;
-    private Runnable onPress;
-    private Runnable onRelease;
+    private Consumer<JPanel> onPress;
+    private Consumer<JPanel> onRelease;
     
     public PanelBuilder withLayout(LayoutManager layout) {
         this.layout = layout;
@@ -72,12 +72,12 @@ public class PanelBuilder {
         return this;
     }
 
-    public PanelBuilder onPress(Runnable action) {
+    public PanelBuilder onPress(Consumer<JPanel> action) {
         this.onPress = action;
         return this;
     }
 
-    public PanelBuilder onRelease(Runnable action) {
+    public PanelBuilder onRelease(Consumer<JPanel> action) {
         this.onRelease = action;
         return this;
     }
@@ -111,12 +111,12 @@ public class PanelBuilder {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    if (onPress != null) onPress.run();
+                    if (onPress != null) onPress.accept(panel);
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    if (onRelease != null) onRelease.run();
+                    if (onRelease != null) onRelease.accept(panel);
                 }
             });
         }
