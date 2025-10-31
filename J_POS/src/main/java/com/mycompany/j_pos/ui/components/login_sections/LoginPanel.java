@@ -1,5 +1,7 @@
 package com.mycompany.j_pos.ui.components.login_sections;
 
+import com.mycompany.j_pos.database.SQLiteConnect;
+import com.mycompany.j_pos.facade.POSFacade;
 import com.mycompany.j_pos.ui.MainFrame;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.components.login_sections.login_panel_components.InputFieldsPanel;
@@ -9,10 +11,11 @@ import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-/**
- * LoginPanel – Handles the login UI layout and interactions.
- */
 public class LoginPanel extends JPanel implements themeManager.ThemeChangeListener {
 
     private final themeManager theme = themeManager.getInstance();
@@ -20,6 +23,8 @@ public class LoginPanel extends JPanel implements themeManager.ThemeChangeListen
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private InputFieldsPanel inputFieldsPanel;
+    private POSFacade facade = POSFacade.getInstance();
     
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -47,14 +52,16 @@ public class LoginPanel extends JPanel implements themeManager.ThemeChangeListen
         textContainer.add(Box.createRigidArea(new Dimension(0, 100)));
         textContainer.add(new LabelsPanel());
         textContainer.add(Box.createRigidArea(new Dimension(0, 55)));
-        textContainer.add(new InputFieldsPanel());
+        
+        inputFieldsPanel = new InputFieldsPanel();
+        textContainer.add(inputFieldsPanel);
+        
         textContainer.add(Box.createRigidArea(new Dimension(0, 25)));
         textContainer.add(createLoginButton());
 
         add(textContainer, BorderLayout.CENTER);
     }
 
-    /** Adds login button and hover behavior */
     private JButton createLoginButton() {
         loginButton = new JButton("Login");
         loginButton.setFont(new Font(AppConstants.DEFAULT_FONT, Font.BOLD, 16));
@@ -68,7 +75,6 @@ public class LoginPanel extends JPanel implements themeManager.ThemeChangeListen
         loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         loginButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        // Hover effects
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
@@ -94,10 +100,24 @@ public class LoginPanel extends JPanel implements themeManager.ThemeChangeListen
             }
         });
 
-        // Action listener
-        loginButton.addActionListener(e -> MainFrame.getInstance().changeCard("CASHIER"));
+        loginButton.addActionListener(e -> handleLogin());
         
         return loginButton;
+    }
+
+    private void handleLogin() {
+        String username = inputFieldsPanel.getUsername();
+        String password = new String(inputFieldsPanel.getPassword());
+
+        if (username.trim().isEmpty() || password.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Please enter both username and password",
+                "Login Error",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        facade.login(username, password);
     }
 
     private void applyTheme() {
@@ -112,4 +132,3 @@ public class LoginPanel extends JPanel implements themeManager.ThemeChangeListen
         applyTheme();
     }
 }
-

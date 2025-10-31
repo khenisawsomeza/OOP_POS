@@ -1,9 +1,6 @@
 package com.mycompany.j_pos.ui.components.cashier_sections;
 
-import com.mycompany.j_pos.models.cart.Cart;
 import com.mycompany.j_pos.models.items.Category;
-import com.mycompany.j_pos.models.items.Item;
-import com.mycompany.j_pos.ui.components.cashier_sections.CartPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.CategoriesPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.HeaderPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.ItemsListPanel;

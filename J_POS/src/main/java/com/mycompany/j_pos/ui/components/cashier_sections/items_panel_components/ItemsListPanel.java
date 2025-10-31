@@ -17,7 +17,7 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
     private static final int CARD_WIDTH = 220;
     private static final int CARD_HEIGHT = 170;
 
-    private List<Item> availableItems;
+    private static List<Item> availableItems;
     private final themeManager theme = themeManager.getInstance();
     private static ItemsListPanel instance;
 
@@ -27,7 +27,7 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
 
     private ItemsListPanel() {
         try {
-            availableItems = LoadResources.loadSampleItems();
+            availableItems = LoadResources.getItems();
         } catch (Exception e) {
             System.out.println("Unable to load availble items");
         }
@@ -96,7 +96,11 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
     }
 
     public void refreshItemsDisplay(List<Item> items) {
+        items.forEach(item -> {
+            System.out.println(item.getName());
+        });
         itemsListPanel.removeAll();
+        
         items.forEach(item -> itemsListPanel.add(new ItemCard(item)));
         itemsListPanel.add(createAddNewItemCard());
         applyTheme();

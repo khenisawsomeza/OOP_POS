@@ -3,11 +3,14 @@ package com.mycompany.j_pos.ui.components.cashier_sections.items_panel_component
 import com.mycompany.j_pos.models.items.Category;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
+import com.mycompany.j_pos.ui.components.cashier_sections.cashier_functions.LoadItemPerCategory;
+import com.mycompany.j_pos.ui.utils.LoadResources;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +21,7 @@ public class CategoriesPanel extends JPanel implements themeManager.ThemeChangeL
 
     private final List<Category> availableCategories;
     private final themeManager theme = themeManager.getInstance();
+    private final ItemsListPanel itemsListPanel = ItemsListPanel.getInstance();
 
     private JPanel buttonsPanel;
     private JPanel newCategoryPanel;
@@ -46,6 +50,7 @@ public class CategoriesPanel extends JPanel implements themeManager.ThemeChangeL
                 .withLayout(new FlowLayout(FlowLayout.LEFT, 20, 0))
                 .build();
 
+        buttonsPanel.add(createCategoryLabel("All Items"));
         availableCategories.forEach(category -> 
             buttonsPanel.add(createCategoryLabel(category.getName()))
         );
@@ -69,6 +74,13 @@ public class CategoriesPanel extends JPanel implements themeManager.ThemeChangeL
                     e.setBackground(theme.getLightGreenColor());
                     e.setOpaque(true);
                     e.setForeground(theme.getTextForeground());
+                })
+                .onClick(() -> {
+                    try{
+                        LoadItemPerCategory.loadItems(name);
+                    }catch(Exception ex){
+                        System.out.println("ERROR IN SWITCHING CATEGORIES: " + ex);
+                    }
                 })
                 .onPress(e -> e.setBackground(theme.getStaticPrimaryGreenLM().darker()))
                 .onRelease(e -> e.setBackground(theme.getStaticPrimaryGreenLM()))
@@ -97,7 +109,7 @@ public class CategoriesPanel extends JPanel implements themeManager.ThemeChangeL
         newCategoryPanel.add(addCategoryIcon, BorderLayout.CENTER);
         return newCategoryPanel;
     }
-
+    
     // apply the current theme
     private void applyTheme() {
         setBackground(theme.getLightGreenColor());

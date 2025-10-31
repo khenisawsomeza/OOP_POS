@@ -10,13 +10,18 @@ import java.util.Scanner;
 import javax.swing.ImageIcon;
 
 public class LoadResources {
-    private static final String FALLBACK_ICON = "src/main/resources/images/noFileIcon.png";   
+    private static final String FALLBACK_ICON = "src/main/resources/images/noFileIcon.png"; 
+    
+    private static List<Item> items;
+    
+    public static List<Item> getItems(){
+        return items;
+    }
     
     // helper to load safely using File.exists()
     public static ImageIcon loadImage(String IMAGES_PATH, String filename) {
         String fullPath = IMAGES_PATH + filename;
         File iconFile = new File(fullPath);
-
         if (iconFile.exists()) {
             return new ImageIcon(fullPath);
         } else {
@@ -29,7 +34,7 @@ public class LoadResources {
      * Create sample items for demonstration
      * TODO: Replace with actual item loading from database/file
      */
-    public static List<Item> loadSampleItems() throws FileNotFoundException {
+    public static void loadSampleItems() throws FileNotFoundException {
         ArrayList<Item> itemsList = new ArrayList<>();
         try (Scanner scanner = new Scanner(LoadResources.class.getResourceAsStream("/tempDB/entrees.txt"))) {
             while (scanner.hasNext()) {
@@ -46,12 +51,13 @@ public class LoadResources {
 
                 Item newItem = new Item(prodID, prodName, prodPrice, prodCat);
                 itemsList.add(newItem);
+                
             }
         }catch(Exception e){
             System.out.println(e);
         }
-
-        return itemsList;
+        
+        items = itemsList;
     }
     
     public static List<Category> loadSampleCategories() throws FileNotFoundException {
