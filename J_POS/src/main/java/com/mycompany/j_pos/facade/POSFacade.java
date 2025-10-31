@@ -8,6 +8,9 @@ import com.mycompany.j_pos.models.cart.*;
 import com.mycompany.j_pos.models.items.*;
 import com.mycompany.j_pos.models.sale.*;
 import com.mycompany.j_pos.services.*;
+import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.ItemsListPanel;
+import com.mycompany.j_pos.ui.utils.LoadResources;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -20,6 +23,7 @@ public class POSFacade {
     private final SaleService saleService;
     private final ReceiptService receiptService;
     private final LoginService loginService;
+    private List<Item> items = null;
 
     private POSFacade() {
         this.cart = Cart.getInstance();
@@ -114,5 +118,15 @@ public class POSFacade {
     
     public void login(String uname, String pass){
         loginService.authenticateUser(uname, pass);
+        try{
+            LoadResources.loadSampleItems(); 
+            items = LoadResources.getItems();
+        } catch (Exception e){
+            System.out.println("failed to load items");
+        }
+    }
+    
+    public void refreshItemsDisplay(){
+        ItemsListPanel.getInstance().refreshItemsDisplay(items);
     }
 }

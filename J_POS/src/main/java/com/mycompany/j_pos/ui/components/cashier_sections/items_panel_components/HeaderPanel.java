@@ -168,7 +168,7 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
         
         List<Item> items = null;
             try {
-                items = SearchFunction.search(searchField.getText(), LoadResources.loadSampleItems());
+                items = SearchFunction.search(searchField.getText(), LoadResources.getItems());
             } catch (Exception a){
                 System.out.println("failed to pass availble items in search");
             }

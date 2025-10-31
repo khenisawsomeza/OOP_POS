@@ -4,6 +4,7 @@ com\mycompany\j_pos\ui\utils\commons\themes\UIColors.class
 com\mycompany\j_pos\ui\components\CashierUI$1.class
 com\mycompany\j_pos\ui\components\cashier_sections\cart_panel_components\top_section\CartTitlePanel.class
 com\mycompany\j_pos\database\SQLiteConnect.class
+com\mycompany\j_pos\ui\components\cashier_sections\cashier_functions\LoadItemPerCategory.class
 com\mycompany\j_pos\services\LoginService.class
 com\mycompany\j_pos\ui\components\CashierUI.class
 com\mycompany\j_pos\facade\POSFacade.class

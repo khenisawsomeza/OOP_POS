@@ -7,6 +7,7 @@ package com.mycompany.j_pos.ui;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.components.CashierUI;
 import com.mycompany.j_pos.ui.components.LoginUI;
+import com.mycompany.j_pos.ui.utils.LoadResources;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import java.awt.*;
@@ -37,6 +38,11 @@ public class MainFrame extends JFrame{
      }
      
      private void initializeFrame(){
+         try {
+            LoadResources.loadSampleItems();
+        } catch (Exception e){
+            System.out.println("Failed to Load items");
+        }
          this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          this.setResizable(true);
          this.setTitle(AppConstants.APP_TITLE);

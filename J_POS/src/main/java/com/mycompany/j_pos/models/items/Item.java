@@ -29,6 +29,8 @@ public class Item {
 
         // load from foodpics folder directly
         this.picture = LoadResources.loadImage(IMAGES_PATH, name + ".png");
+        
+        System.out.println(this.category);
     }
 
     // Getters
