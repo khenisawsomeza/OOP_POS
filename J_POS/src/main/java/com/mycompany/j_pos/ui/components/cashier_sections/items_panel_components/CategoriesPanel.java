@@ -5,6 +5,7 @@ import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.components.cashier_sections.cashier_functions.LoadItemPerCategory;
 import com.mycompany.j_pos.ui.utils.LoadResources;
+import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
@@ -55,7 +56,7 @@ public class CategoriesPanel extends JPanel implements themeManager.ThemeChangeL
             buttonsPanel.add(createCategoryLabel(category.getName()))
         );
 
-        buttonsPanel.add(createAddCategoryButton());
+        if(AppConstants.isAdmin) buttonsPanel.add(createAddCategoryButton());
     }
 
     // creates resuable category labels

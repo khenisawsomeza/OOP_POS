@@ -39,7 +39,7 @@ public class MainFrame extends JFrame{
      
      private void initializeFrame(){
          try {
-            LoadResources.loadSampleItems();
+            LoadResources.loadItems();
         } catch (Exception e){
             System.out.println("Failed to Load items");
         }
@@ -61,7 +61,6 @@ public class MainFrame extends JFrame{
          cardLayout = new CardLayout();
          displayPanel = new JPanel(cardLayout);
          displayPanel.add(new LoginUI(), "LOGIN");
-         displayPanel.add(new CashierUI(), "CASHIER");
          
          changeCard("LOGIN");
          
@@ -69,6 +68,10 @@ public class MainFrame extends JFrame{
          mainPanel.add(displayPanel, BorderLayout.CENTER);
          
          this.setContentPane(mainPanel);
+     }
+     
+     public void addCashierUI(){
+         displayPanel.add(new CashierUI(), "CASHIER");
      }
      
      public void changeCard(String text){

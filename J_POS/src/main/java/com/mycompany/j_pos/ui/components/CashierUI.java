@@ -4,7 +4,6 @@
  */
 package com.mycompany.j_pos.ui.components;
 
-import com.mycompany.j_pos.models.cart.Cart;
 import com.mycompany.j_pos.ui.components.cashier_sections.CartPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.ItemsPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.MenuBurgerSidebar;

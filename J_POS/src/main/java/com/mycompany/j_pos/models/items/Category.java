@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
-    private String id;
+    private int id;
     private String name;
     private final List<Item> items;
     
-    public Category(String id, String name) {
+    public Category(int id, String name) {
         this.id = id;
         this.name = name;
         this.items = new ArrayList<>();
@@ -18,7 +18,7 @@ public class Category {
     public void addItem(Item item) {
         if (!items.contains(item)) {
             items.add(item);
-            item.setCategory(this.name);
+            item.setCategoryID(this.id);
         }
     }
     
@@ -45,8 +45,8 @@ public class Category {
     }
     
     // Getters and Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
     
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

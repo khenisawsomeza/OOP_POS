@@ -4,6 +4,7 @@
  */
 package com.mycompany.j_pos.ui.components.cashier_sections;
 
+import com.mycompany.j_pos.controllers.SidebarController;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
@@ -26,8 +27,10 @@ import javax.swing.SwingConstants;
  */
     public class MenuBurgerSidebar extends JPanel implements themeManager.ThemeChangeListener{
     static private MenuBurgerSidebar instance;
+    
     private final themeManager theme = themeManager.getInstance();
     private final Icons icons = Icons.getInstance();
+    private final SidebarController sbController = SidebarController.getInstance();
 
     private final int width = 220;
     private final int height = 720;
@@ -64,14 +67,14 @@ import javax.swing.SwingConstants;
         companyLogoLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(companyLogoLabel, BorderLayout.CENTER);
         
-        add(createSidebarItem("Sales", () -> System.out.println("Sales")));
-        add(createSidebarItem("Inventory", () -> System.out.println("Inventory")));
-        add(createSidebarItem("Discount", () -> System.out.println("Discount")));
-        add(createSidebarItem("Logout", () -> System.out.println("Logout")));
+        add(createSidebarItem("Sales", sbController::openSales));
+        add(createSidebarItem("Inventory", sbController::openInventory));
+        add(createSidebarItem("Discount", sbController::editDiscount));
         if(AppConstants.isAdmin){
-            add(createSidebarItem("Manage Employees", () -> System.out.println("Manage Employees")));
-            add(createSidebarItem("Edit Tax", () -> System.out.println("Edit Tax")));
+            add(createSidebarItem("Manage Employees", sbController::openManageEmployees));
+            add(createSidebarItem("Edit Tax", sbController::editTax));
         }
+        add(createSidebarItem("Logout", sbController::logout));
     }
 
     private JPanel createSidebarItem(String text, Runnable onClick) {

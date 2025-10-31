@@ -10,6 +10,8 @@ import java.awt.*;
 
 public class cashierPanel extends JPanel implements themeManager.ThemeChangeListener {
 
+    private static cashierPanel instance;
+    
     private static final int WIDTH = 500;
     private static final int HEIGHT = 30;
     private static final int PADDING = 20;
@@ -18,6 +20,11 @@ public class cashierPanel extends JPanel implements themeManager.ThemeChangeList
     private final themeManager theme = themeManager.getInstance();
     private JLabel cashierNameLabel;
 
+    public static cashierPanel getInstance(){
+        if (instance == null) instance = new cashierPanel();
+        return instance;
+    }
+    
     public cashierPanel() {
         initializeUI();
         applyTheme();

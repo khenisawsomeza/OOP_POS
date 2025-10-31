@@ -18,7 +18,7 @@ public final class UIColors {
     public static final Color LIGHT_GRAY_LIGHTMODE    = hex(0xF3F4F6);
 
     public static final Color PRIMARY_GREEN_DARKMODE  = hex(0x6B8E46);
-    public static final Color LIGHT_GREEN_DARKMODE    = hex(0x252629);
+    public static final Color LIGHT_GREEN_DARKMODE    = hex(0x7FAE52);
     public static final Color LIGHT_GRAY_DARKMODE     = hex(0x1C1D21);
 
     /* =========================================================
