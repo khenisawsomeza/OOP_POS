@@ -9,6 +9,7 @@ import com.mycompany.j_pos.models.items.*;
 import com.mycompany.j_pos.models.sale.*;
 import com.mycompany.j_pos.services.*;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class POSFacade {
 
@@ -81,6 +82,12 @@ public class POSFacade {
     public Sale checkout() {
         if (cart.isEmpty()) {
             System.out.println("Cart is empty. Cannot checkout.");
+            JOptionPane.showMessageDialog(
+                null, 
+                "Cart is empty. Cannot checkout.", 
+                "Receipt", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
             return null;
         }
 

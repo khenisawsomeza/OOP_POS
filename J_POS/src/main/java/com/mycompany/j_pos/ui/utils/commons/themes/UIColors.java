@@ -33,6 +33,12 @@ public final class UIColors {
     // Add Item Hover States
     public static final Color ADD_ITEM_HOVER_LIGHT          = hex(0xBEBEBE);
     public static final Color ADD_ITEM_HOVER_DARK           = hex(0x505050);
+    
+    // Sidebar
+    public static final Color SIDEBAR_ITEM_HOVER_LIGHTMODE  = new Color(220, 220, 220);
+    public static final Color SIDEBAR_ITEM_HOVER_DARKMODE  = new Color(66, 68, 70);
+    public static final Color SIDEBAR_ITEM_PRESS_LIGHTMODE  = new Color(200, 200, 200);
+    public static final Color SIDEBAR_ITEM_PRESS_DARKMODE  = new Color(55, 57, 59);
 
     /* =========================================================
        ⚙️ GENERAL UI COLORS

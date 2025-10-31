@@ -5,12 +5,15 @@
 package com.mycompany.j_pos.ui.components.cashier_sections;
 
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
+import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
+import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -21,19 +24,21 @@ import javax.swing.SwingConstants;
  *
  * @author Khenyshi
  */
-    public class MenuBurgerSidebar extends JPanel {
+    public class MenuBurgerSidebar extends JPanel implements themeManager.ThemeChangeListener{
     static private MenuBurgerSidebar instance;
+    private final themeManager theme = themeManager.getInstance();
+    private final Icons icons = Icons.getInstance();
 
-    private boolean isVisible = false;
     private final int width = 220;
     private final int height = 720;
-    private final Color bgColor = themeManager.getInstance().getLightGrayColor();
+    private static final Dimension LOGO_SIZE = new Dimension(150, 30);
     
     private JLabel companyLogoLabel;
-    private static final Dimension LOGO_SIZE = new Dimension(150, 30);
-    private final themeManager theme = themeManager.getInstance();
-
+    private ArrayList<JLabel> labels = new ArrayList<>();
+    private ArrayList<JPanel> sidebarItems = new ArrayList<>();
+    
     private MenuBurgerSidebar() {
+        theme.addThemeChangeListener(this);
         initializeUI();
     }
     
@@ -44,10 +49,11 @@ import javax.swing.SwingConstants;
     
     private void initializeUI(){
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(bgColor);
+        setBackground(theme.getLightGrayColor());
         setBounds(-width, 0, width, height); // start hidden
         
         createContents();
+        applyTheme();
     }
 
     private void createContents() {
@@ -69,33 +75,30 @@ import javax.swing.SwingConstants;
     }
 
     private JPanel createSidebarItem(String text, Runnable onClick) {
-        JPanel sidebarItemPanel = new JPanel();
-        sidebarItemPanel.setLayout(new BorderLayout());
-        sidebarItemPanel.setBackground(new Color(245, 245, 245)); // light gray
-        sidebarItemPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
-        sidebarItemPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        JLabel label = new LabelBuilder()
+            .withText(text)
+            .withFont(Font.PLAIN, 14)
+            .withForeground(theme.getTextForeground())
+            .withAlignment(SwingConstants.LEFT, SwingConstants.CENTER)
+            .build();
 
-        JLabel label = new JLabel(text);
-        label.setFont(new Font(AppConstants.DEFAULT_FONT, Font.PLAIN, 14));
+        JPanel sidebarItemPanel = new PanelBuilder()
+                .withLayout(new BorderLayout())
+                .withBackground(theme.getLightGrayColor())
+                .withBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10))
+                .withCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR))
+                .onHoverEnter(panel -> panel.setBackground(theme.getSidebarItemHoverBackground()))
+                .onHoverExit(panel -> panel.setBackground(theme.getLightGrayColor()))
+                .onPress(panel -> panel.setBackground(theme.getSidebarItemPressBackground()))
+                .onRelease(panel -> panel.setBackground(theme.getSidebarItemHoverBackground()))
+                .onClick(onClick)
+                .build();
+
+        sidebarItemPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         sidebarItemPanel.add(label, BorderLayout.CENTER);
 
-        // Hover effect
-        sidebarItemPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent e) {
-                sidebarItemPanel.setBackground(new Color(220, 220, 220)); // darker gray
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent e) {
-                sidebarItemPanel.setBackground(new Color(245, 245, 245)); // reset
-            }
-
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (onClick != null) onClick.run();
-            }
-        });
+        labels.add(label);
+        sidebarItems.add(sidebarItemPanel);
 
         return sidebarItemPanel;
     }
@@ -111,6 +114,37 @@ import javax.swing.SwingConstants;
         setLocation(-width, 0);
         revalidate();
         repaint();
+    }
+    
+    //apply theme
+    private void applyTheme() {
+        // Set sidebar background color
+        setBackground(theme.getLightGrayColor());
+
+        // Apply text color to labels
+        for (JLabel label : labels) {
+            label.setForeground(theme.getTextForeground());
+        }
+
+        if (companyLogoLabel != null) {
+            companyLogoLabel.setIcon(
+                icons.getScaledIcon(theme.getLogoIcon(), LOGO_SIZE.width, LOGO_SIZE.height)
+            );
+        }
+        
+        // Apply background color to sidebar items (if you have item panels)
+        for (JPanel item : sidebarItems) {
+            item.setBackground(theme.getLightGrayColor());
+        }
+
+        // Optional: set hover or accent colors if defined in theme
+        revalidate();
+        repaint();
+    }
+    
+    @Override
+    public void onThemeChange(boolean isDarkMode) {
+        applyTheme();
     }
 }
 

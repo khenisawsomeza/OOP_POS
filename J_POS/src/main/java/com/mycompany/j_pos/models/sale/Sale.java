@@ -4,16 +4,28 @@
  */
 package com.mycompany.j_pos.models.sale;
 
+import com.mycompany.j_pos.models.cart.Cart;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Sale implements SaleComponent {
+    private final Cart cart = Cart.getInstance();
     private final List<SaleComponent> lineItems;
-
+    private static Sale instance;
+    
+    public static Sale getInstance() {
+        if (instance == null) instance = new Sale();
+        return instance;
+    }
+    
     public Sale() {
         this.lineItems = new ArrayList<>();
     }
-
+    
+    public boolean isCartEmpty() {
+        return lineItems.isEmpty();
+    }
+    
     public void addItem(SaleComponent item) {
         lineItems.add(item);
     }
@@ -35,12 +47,14 @@ public class Sale implements SaleComponent {
         return total;
     }
 
-    public void printReceipt() {
-        System.out.println("=== RECEIPT ===");
+    public String printReceipt() {
+        String upperReceiptPortion = "";
+        upperReceiptPortion += "===== RECEIPT ===== \n";
         for (SaleComponent item : lineItems) {
-            System.out.println(item);
+            upperReceiptPortion += (item + "\n");
         }
-        System.out.println("----------------");
-        System.out.println("SUBTOTAL: ₱" + String.format("%.2f", getTotal()));
+        upperReceiptPortion += "--------------------------------- \n";
+        upperReceiptPortion += ("SUBTOTAL: ₱" + String.format("%.2f", getTotal()) + "\n");
+        return upperReceiptPortion;
     }
 }

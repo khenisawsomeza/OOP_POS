@@ -38,9 +38,12 @@ public class CheckoutPanel extends JPanel implements themeManager.ThemeChangeLis
                 .withLayout(new FlowLayout(FlowLayout.CENTER, 10, 10))
                 .withSize(460, 60)
                 .withBackground(theme.getStaticLightGreenLM())
+                .withCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR))
                 .onHoverEnter(panel -> panel.setBackground(theme.getStaticPrimaryGreenLM()))
                 .onHoverExit(panel -> panel.setBackground(theme.getStaticLightGreenLM()))
-                .onClick(this::handleCheckout)
+                .onPress(panel -> panel.setBackground(theme.getStaticPrimaryGreenLM().darker()))
+                .onRelease(panel -> panel.setBackground(theme.getStaticPrimaryGreenLM()))
+                .onClick(POS::checkout)
                 .build();
 
         JLabel title = new LabelBuilder()
@@ -57,17 +60,6 @@ public class CheckoutPanel extends JPanel implements themeManager.ThemeChangeLis
         contentPanel.add(checkoutAmountLabel);
 
         add(contentPanel, BorderLayout.CENTER);
-    }
-
-    private void handleCheckout() {
-        if (cart.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cart is empty! Add items before checkout.");
-            return;
-        }
-        
-        Sale sale = POS.checkout();
-
-        JOptionPane.showMessageDialog(this, "Processing checkout for: " + cart.getFormattedTotal());
     }
 
     public void refreshCheckout() {

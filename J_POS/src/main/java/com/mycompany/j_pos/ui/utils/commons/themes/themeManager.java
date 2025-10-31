@@ -303,6 +303,14 @@ public class themeManager {
     public Color getTextBackground() {
         return isDarkMode ? new Color(0x252629) : Color.WHITE;
     }
+    
+    public Color getSidebarItemHoverBackground(){
+        return isDarkMode ? UIColors.SIDEBAR_ITEM_HOVER_DARKMODE : UIColors.SIDEBAR_ITEM_HOVER_LIGHTMODE;
+    }
+    
+    public Color getSidebarItemPressBackground(){
+        return isDarkMode ? UIColors.SIDEBAR_ITEM_PRESS_DARKMODE : UIColors.SIDEBAR_ITEM_PRESS_LIGHTMODE;
+    }
 
     /* ---------------------- STATIC COLORS (unchanging) ---------------------- */
 

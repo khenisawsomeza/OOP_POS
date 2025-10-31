@@ -1,10 +1,8 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components;
 
-import com.mycompany.j_pos.models.cart.Cart;
 import com.mycompany.j_pos.models.items.Item;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
-import com.mycompany.j_pos.ui.components.cashier_sections.cashier_functions.SearchFunction;
 import com.mycompany.j_pos.ui.utils.LoadResources;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
@@ -12,11 +10,10 @@ import com.mycompany.j_pos.ui.utils.layouts.WrapLayout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeListener {
-
+    
     private static final int CARD_WIDTH = 220;
     private static final int CARD_HEIGHT = 170;
 
@@ -31,25 +28,22 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
     private ItemsListPanel() {
         try {
             availableItems = LoadResources.loadSampleItems();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Unable to load availble items");
         }
-        
+
         initializeComponents();
         buildLayout();
         applyTheme();
     }
-    
-    static public ItemsListPanel getInstance(){
-        if (instance == null) 
-            instance = new ItemsListPanel();
-        
+
+    public static ItemsListPanel getInstance() {
+        if (instance == null) instance = new ItemsListPanel();
         return instance;
     }
 
     private void initializeComponents() {
         theme.addThemeChangeListener(this);
-        
         itemsListPanel = new PanelBuilder()
                 .withLayout(new WrapLayout(FlowLayout.CENTER, 30, 30))
                 .build();
@@ -65,6 +59,8 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
 
+        scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        scrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setBorder(null);
 
@@ -84,7 +80,6 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
                 .withCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR))
                 .onHoverEnter(panel -> {
                     panel.setBackground(theme.getStaticPrimaryGreenLM());
-                    panel.setBorder(null);
                 })
                 .onHoverExit(panel -> {
                     panel.setBackground(theme.getLightGrayColor());
@@ -92,17 +87,18 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
                             theme.getTextForeground(), 2, 10, 5, true));
                 })
                 .onClick(() -> System.out.println("New item clicked"))
+                .onPress(panel -> panel.setBackground(theme.getStaticPrimaryGreenLM().darker()))
+                .onRelease(panel -> panel.setBackground(theme.getStaticPrimaryGreenLM()))
                 .build();
 
         addItemPanel.add(addItemIcon, BorderLayout.CENTER);
         return addItemPanel;
     }
-    
+
     public void refreshItemsDisplay(List<Item> items) {
-        itemsListPanel.removeAll();    
+        itemsListPanel.removeAll();
         items.forEach(item -> itemsListPanel.add(new ItemCard(item)));
         itemsListPanel.add(createAddNewItemCard());
-        
         applyTheme();
         itemsListPanel.revalidate();
         itemsListPanel.repaint();

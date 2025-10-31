@@ -70,6 +70,8 @@ public class CategoriesPanel extends JPanel implements themeManager.ThemeChangeL
                     e.setOpaque(true);
                     e.setForeground(theme.getTextForeground());
                 })
+                .onPress(e -> e.setBackground(theme.getStaticPrimaryGreenLM().darker()))
+                .onRelease(e -> e.setBackground(theme.getStaticPrimaryGreenLM()))
                 .build();
 
         categoryLabels.add(label);
@@ -86,6 +88,8 @@ public class CategoriesPanel extends JPanel implements themeManager.ThemeChangeL
                 .withLayout(new BorderLayout())
                 .withSize(120, 40)
                 .withCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR))
+                .onPress(panel -> panel.setBackground(theme.getStaticPrimaryGreenLM().darker()))
+                .onRelease(panel -> panel.setBackground(theme.getStaticPrimaryGreenLM()))
                 .onHoverEnter(panel -> panel.setBackground(theme.getStaticPrimaryGreenLM()))
                 .onHoverExit(panel -> panel.setBackground(theme.getLightGreenColor()))
                 .build();

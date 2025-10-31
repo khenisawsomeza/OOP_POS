@@ -24,6 +24,8 @@ public class LabelBuilder {
     private Runnable onClick;
     private Consumer<JLabel> onHoverEnter;
     private Consumer<JLabel> onHoverExit;
+    private Consumer<JLabel> onPress;
+    private Consumer<JLabel> onRelease;
 
     public LabelBuilder withText(String text) {
         this.text = text;
@@ -83,6 +85,16 @@ public class LabelBuilder {
         this.onHoverExit = action;
         return this;
     }
+    
+    public LabelBuilder onPress(Consumer<JLabel> action) {
+        this.onPress = action;
+        return this;
+    }
+
+    public LabelBuilder onRelease(Consumer<JLabel> action) {
+        this.onRelease = action;
+        return this;
+    }
 
     public JLabel build() {
         JLabel label = (icon != null) ? new JLabel(icon, hAlign) : new JLabel(text, hAlign);
@@ -114,6 +126,16 @@ public class LabelBuilder {
                 @Override
                 public void mouseExited(MouseEvent e) {
                     if (onHoverExit != null) onHoverExit.accept(label);
+                }
+                
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (onPress != null) onPress.accept(label);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    if (onRelease != null) onRelease.accept(label);
                 }
             });
         }

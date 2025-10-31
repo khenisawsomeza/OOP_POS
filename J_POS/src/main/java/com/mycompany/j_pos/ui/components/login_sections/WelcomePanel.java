@@ -87,8 +87,7 @@ public class WelcomePanel extends JPanel {
         footerPanel.setLayout(new BoxLayout(footerPanel, BoxLayout.X_AXIS));
 
         // Logo
-        ImageIcon companyLogo = Icons.getInstance().getcompanyIcon();
-        JLabel logoLabel = new JLabel(Icons.getScaledIcon(companyLogo, 40, 40));
+        JLabel logoLabel = new JLabel(Icons.getScaledIcon(Icons.getInstance().getCompanyIcon(), 40, 40));
         logoLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         // Company name

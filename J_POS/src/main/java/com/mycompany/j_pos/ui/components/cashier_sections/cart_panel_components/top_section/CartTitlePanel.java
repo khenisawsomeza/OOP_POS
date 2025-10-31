@@ -85,17 +85,27 @@ public class CartTitlePanel extends JPanel implements themeManager.ThemeChangeLi
     
     //handle clearing of cart
     private void handleClearCart() {
-        int result = JOptionPane.showConfirmDialog(
-                this,
+        if(!cart.isEmpty()){
+            int result = JOptionPane.showConfirmDialog(
+                null,
                 "Are you sure you want to clear all items from the cart?",
                 "Clear Cart",
                 JOptionPane.YES_NO_OPTION
-        );
+            );
 
-        if (result == JOptionPane.YES_OPTION) {
-            cart.clearCart();
-            CartPanel.getInstance().refreshCartDisplay();
+            if (result == JOptionPane.YES_OPTION) {
+                cart.clearCart();
+                CartPanel.getInstance().refreshCartDisplay();
+            }
+        }else{
+            JOptionPane.showMessageDialog(
+                null,
+                "The cart is empty. There is nothing to clear.",
+                "Cart Empty",
+                JOptionPane.INFORMATION_MESSAGE
+            );
         }
+        
     }
 
     // apply theme
