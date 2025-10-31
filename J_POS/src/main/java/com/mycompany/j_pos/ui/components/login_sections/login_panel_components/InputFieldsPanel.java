@@ -15,47 +15,70 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
- *
+ * 
  * @author Khenyshi
  */
-public class InputFieldsPanel extends JPanel implements themeManager.ThemeChangeListener{
-    private themeManager theme = themeManager.getInstance();
+public class InputFieldsPanel extends JPanel implements themeManager.ThemeChangeListener {
     
-    public InputFieldsPanel(){
+    private themeManager theme = themeManager.getInstance();
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+    
+    public InputFieldsPanel() {
         initializeUI();
     }
     
-    private void initializeUI(){
+    private void initializeUI() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setOpaque(false);
         
-        add(buildPlaceholderField("Username"));
-        add(Box.createRigidArea(new Dimension(0, 15)));
-        add(buildPasswordField("Password"));
+        usernameField = buildPlaceholderField("Username");
+        passwordField = buildPasswordField("Password");
         
+        add(usernameField);
+        add(Box.createRigidArea(new Dimension(0, 15)));
+        add(passwordField);
     }
     
     /** Builds a styled placeholder text field */
     private JTextField buildPlaceholderField(String placeholder) {
-       return new TextFieldBuilder()
-               .withPlaceholder(placeholder)
-               .withSize(350, 35)
-               .withFont(Font.PLAIN, 14)
-               .build();
-   }
-
+        return new TextFieldBuilder()
+                .withPlaceholder(placeholder)
+                .withSize(350, 35)
+                .withFont(Font.PLAIN, 14)
+                .build();
+    }
+    
     /** Builds a styled placeholder password field */
     private JPasswordField buildPasswordField(String placeholder) {
-    return (JPasswordField) new TextFieldBuilder()
-            .withPlaceholder(placeholder)
-            .withSize(350, 35)
-            .withFont(Font.PLAIN, 14)
-            .isPassword(true)
-            .build();
+        return (JPasswordField) new TextFieldBuilder()
+                .withPlaceholder(placeholder)
+                .withSize(350, 35)
+                .withFont(Font.PLAIN, 14)
+                .isPassword(true)
+                .build();
     }
-
+    
+    // Getter methods for LoginPanel to access field values
+    public String getUsername() {
+        return usernameField.getText();
+    }
+    
+    public char[] getPassword() {
+        return passwordField.getPassword();
+    }
+    
+    public void clearPassword() {
+        passwordField.setText("");
+    }
+    
+    public void clearFields() {
+        usernameField.setText("");
+        passwordField.setText("");
+    }
+    
     @Override
     public void onThemeChange(boolean isDarkMode) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Add theme change implementation if needed
     }
 }
