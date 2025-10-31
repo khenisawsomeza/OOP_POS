@@ -1,17 +1,19 @@
-package com.mycompany.j_pos;
+package com.mycompany.j_pos.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.io.File;
+import java.net.URL;
 
 public class SQLiteConnect {
+    static URL resource = SQLiteConnect.class.getResource("/database/POS.db");
     
     public static Connection getConnection() {
         Connection conn = null;
         
         try {
-            String dbPath = "C:\\Users\\Default.LAPTOP-PTOS5CK5\\Documents\\GitHub\\OOP_POS\\J_POS\\src\\main\\resources\\database\\POS.db";
+            String dbPath = resource.getPath();
             
             File dbFile = new File(dbPath);
             if (!dbFile.exists()) {

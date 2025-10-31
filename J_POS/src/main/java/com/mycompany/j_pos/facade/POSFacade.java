@@ -19,19 +19,20 @@ public class POSFacade {
 //    private final ItemService itemService;
     private final SaleService saleService;
     private final ReceiptService receiptService;
+    private final LoginService loginService;
 
     private POSFacade() {
         this.cart = Cart.getInstance();
 //        this.itemService = new ItemService();
         this.saleService = new SaleService();
         this.receiptService = new ReceiptService();
+        this.loginService = new LoginService();
     }
 
     public static POSFacade getInstance() {
         if (instance == null) instance = new POSFacade();
         return instance;
     }
-
 
 //    public List<Category> loadMenuFromDB() {
 //        return itemService.loadCategories();
@@ -109,5 +110,9 @@ public class POSFacade {
         System.out.println("Checkout completed successfully!");
 
         return sale;
+    }
+    
+    public void login(String uname, String pass){
+        loginService.authenticateUser(uname, pass);
     }
 }
