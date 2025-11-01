@@ -15,7 +15,6 @@ public class Icons {
     private static final ImageIcon searchIconDark          = LoadResources.loadImage(IMAGES_PATH, "searchIconDark.png");
     private static final ImageIcon trashIconDark           = LoadResources.loadImage(IMAGES_PATH, "trashDark.png");
     private static final ImageIcon deleteIconDark          = LoadResources.loadImage(IMAGES_PATH, "crossCircleIconDark.png");
-    private static final ImageIcon userIcon                = LoadResources.loadImage(IMAGES_PATH, "userIconDark.png");
     private static final ImageIcon darkModeToggleIconDark  = LoadResources.loadImage(IMAGES_PATH, "themeModeIconDark.png");
     private static final ImageIcon plusIconDark            = LoadResources.loadImage(IMAGES_PATH, "plusIconDark.png");
     
@@ -31,25 +30,45 @@ public class Icons {
     //Non dark/light Icons
     private static final ImageIcon appIcon                 = LoadResources.loadImage(IMAGES_PATH, "appIcon.png");
     private static final ImageIcon companyIcon             = LoadResources.loadImage(IMAGES_PATH, "companyIcon.png");
+    private static final ImageIcon userIcon                = LoadResources.loadImage(IMAGES_PATH, "userIconDark.png");
     
+    //Navigation Items
+    private static final ImageIcon darkModeToggleIcon  = LoadResources.loadImage(IMAGES_PATH, "darkModeToggleIcon.png");
+    private static final ImageIcon cashierIcon         = LoadResources.loadImage(IMAGES_PATH, "cashierIcon.png");
+    private static final ImageIcon salesIcon           = LoadResources.loadImage(IMAGES_PATH, "salesIcon.png");
+    private static final ImageIcon inventoryIcon       = LoadResources.loadImage(IMAGES_PATH, "inventoryIcon.png");
+    private static final ImageIcon discountIcon        = LoadResources.loadImage(IMAGES_PATH, "discountIcon.png");
+    private static final ImageIcon manageEmployeesIcon = LoadResources.loadImage(IMAGES_PATH, "manageEmployeesIcon.png");
+    private static final ImageIcon editTaxIcon         = LoadResources.loadImage(IMAGES_PATH, "editTaxIcon.png");
+    private static final ImageIcon logOutIcon          = LoadResources.loadImage(IMAGES_PATH, "logOutIcon.png");
     // Getters
-    public ImageIcon getLogoIconDark()       { return logoIconDark; }
-    public ImageIcon getLogoIconLight()      { return logoIconLight; }
-    public ImageIcon getAppIcon()            { return appIcon; }
-    public ImageIcon getCompanyIcon()        { return companyIcon; }
-    public ImageIcon getMenuIconDark()       { return menuIconDark; }
-    public ImageIcon getMenuIconLight()      { return menuIconLight; }
-    public ImageIcon getSearchIconDark()     { return searchIconDark; }
-    public ImageIcon getSearchIconLight()    { return searchIconLight; }
-    public ImageIcon getTrashIconDark()      { return trashIconDark; }
-    public ImageIcon getTrashIconLight()     { return trashIconLight; }
-    public ImageIcon getDeleteIconDark()     { return deleteIconDark; }
-    public ImageIcon getDeleteIconLight()    { return deleteIconLight; }
-    public ImageIcon getUserIcon()           { return userIcon; }
+    public ImageIcon getLogoIconDark()            { return logoIconDark; }
+    public ImageIcon getLogoIconLight()           { return logoIconLight; }
+    public ImageIcon getAppIcon()                 { return appIcon; }
+    public ImageIcon getCompanyIcon()             { return companyIcon; }
+    public ImageIcon getMenuIconDark()            { return menuIconDark; }
+    public ImageIcon getMenuIconLight()           { return menuIconLight; }
+    public ImageIcon getSearchIconDark()          { return searchIconDark; }
+    public ImageIcon getSearchIconLight()         { return searchIconLight; }
+    public ImageIcon getTrashIconDark()           { return trashIconDark; }
+    public ImageIcon getTrashIconLight()          { return trashIconLight; }
+    public ImageIcon getDeleteIconDark()          { return deleteIconDark; }
+    public ImageIcon getDeleteIconLight()         { return deleteIconLight; }
+    public ImageIcon getUserIcon()                { return userIcon; }
     public ImageIcon getDarkModeToggleIconDark()  { return darkModeToggleIconDark; }
     public ImageIcon getDarkModeToggleIconLight() { return darkModeToggleIconLight; }
-    public ImageIcon getPlusIconDark()       { return plusIconDark; }
-    public ImageIcon getPlusIconLight()      { return plusIconLight; }
+    public ImageIcon getPlusIconDark()            { return plusIconDark; }
+    public ImageIcon getPlusIconLight()           { return plusIconLight; }
+    
+    //Navigation icons
+    public ImageIcon getDarkModeToggleIcon()           { return darkModeToggleIcon; }
+    public ImageIcon getCashierIcon()                  { return cashierIcon; }
+    public ImageIcon getSalesIcon()                    { return salesIcon; }
+    public ImageIcon getInventoryIcon()                { return inventoryIcon; }
+    public ImageIcon getDiscountIcon()                 { return discountIcon; }
+    public ImageIcon getManageEmployeesIcon()          { return manageEmployeesIcon; }
+    public ImageIcon getEditTaxIcon()                  { return editTaxIcon; }
+    public ImageIcon getLogOutIcon()                   { return logOutIcon; }
 
     // Scaling helper
     public static ImageIcon getScaledIcon(ImageIcon icon, int width, int height) {

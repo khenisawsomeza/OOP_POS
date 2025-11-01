@@ -6,6 +6,7 @@ package com.mycompany.j_pos.services;
 
 import com.mycompany.j_pos.database.SQLiteConnect;
 import com.mycompany.j_pos.ui.MainFrame;
+import com.mycompany.j_pos.ui.Navigation;
 import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.ItemsListPanel;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import java.sql.Connection;
@@ -59,13 +60,16 @@ public class LoginService {
                     mainframe.addCashierUI();
                     System.out.println("BECOMING ADMING ROLE");
                     mainframe.changeCard("CASHIER");
+                    Navigation.getInstance().switchSidebar();
                 } else if ("employee".equalsIgnoreCase(userRole)) {
                     mainframe.addCashierUI();
                     mainframe.changeCard("CASHIER");
+                    Navigation.getInstance().switchSidebar();
                 } else {
                     // custom role if want to add or if gusto kay invalid ang unknown roles
                     mainframe.addCashierUI();
                     mainframe.changeCard("CASHIER");
+                    Navigation.getInstance().switchSidebar();
                 }
                 
                 

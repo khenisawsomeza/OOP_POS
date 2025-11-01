@@ -39,6 +39,7 @@ public final class UIColors {
     public static final Color SIDEBAR_ITEM_HOVER_DARKMODE  = new Color(66, 68, 70);
     public static final Color SIDEBAR_ITEM_PRESS_LIGHTMODE  = new Color(200, 200, 200);
     public static final Color SIDEBAR_ITEM_PRESS_DARKMODE  = new Color(55, 57, 59);
+    public static final Color SIDEBAR_BACKGROUND            = hex(0x1A1A1B);
 
     /* =========================================================
        ⚙️ GENERAL UI COLORS
