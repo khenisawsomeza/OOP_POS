@@ -1,3 +1,5 @@
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\controllers\SidebarController.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\controllers\SidebarFunctions\editTax.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\core\AppContext.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\database\SQLiteConnect.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\facade\POSFacade.java
@@ -11,6 +13,7 @@ C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_p
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\sale\SaleLineItem.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\User.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\CheckoutService.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\ItemService.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\LoginService.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\ReceiptService.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\SaleService.java

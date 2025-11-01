@@ -6,6 +6,8 @@ package com.mycompany.j_pos.services;
 
 import com.mycompany.j_pos.database.SQLiteConnect;
 import com.mycompany.j_pos.ui.MainFrame;
+import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.ItemsListPanel;
+import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +24,7 @@ public class LoginService {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        MainFrame mainframe = MainFrame.getInstance();
         
         try {
             conn = SQLiteConnect.getConnection();
@@ -47,16 +50,22 @@ public class LoginService {
                 String userName = rs.getString("username");
                 
                 System.out.println("Login successful: " + userName + " (Role: " + userRole + ")");
-                
+                AppConstants.DEFAULT_CASHIER_NAME = userName;
                 // For now, both admin and employee go to CASHIER
                 // Future: Add role-based navigation here
                 if ("admin".equalsIgnoreCase(userRole)) {
                     MainFrame.getInstance().changeCard("CASHIER");
+                    AppConstants.isAdmin = true;
+                    mainframe.addCashierUI();
+                    System.out.println("BECOMING ADMING ROLE");
+                    mainframe.changeCard("CASHIER");
                 } else if ("employee".equalsIgnoreCase(userRole)) {
-                    MainFrame.getInstance().changeCard("CASHIER");
+                    mainframe.addCashierUI();
+                    mainframe.changeCard("CASHIER");
                 } else {
                     // custom role if want to add or if gusto kay invalid ang unknown roles
-                    MainFrame.getInstance().changeCard("CASHIER");
+                    mainframe.addCashierUI();
+                    mainframe.changeCard("CASHIER");
                 }
                 
                 

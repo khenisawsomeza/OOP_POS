@@ -18,11 +18,17 @@ import javax.swing.JTextField;
  * 
  * @author Khenyshi
  */
-public class InputFieldsPanel extends JPanel implements themeManager.ThemeChangeListener {
+public class InputFieldsPanel extends JPanel{
+
+    static private InputFieldsPanel instance;
     
-    private themeManager theme = themeManager.getInstance();
     private JTextField usernameField;
     private JPasswordField passwordField;
+    
+    static public InputFieldsPanel getInstance(){
+        if (instance == null) instance = new InputFieldsPanel();
+        return instance;
+    }
     
     public InputFieldsPanel() {
         initializeUI();
@@ -75,10 +81,6 @@ public class InputFieldsPanel extends JPanel implements themeManager.ThemeChange
     public void clearFields() {
         usernameField.setText("");
         passwordField.setText("");
-    }
-    
-    @Override
-    public void onThemeChange(boolean isDarkMode) {
-        // Add theme change implementation if needed
+        System.out.println("CLEARING PASSWORD");
     }
 }

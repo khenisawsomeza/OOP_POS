@@ -79,10 +79,6 @@ public class POSFacade {
         cart.setDiscountAmount(amount);
     }
 
-    public void setTaxRate(double rate) {
-        cart.setTaxRate(rate);
-    }
-
     /** Finalizes the sale: creates Sale, saves it, prints receipt, clears cart. */
     public Sale checkout() {
         if (cart.isEmpty()) {
@@ -119,7 +115,7 @@ public class POSFacade {
     public void login(String uname, String pass){
         loginService.authenticateUser(uname, pass);
         try{
-            LoadResources.loadSampleItems(); 
+            LoadResources.loadItems(); 
             items = LoadResources.getItems();
         } catch (Exception e){
             System.out.println("failed to load items");
