@@ -100,7 +100,7 @@ public class POSFacade {
         saleService.saveSale(sale);
 
         // 3️⃣ Print receipt
-        receiptService.printReceipt(
+        receiptService.printReceiptToPDF(
             sale,
             cart.getTaxAmount(),
             cart.getDiscountAmount()
