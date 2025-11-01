@@ -98,22 +98,24 @@ public class LoadResources {
         String query = """
             SELECT setting_value
             FROM settings
-            WHERE setting_key = 'tax'   
+            WHERE setting_key = 'tax'
         """;
         
         try (Connection conn = SQLiteConnect.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query)) {
 
-            while (rs.next()) {
-                taxString = rs.getString("setting_value");
-            }
-            
-        } catch (SQLException e) {
-            System.out.println("Database get tax error: " + e.getMessage());
-        }
-        taxValue = Double.parseDouble(taxString);
-        System.out.println("THE TAX IS: " + taxValue);
+           if (rs.next()) {
+               taxValue = rs.getDouble("setting_value");
+           } else {
+               System.out.println("No tax record found.");
+           }
+
+       } catch (SQLException e) {
+           System.out.println("Database get tax error: " + e.getMessage());
+       }
+
+       System.out.println("THE TAX IS: " + taxValue);
         return taxValue;
     }
 }
