@@ -2,6 +2,7 @@ package com.mycompany.j_pos.models.cart;
 
 import com.mycompany.j_pos.models.items.Item;
 import com.mycompany.j_pos.ui.components.cashier_sections.CartPanel;
+import com.mycompany.j_pos.ui.utils.LoadResources;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Cart {
 
     private Cart() {
         this.items = new ArrayList<>();
-        this.taxRate = 0.12; // 12% tax
+        this.taxRate = LoadResources.getTax(); // 12% tax
         this.discountAmount = 0.0;
     }
     
@@ -122,7 +123,6 @@ public class Cart {
 
     // Getters & setters
     public double getTaxRate() { return taxRate; }
-    public void setTaxRate(double taxRate) { this.taxRate = taxRate; }
 
     public double getDiscountAmount() { return discountAmount; }
     public void setDiscountAmount(double discountAmount) { this.discountAmount = discountAmount; }

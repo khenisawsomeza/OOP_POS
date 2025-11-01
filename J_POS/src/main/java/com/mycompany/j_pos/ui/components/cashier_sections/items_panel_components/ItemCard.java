@@ -68,7 +68,9 @@ public class ItemCard extends JPanel implements themeManager.ThemeChangeListener
 
     private JLabel createPromptLabel() {
         return new LabelBuilder()
-                .withText("Add " + item.getName() + " to cart?")
+                .withText("<html><div style='text-align:center; width:" + (CARD_WIDTH - 50) + "px;'>" +
+                          "<p style='margin:0; word-wrap:break-word;'>Add <b>" + item.getName() + "</b> to cart?</p>" +
+                          "</div></html>")
                 .withFont(Font.BOLD, 16)
                 .withAlignment(JLabel.CENTER, JLabel.CENTER)
                 .build();

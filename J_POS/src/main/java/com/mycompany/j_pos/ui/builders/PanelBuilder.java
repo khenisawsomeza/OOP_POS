@@ -85,7 +85,12 @@ public class PanelBuilder {
     public JPanel build() {
         JPanel panel = new JPanel(layout);
 
-        if (size != null) panel.setPreferredSize(size);
+        if (size != null){
+            panel.setPreferredSize(size);
+            panel.setSize(size);
+            panel.setMaximumSize(size);
+            panel.setMinimumSize(size);
+        }
         if (background != null) panel.setBackground(background);
         panel.setOpaque(opaque);
         if (border != null) panel.setBorder(border);

@@ -19,12 +19,21 @@ public class CartSummaryPanel extends JPanel implements themeManager.ThemeChange
 
     private final Cart cart = Cart.getInstance();
     private final themeManager theme = themeManager.getInstance();
+    private static CartSummaryPanel instance;
 
     private JLabel taxAmountLabel;
     private JLabel subtotalAmountLabel;
     private JLabel discountAmountLabel;
     private ArrayList<JLabel> labels = new ArrayList<>();
 
+    public static CartSummaryPanel getInstance(){
+        if (instance == null){
+            instance = new CartSummaryPanel();
+        }
+        return instance;
+    }
+
+    
     public CartSummaryPanel() {
         initializeUI();
         applyTheme();

@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.io.File;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 public class SQLiteConnect {
     static URL resource = SQLiteConnect.class.getResource("/database/POS.db");
@@ -13,7 +15,8 @@ public class SQLiteConnect {
         Connection conn = null;
         
         try {
-            String dbPath = resource.getPath();
+            
+            String dbPath = URLDecoder.decode(resource.getPath(), StandardCharsets.UTF_8.name());
             
             File dbFile = new File(dbPath);
             if (!dbFile.exists()) {
@@ -43,25 +46,5 @@ public class SQLiteConnect {
         }
         
         return conn;
-    }
-    
-    public static void main(String[] args) {
-        System.out.println("Testing database connection...");
-        Connection conn = getConnection();
-        
-        if (conn != null) {
-            try {
-                System.out.println("Connection test successful!");
-                System.out.println("Database product: " + conn.getMetaData().getDatabaseProductName());
-                System.out.println("Database version: " + conn.getMetaData().getDatabaseProductVersion());
-                conn.close();
-                System.out.println("Connection closed successfully");
-            } catch (SQLException e) {
-                System.err.println("Error: " + e.getMessage());
-                e.printStackTrace();
-            }
-        } else {
-            System.err.println("Failed to establish connection");
-        }
     }
 }

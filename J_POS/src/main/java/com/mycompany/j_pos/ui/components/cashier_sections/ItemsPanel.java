@@ -29,7 +29,7 @@ public class ItemsPanel extends JPanel implements themeManager.ThemeChangeListen
     // Loads item and category data
     private void initializeData(){
         try {
-            availableCategories = LoadResources.loadSampleCategories();
+            availableCategories = LoadResources.loadCategories();
         } catch (FileNotFoundException e){
             System.out.println("failed to load items and categories");
         }

@@ -4,6 +4,7 @@ import com.mycompany.j_pos.models.items.Item;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.LoadResources;
+import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import com.mycompany.j_pos.ui.utils.layouts.WrapLayout;
@@ -102,7 +103,9 @@ public class ItemsListPanel extends JPanel implements themeManager.ThemeChangeLi
         itemsListPanel.removeAll();
         
         items.forEach(item -> itemsListPanel.add(new ItemCard(item)));
-        itemsListPanel.add(createAddNewItemCard());
+        if (AppConstants.isAdmin){
+            itemsListPanel.add(createAddNewItemCard());
+        }
         applyTheme();
         itemsListPanel.revalidate();
         itemsListPanel.repaint();

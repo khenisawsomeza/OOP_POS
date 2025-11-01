@@ -11,5 +11,5 @@ public class AppConstants {
     public static boolean isAdmin = false;
     
     // Sample Datas
-    public static final String DEFAULT_CASHIER_NAME = "Jheoritch";
+    public static String DEFAULT_CASHIER_NAME = "FALLBACK_NAME";
 }
