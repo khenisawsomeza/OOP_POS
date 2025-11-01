@@ -43,6 +43,8 @@
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/cashier_sections/items_panel_components/HeaderPanel.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/cashier_sections/items_panel_components/ItemCard.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/cashier_sections/items_panel_components/ItemsListPanel.java
+/Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/inventory_sections/InventoryHeaderPanel.java
+/Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/inventory_sections/InventoryListPanel.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/login_sections/LoginPanel.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/login_sections/WelcomePanel.java
 /Users/khenshi/Documents/GitHub/OOP_POS/J_POS/src/main/java/com/mycompany/j_pos/ui/components/login_sections/login_panel_components/InputFieldsPanel.java

@@ -4,6 +4,8 @@
  */
 package com.mycompany.j_pos.ui.components;
 
+import com.mycompany.j_pos.ui.components.inventory_sections.InventoryHeaderPanel;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
@@ -11,11 +13,20 @@ import javax.swing.JPanel;
 public class InventoryUI extends JPanel {
 
     public InventoryUI() {
-        // Set preferred size and background color
-        setPreferredSize(new Dimension(1280, 720));
-        setBackground(Color.BLUE); // Example: dark gray (#181818)
-
-        // Make panel visible
-        setVisible(true);
+        // Setup main window
+        initializeUI();
+        
+        // Create and add components
+        createComponents();
+    }
+    
+    private void initializeUI(){
+        setSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        setMinimumSize(new Dimension(1280, 720));
+        setLayout(new BorderLayout());
+    }
+    
+    private void createComponents(){
+        add(new InventoryHeaderPanel(), BorderLayout.NORTH);
     }
 }
