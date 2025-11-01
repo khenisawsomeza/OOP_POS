@@ -6,7 +6,10 @@ package com.mycompany.j_pos.ui;
 
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.components.CashierUI;
+import com.mycompany.j_pos.ui.components.InventoryUI;
 import com.mycompany.j_pos.ui.components.LoginUI;
+import com.mycompany.j_pos.ui.components.ManageEmployeesUI;
+import com.mycompany.j_pos.ui.components.SalesUI;
 import com.mycompany.j_pos.ui.utils.LoadResources;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
@@ -56,11 +59,14 @@ public class MainFrame extends JFrame{
                  .withLayout(new BorderLayout())
                  .build();
          
-         navigation = new Navigation();
+         navigation = Navigation.getInstance();
          
          cardLayout = new CardLayout();
          displayPanel = new JPanel(cardLayout);
          displayPanel.add(new LoginUI(), "LOGIN");
+         displayPanel.add(new SalesUI(), "SALES");
+         displayPanel.add(new InventoryUI(), "INVENTORY");
+         displayPanel.add(new ManageEmployeesUI(), "EMPLOYEES");
          
          changeCard("LOGIN");
          
@@ -68,11 +74,14 @@ public class MainFrame extends JFrame{
          mainPanel.add(displayPanel, BorderLayout.CENTER);
          
          this.setContentPane(mainPanel);
+         this.revalidate();
      }
      
      public void addCashierUI(){
          displayPanel.add(new CashierUI(), "CASHIER");
      }
+     
+     
      
      public void changeCard(String text){
          cardLayout.show(displayPanel, text);

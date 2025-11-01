@@ -6,7 +6,10 @@ package com.mycompany.j_pos.controllers;
 
 import com.mycompany.j_pos.controllers.SidebarFunctions.editTax;
 import com.mycompany.j_pos.ui.MainFrame;
+import com.mycompany.j_pos.ui.Navigation;
 import com.mycompany.j_pos.ui.components.login_sections.login_panel_components.InputFieldsPanel;
+import com.mycompany.j_pos.ui.utils.commons.AppConstants;
+import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 
 /**
  *
@@ -14,28 +17,50 @@ import com.mycompany.j_pos.ui.components.login_sections.login_panel_components.I
  */
 public class SidebarController {
     static private SidebarController instance;
-    private final MainFrame mainframe = MainFrame.getInstance();
-    private final InputFieldsPanel inputfields = InputFieldsPanel.getInstance();
+    private MainFrame mainframe;
+    private Navigation nav;
+    private final themeManager theme = themeManager.getInstance();
+    
+    private SidebarController() {
+        // Leave empty - don't call MainFrame.getInstance() here!
+    }
     
     static public SidebarController getInstance(){
         if (instance == null) instance = new SidebarController();
         return instance;
     }
     
+    private MainFrame getMainFrame() {
+        return MainFrame.getInstance();
+    }
+    
+    private Navigation getNavigation() {
+        return Navigation.getInstance();
+    }
+    
+    
+    public void toggleDarkMode(){
+        theme.toggleDarkMode();
+    }
+    
+    public void openCashier(){
+        getMainFrame().changeCard("CASHIER");
+    }
+    
     public void openSales(){
-        
+        getMainFrame().changeCard("SALES");
     }
     
     public void openInventory(){
-        
+        getMainFrame().changeCard("INVENTORY");
     }
     
-    public void editDiscount(){
+    public void setDiscount(){
         
     }
     
     public void openManageEmployees(){
-        
+        getMainFrame().changeCard("EMPLOYEES");
     }
     
     public void editTax(){
@@ -43,7 +68,24 @@ public class SidebarController {
     }
     
     public void logout(){
-        inputfields.clearFields(); //NOT WORKING
-        mainframe.changeCard("LOGIN");
+        
+        // Clear fields FIRST (while still on current screen)
+        try {
+            InputFieldsPanel inputFields = InputFieldsPanel.getInstance();
+            System.out.println("InputFieldsPanel instance: " + inputFields);
+            System.out.println("Username field: " + inputFields.getUsername());
+            inputFields.clearFields();
+            System.out.println("Fields cleared - Username now: " + inputFields.getUsername());
+        } catch (Exception e) {
+            System.err.println("Error clearing fields: " + e.getMessage());
+            e.printStackTrace();
+        }
+        //CLEAR FIELDS NOT WORKING
+        
+        AppConstants.isAdmin = false;
+        AppConstants.DEFAULT_CASHIER_NAME = "";
+        
+        getNavigation().hideNavigation();
+        getMainFrame().changeCard("LOGIN");
     }
 }

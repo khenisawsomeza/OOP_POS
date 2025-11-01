@@ -221,7 +221,7 @@ import javax.swing.ImageIcon;
 
 public class themeManager {
     private static themeManager instance;
-    private boolean isDarkMode = false;
+    public boolean isDarkMode = false;
     private final ArrayList<ThemeChangeListener> listeners = new ArrayList<>();
     
     private themeManager() {}
@@ -266,7 +266,7 @@ public class themeManager {
         listeners.remove(listener);
     }
 
-    private void notifyListeners() {
+    public void notifyListeners() {
         for (ThemeChangeListener listener : listeners) {
             listener.onThemeChange(isDarkMode);
         }
@@ -320,6 +320,7 @@ public class themeManager {
     public Color getStaticPrimaryGreenDM() { return UIColors.PRIMARY_GREEN_DARKMODE; }
     public Color getStaticBorderGray() { return UIColors.BORDER_GRAY; }
     public Color getStaticBlack() { return UIColors.BLACK; }
+    public Color getSidebarBackground() { return UIColors.SIDEBAR_BACKGROUND; }
 
     /* ---------------------- ICON HELPERS ---------------------- */
 
@@ -351,6 +352,40 @@ public class themeManager {
         return isDarkMode ? Icons.getInstance().getLogoIconLight() : Icons.getInstance().getLogoIconDark();
     }
 
+    /* ---------------------- NAVIGATION ICON HELPERS ---------------------- */
+
+    public ImageIcon getStaticDarkModeToggleIcon() {
+        return Icons.getInstance().getDarkModeToggleIcon();
+    }
+    
+    public ImageIcon getCashierIcon() {
+        return Icons.getInstance().getCashierIcon();
+    }
+    
+    public ImageIcon getSalesIcon() {
+        return Icons.getInstance().getSalesIcon();
+    }
+
+    public ImageIcon getInventoryIcon() {
+        return Icons.getInstance().getInventoryIcon();
+    }
+
+    public ImageIcon getDiscountIcon() {
+        return Icons.getInstance().getDiscountIcon();
+    }
+
+    public ImageIcon getManageEmployeesIcon() {
+        return Icons.getInstance().getManageEmployeesIcon();
+    }
+
+    public ImageIcon getEditTaxIcon() {
+        return Icons.getInstance().getEditTaxIcon();
+    }
+
+    public ImageIcon getLogOutIcon() {
+        return Icons.getInstance().getLogOutIcon();
+    }
+    
     /* ---------------------- INTERFACE ---------------------- */
 
     public interface ThemeChangeListener {

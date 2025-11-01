@@ -25,7 +25,8 @@ public class editTax {
             double taxRate = taxInput / 100.0;
 
             setTaxInDB(taxRate);
-            JOptionPane.showMessageDialog(null, "Tax rate updated to " + taxInput + "%");
+            JOptionPane.showMessageDialog(null, "Tax rate updated to " + taxInput + "% \n"
+                                              + "Kindly restart the program");
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.");

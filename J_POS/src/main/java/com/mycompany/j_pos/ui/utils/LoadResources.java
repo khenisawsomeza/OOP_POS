@@ -14,7 +14,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 public class LoadResources {
-    private static final String FALLBACK_ICON = "src/main/resources/images/noFileIcon.png"; 
+    private static final String FALLBACK_ICON = "src/main/resources/images/icons/noFileIcon.png"; 
     
     private static List<Item> items;
     
