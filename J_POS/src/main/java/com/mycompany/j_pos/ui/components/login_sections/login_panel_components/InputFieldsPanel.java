@@ -79,8 +79,7 @@ public class InputFieldsPanel extends JPanel{
     }
     
     public void clearFields() {
-        usernameField.setText("");
-        passwordField.setText("");
-        System.out.println("CLEARING PASSWORD");
+        this.usernameField.setText("");
+        this.passwordField.setText("");
     }
 }

@@ -69,7 +69,7 @@ import javax.swing.SwingConstants;
         
         add(createSidebarItem("Sales", sbController::openSales));
         add(createSidebarItem("Inventory", sbController::openInventory));
-        add(createSidebarItem("Discount", sbController::editDiscount));
+//        add(createSidebarItem("Discount", sbController::editDiscount));
         if(AppConstants.isAdmin){
             add(createSidebarItem("Manage Employees", sbController::openManageEmployees));
             add(createSidebarItem("Edit Tax", sbController::editTax));

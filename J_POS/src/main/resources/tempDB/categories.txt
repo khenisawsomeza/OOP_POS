@@ -1,6 +1,0 @@
-1
-entrees
-2
-desserts
-3
-beverages
