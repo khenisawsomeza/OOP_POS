@@ -18,56 +18,45 @@ import javax.swing.JOptionPane;
  * @author Khenyshi
  */
 public class ReceiptService {
-    
-    // Generate PDF receipt
     public void printReceiptToPDF(Sale sale, double tax, double discount) {
         try {
             double subtotal = sale.getTotal();
             double finalTotal = subtotal + tax - discount;
             
-            // Create receipts directory if it doesn't exist
             File directory = new File("receipts");
             if (!directory.exists()) {
                 directory.mkdirs();
             }
             
-            // Generate filename with timestamp
             String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             String filename = "receipts/receipt_" + timestamp + ".pdf";
             
-            // Create PDF document
             Document document = new Document(PageSize.A4);
             PdfWriter.getInstance(document, new FileOutputStream(filename));
             
             document.open();
             
-            // Add title
             Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
             Paragraph title = new Paragraph("RECEIPT", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             title.setSpacingAfter(20);
             document.add(title);
             
-            // Add date/time
             Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 10);
             Paragraph datetime = new Paragraph("Date: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()), normalFont);
             datetime.setSpacingAfter(15);
             document.add(datetime);
             
-            // Add separator
             document.add(new Paragraph("_________________________________________________________________"));
             document.add(Chunk.NEWLINE);
             
-            // Add sale details
             Font itemFont = FontFactory.getFont(FontFactory.COURIER, 10);
             Paragraph saleDetails = new Paragraph(sale.printReceipt(), itemFont);
             document.add(saleDetails);
             
-            // Add separator
             document.add(new Paragraph("_________________________________________________________________"));
             document.add(Chunk.NEWLINE);
             
-            // Add totals
             Font totalFont = FontFactory.getFont(FontFactory.HELVETICA, 11);
             document.add(new Paragraph(String.format("TAX: ₱%.2f", tax), totalFont));
             document.add(new Paragraph(String.format("DISCOUNT: ₱%.2f", discount), totalFont));
@@ -78,7 +67,6 @@ public class ReceiptService {
             total.setSpacingBefore(10);
             document.add(total);
             
-            // Add footer
             document.add(Chunk.NEWLINE);
             document.add(Chunk.NEWLINE);
             Paragraph footer = new Paragraph("Thank you for your purchase!", normalFont);
@@ -94,7 +82,6 @@ public class ReceiptService {
                 JOptionPane.INFORMATION_MESSAGE
             );
             
-            // Optionally open the PDF
             openPDF(filename);
             
         } catch (Exception e) {
@@ -108,7 +95,6 @@ public class ReceiptService {
         }
     }
     
-    // Open PDF after creation
     private void openPDF(String filename) {
         try {
             File file = new File(filename);
@@ -122,7 +108,6 @@ public class ReceiptService {
         }
     }
     
-    // Keep the original method for dialog display (optional)
     public void printReceipt(Sale sale, double tax, double discount) {
         double subtotal = sale.getTotal();
         double finalTotal = subtotal + tax - discount;
