@@ -1,10 +1,16 @@
 com\mycompany\j_pos\ui\components\Navigation.class
 com\mycompany\j_pos\ui\components\InventoryUI.class
 com\mycompany\j_pos\ui\components\SalesUI.class
+com\mycompany\j_pos\payments\cash\CashPaymentFactory.class
 com\mycompany\j_pos\ui\components\inventory_sections\InventoryHeaderPanel.class
 com\mycompany\j_pos\ui\components\ManageEmployeesUI.class
 com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\InventoryItemPanel.class
+com\mycompany\j_pos\payments\gcash\GCashPaymentProcessor.class
+com\mycompany\j_pos\payments\cash\CashPaymentProcessor.class
+com\mycompany\j_pos\payments\PaymentFactory.class
+com\mycompany\j_pos\payments\PaymentProcessor.class
 com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\FilterPanel.class
 com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\InventoryItemListPanel.class
+com\mycompany\j_pos\payments\gcash\GCashPaymentFactory.class
 com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\FilterPanel$1.class
 com\mycompany\j_pos\ui\components\inventory_sections\InventoryContentPanel.class

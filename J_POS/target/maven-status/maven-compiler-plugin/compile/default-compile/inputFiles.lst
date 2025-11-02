@@ -12,6 +12,12 @@ C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_p
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\sale\SaleComponent.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\sale\SaleLineItem.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\models\User.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\payments\cash\CashPaymentFactory.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\payments\cash\CashPaymentProcessor.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\payments\gcash\GCashPaymentFactory.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\payments\gcash\GCashPaymentProcessor.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\payments\PaymentFactory.java
+C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\payments\PaymentProcessor.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\CheckoutService.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\ItemService.java
 C:\Users\Khenyshi\Documents\GitHub\OOP_POS\J_POS\src\main\java\com\mycompany\j_pos\services\LoginService.java
