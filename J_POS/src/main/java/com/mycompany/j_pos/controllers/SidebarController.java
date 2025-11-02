@@ -6,7 +6,7 @@ package com.mycompany.j_pos.controllers;
 
 import com.mycompany.j_pos.controllers.SidebarFunctions.editTax;
 import com.mycompany.j_pos.ui.MainFrame;
-import com.mycompany.j_pos.ui.Navigation;
+import com.mycompany.j_pos.ui.components.Navigation;
 import com.mycompany.j_pos.ui.components.login_sections.login_panel_components.InputFieldsPanel;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;

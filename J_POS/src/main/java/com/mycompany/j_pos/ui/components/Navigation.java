@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.j_pos.ui;
+package com.mycompany.j_pos.ui.components;
 
 import com.mycompany.j_pos.controllers.SidebarController;
 import com.mycompany.j_pos.ui.builders.ButtonBuilder;
@@ -58,7 +58,8 @@ public class Navigation extends JPanel{
         contentPanel.add(navigationPanel, "NAVIGATION");
         contentPanel.add(createBlankPanel(), "BLANK");
         
-        cardLayout.show(contentPanel, "BLANK");
+//        cardLayout.show(contentPanel, "BLANK");
+        cardLayout.show(contentPanel, "NAVIGATION");
         this.add(contentPanel, BorderLayout.CENTER);
     }
     

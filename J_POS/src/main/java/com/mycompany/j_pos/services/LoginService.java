@@ -6,7 +6,7 @@ package com.mycompany.j_pos.services;
 
 import com.mycompany.j_pos.database.SQLiteConnect;
 import com.mycompany.j_pos.ui.MainFrame;
-import com.mycompany.j_pos.ui.Navigation;
+import com.mycompany.j_pos.ui.components.Navigation;
 import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.ItemsListPanel;
 import com.mycompany.j_pos.ui.utils.commons.AppConstants;
 import java.sql.Connection;

@@ -8,7 +8,7 @@ import com.mycompany.j_pos.models.cart.*;
 import com.mycompany.j_pos.models.items.*;
 import com.mycompany.j_pos.models.sale.*;
 import com.mycompany.j_pos.services.*;
-import com.mycompany.j_pos.ui.Navigation;
+import com.mycompany.j_pos.ui.components.Navigation;
 import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.ItemsListPanel;
 import com.mycompany.j_pos.ui.utils.LoadResources;
 import java.util.ArrayList;
@@ -100,7 +100,7 @@ public class POSFacade {
         saleService.saveSale(sale);
 
         // 3️⃣ Print receipt
-        receiptService.printReceipt(
+        receiptService.printReceiptToPDF(
             sale,
             cart.getTaxAmount(),
             cart.getDiscountAmount()

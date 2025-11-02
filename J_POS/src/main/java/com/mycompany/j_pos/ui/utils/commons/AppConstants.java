@@ -8,7 +8,8 @@ public class AppConstants {
     public static final String APP_TITLE = "POS";
     public static final String DEFAULT_FONT = "SansSerif";
     public static final int DEFAULT_QUANTITY = 1;
-    public static boolean isAdmin = false;
+//    public static boolean isAdmin = false;
+    public static boolean isAdmin = true;
     
     // Sample Datas
     public static String DEFAULT_CASHIER_NAME = "FALLBACK_NAME";

@@ -4,6 +4,7 @@
  */
 package com.mycompany.j_pos.ui;
 
+import com.mycompany.j_pos.ui.components.Navigation;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.components.CashierUI;
 import com.mycompany.j_pos.ui.components.InventoryUI;
@@ -67,8 +68,10 @@ public class MainFrame extends JFrame{
          displayPanel.add(new SalesUI(), "SALES");
          displayPanel.add(new InventoryUI(), "INVENTORY");
          displayPanel.add(new ManageEmployeesUI(), "EMPLOYEES");
+         displayPanel.add(new CashierUI(), "CASHIER");
          
-         changeCard("LOGIN");
+//         changeCard("LOGIN");
+         changeCard("CASHIER");
          
          mainPanel.add(navigation, BorderLayout.WEST);
          mainPanel.add(displayPanel, BorderLayout.CENTER);
