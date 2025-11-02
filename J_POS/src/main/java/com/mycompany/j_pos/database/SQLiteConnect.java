@@ -29,7 +29,7 @@ public class SQLiteConnect {
             Class.forName("org.sqlite.JDBC");
             
             conn = DriverManager.getConnection(url);
-            conn.setAutoCommit(true); // ✅ EXPLICITLY ENABLE AUTO-COMMIT
+            conn.setAutoCommit(true);
             
             System.out.println("✅ Connected to SQLite at: " + dbPath);
             

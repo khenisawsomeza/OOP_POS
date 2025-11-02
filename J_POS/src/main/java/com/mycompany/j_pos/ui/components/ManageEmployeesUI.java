@@ -22,26 +22,21 @@ public class ManageEmployeesUI extends JPanel {
         setBackground(Color.WHITE);
         setLayout(new BorderLayout());
         
-        // Create header panel
         JPanel headerPanel = createHeaderPanel();
         add(headerPanel, BorderLayout.NORTH);
         
-        // Create main content panel
         JPanel contentPanel = new JPanel(new BorderLayout(20, 0));
         contentPanel.setBackground(Color.WHITE);
         contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
-        // Left side: Form panel
         JPanel formPanel = createFormPanel();
         contentPanel.add(formPanel, BorderLayout.WEST);
         
-        // Right side: Table panel
         JPanel tablePanel = createTablePanel();
         contentPanel.add(tablePanel, BorderLayout.CENTER);
         
         add(contentPanel, BorderLayout.CENTER);
         
-        // Load employees from database
         loadEmployeesFromDatabase();
         
         setVisible(true);
@@ -71,7 +66,6 @@ public class ManageEmployeesUI extends JPanel {
         ));
         formContainer.setPreferredSize(new Dimension(350, 0));
         
-        // Add form fields
         formContainer.add(createFieldPanel("Full Name", nameField = createTextField()));
         formContainer.add(Box.createVerticalStrut(15));
         
@@ -87,7 +81,6 @@ public class ManageEmployeesUI extends JPanel {
         formContainer.add(createFieldPanel("Email", emailField = createTextField()));
         formContainer.add(Box.createVerticalStrut(15));
         
-        // Role dropdown
         JPanel rolePanel = new JPanel();
         rolePanel.setLayout(new BoxLayout(rolePanel, BoxLayout.Y_AXIS));
         rolePanel.setBackground(new Color(250, 250, 250));
@@ -170,7 +163,6 @@ public class ManageEmployeesUI extends JPanel {
         JButton deleteBtn = createButton("Delete", new Color(244, 67, 54));
         JButton clearBtn = createButton("Clear", new Color(158, 158, 158));
         
-        // Add action listeners
         saveBtn.addActionListener(e -> saveEmployee());
         editBtn.addActionListener(e -> editEmployee());
         deleteBtn.addActionListener(e -> deleteEmployee());
@@ -210,8 +202,7 @@ public class ManageEmployeesUI extends JPanel {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(new Color(250, 250, 250));
         panel.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1));
-        
-        // Create table model
+
         String[] columnNames = {"ID", "Username", "Full Name", "Gender", "Age", "Contact", "Email"};
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
@@ -220,7 +211,6 @@ public class ManageEmployeesUI extends JPanel {
             }
         };
         
-        // Create table
         employeeTable = new JTable(tableModel);
         employeeTable.setBackground(Color.WHITE);
         employeeTable.setForeground(Color.BLACK);
@@ -231,15 +221,13 @@ public class ManageEmployeesUI extends JPanel {
         employeeTable.setSelectionForeground(Color.BLACK);
         employeeTable.setShowVerticalLines(true);
         employeeTable.setShowHorizontalLines(true);
-        
-        // Add row selection listener
+
         employeeTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && employeeTable.getSelectedRow() != -1) {
                 populateFieldsFromTable();
             }
         });
         
-        // Style table header
         JTableHeader header = employeeTable.getTableHeader();
         header.setBackground(new Color(230, 230, 230));
         header.setForeground(new Color(76, 175, 80));
@@ -247,7 +235,6 @@ public class ManageEmployeesUI extends JPanel {
         header.setPreferredSize(new Dimension(0, 40));
         header.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(76, 175, 80)));
         
-        // Create scroll pane
         JScrollPane scrollPane = new JScrollPane(employeeTable);
         scrollPane.setBackground(new Color(250, 250, 250));
         scrollPane.getViewport().setBackground(Color.WHITE);
@@ -311,10 +298,8 @@ public class ManageEmployeesUI extends JPanel {
             return;
         }
         
-        // Extract first name from full name
         String firstName = fullName.split("\\s+")[0];
         
-        // Get next user ID
         int nextUserId = getNextUserId();
         if (nextUserId == -1) {
             JOptionPane.showMessageDialog(this, 
@@ -324,10 +309,8 @@ public class ManageEmployeesUI extends JPanel {
             return;
         }
         
-        // Generate username: userID + firstName (e.g., 001john)
         String username = String.format("%03d%s", nextUserId, firstName.toLowerCase());
         
-        // Generate password: role + firstName (e.g., employeeJohn)
         String password = role + firstName;
         
         String insertUser = "INSERT INTO users (username, password, full_name, gender, age, contact, email, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -382,7 +365,7 @@ public class ManageEmployeesUI extends JPanel {
                 int maxId = rs.getInt("max_id");
                 return maxId + 1;
             }
-            return 1; // First user
+            return 1;
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -416,10 +399,8 @@ public class ManageEmployeesUI extends JPanel {
             return;
         }
         
-        // Extract first name from full name
         String firstName = fullName.split("\\s+")[0];
         
-        // Generate new username and password based on current user ID and new name
         String username = String.format("%s%s", userId, firstName.toLowerCase());
         String password = role + firstName;
         
