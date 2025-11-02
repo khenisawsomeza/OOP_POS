@@ -1,7 +1,7 @@
 package com.mycompany.j_pos.controllers;
 
 import com.mycompany.j_pos.controllers.SidebarFunctions.EditDiscount;
-import com.mycompany.j_pos.controllers.SidebarFunctions.EditTax;
+import com.mycompany.j_pos.controllers.SidebarFunctions.editTax;
 import com.mycompany.j_pos.models.cart.Cart;
 import com.mycompany.j_pos.ui.MainFrame;
 import com.mycompany.j_pos.ui.components.Navigation;
@@ -77,7 +77,7 @@ public class SidebarController {
     }
     
     public void editTax(){
-        EditTax.setTax();
+        editTax.setTax();
         cartpanel.refreshCartDisplay();
     }
     
