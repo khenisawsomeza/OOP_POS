@@ -7,6 +7,10 @@ package com.mycompany.j_pos.facade;
 import com.mycompany.j_pos.models.cart.*;
 import com.mycompany.j_pos.models.items.*;
 import com.mycompany.j_pos.models.sale.*;
+import com.mycompany.j_pos.payments.PaymentFactory;
+import com.mycompany.j_pos.payments.PaymentProcessor;
+import com.mycompany.j_pos.payments.cash.CashPaymentFactory;
+import com.mycompany.j_pos.payments.gcash.GCashPaymentFactory;
 import com.mycompany.j_pos.services.*;
 import com.mycompany.j_pos.ui.components.Navigation;
 import com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components.ItemsListPanel;
@@ -90,6 +94,22 @@ public class POSFacade {
             );
             return null;
         }
+        
+        //add pop up first for gcash or cash
+        String paymentOption = "cash";
+        
+        PaymentProcessor processor = null;
+        
+        switch(paymentOption.toLowerCase()){
+            case "cash":
+                PaymentFactory cashFactory = new CashPaymentFactory();
+                processor = cashFactory.createProcessor();
+            case "gcash":
+                PaymentFactory GCashFactory = new GCashPaymentFactory();
+                processor = GCashFactory.createProcessor();
+        }
+        
+        processor.processPayment();
 
         // Create sale from cart
         Sale sale = saleService.createSaleFromCart(cart);
