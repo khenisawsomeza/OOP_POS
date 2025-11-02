@@ -1,6 +1,7 @@
 package com.mycompany.j_pos.ui.components;
 
 import com.mycompany.j_pos.database.SQLiteConnect;
+import com.mycompany.j_pos.ui.utils.commons.themes.UIColors;
 import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
@@ -19,14 +20,14 @@ public class ManageEmployeesUI extends JPanel {
     
     public ManageEmployeesUI() {
         setPreferredSize(new Dimension(1280, 720));
-        setBackground(Color.WHITE);
+        setBackground(UIColors.WHITE);
         setLayout(new BorderLayout());
         
         JPanel headerPanel = createHeaderPanel();
         add(headerPanel, BorderLayout.NORTH);
         
         JPanel contentPanel = new JPanel(new BorderLayout(20, 0));
-        contentPanel.setBackground(Color.WHITE);
+        contentPanel.setBackground(UIColors.WHITE);
         contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
         JPanel formPanel = createFormPanel();
@@ -44,13 +45,13 @@ public class ManageEmployeesUI extends JPanel {
     
     private JPanel createHeaderPanel() {
         JPanel header = new JPanel();
-        header.setBackground(new Color(240, 240, 240));
+        header.setBackground(UIColors.PRIMARY_GREEN_LIGHTMODE);
         header.setPreferredSize(new Dimension(0, 80));
         header.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 25));
         
         JLabel titleLabel = new JLabel("Manage Employees");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setForeground(new Color(76, 175, 80));
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        titleLabel.setForeground(UIColors.WHITE);
         header.add(titleLabel);
         
         return header;
@@ -59,9 +60,9 @@ public class ManageEmployeesUI extends JPanel {
     private JPanel createFormPanel() {
         JPanel formContainer = new JPanel();
         formContainer.setLayout(new BoxLayout(formContainer, BoxLayout.Y_AXIS));
-        formContainer.setBackground(new Color(250, 250, 250));
+        formContainer.setBackground(UIColors.LIGHT_GRAY_LIGHTMODE);
         formContainer.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+            BorderFactory.createLineBorder(UIColors.BORDER_GRAY, 1),
             BorderFactory.createEmptyBorder(20, 20, 20, 20)
         ));
         formContainer.setPreferredSize(new Dimension(350, 0));
@@ -83,21 +84,21 @@ public class ManageEmployeesUI extends JPanel {
         
         JPanel rolePanel = new JPanel();
         rolePanel.setLayout(new BoxLayout(rolePanel, BoxLayout.Y_AXIS));
-        rolePanel.setBackground(new Color(250, 250, 250));
+        rolePanel.setBackground(UIColors.LIGHT_GRAY_LIGHTMODE);
         rolePanel.setMaximumSize(new Dimension(310, 70));
         rolePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         JLabel roleLabel = new JLabel("Role");
-        roleLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        roleLabel.setForeground(Color.BLACK);
+        roleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        roleLabel.setForeground(UIColors.BLACK);
         roleLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         roleComboBox = new JComboBox<>(new String[]{"employee", "admin"});
         roleComboBox.setPreferredSize(new Dimension(310, 35));
         roleComboBox.setMaximumSize(new Dimension(310, 35));
-        roleComboBox.setFont(new Font("Arial", Font.PLAIN, 14));
+        roleComboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         roleComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-        roleComboBox.setBackground(Color.WHITE);
+        roleComboBox.setBackground(UIColors.WHITE);
         
         rolePanel.add(roleLabel);
         rolePanel.add(Box.createVerticalStrut(5));
@@ -118,13 +119,13 @@ public class ManageEmployeesUI extends JPanel {
     private JPanel createFieldPanel(String label, JTextField textField) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(250, 250, 250));
+        panel.setBackground(UIColors.LIGHT_GRAY_LIGHTMODE);
         panel.setMaximumSize(new Dimension(310, 70));
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         JLabel fieldLabel = new JLabel(label);
-        fieldLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        fieldLabel.setForeground(Color.BLACK);
+        fieldLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        fieldLabel.setForeground(UIColors.BLACK);
         fieldLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         
         textField.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -140,12 +141,12 @@ public class ManageEmployeesUI extends JPanel {
         JTextField field = new JTextField();
         field.setPreferredSize(new Dimension(310, 35));
         field.setMaximumSize(new Dimension(310, 35));
-        field.setBackground(Color.WHITE);
-        field.setForeground(Color.BLACK);
-        field.setCaretColor(Color.BLACK);
-        field.setFont(new Font("Arial", Font.PLAIN, 14));
+        field.setBackground(UIColors.WHITE);
+        field.setForeground(UIColors.BLACK);
+        field.setCaretColor(UIColors.BLACK);
+        field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         field.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(180, 180, 180), 1),
+            BorderFactory.createLineBorder(UIColors.BORDER_GRAY, 1),
             BorderFactory.createEmptyBorder(5, 10, 5, 10)
         ));
         
@@ -154,14 +155,14 @@ public class ManageEmployeesUI extends JPanel {
     
     private JPanel createButtonPanel() {
         JPanel panel = new JPanel(new GridLayout(2, 2, 10, 10));
-        panel.setBackground(new Color(250, 250, 250));
+        panel.setBackground(UIColors.LIGHT_GRAY_LIGHTMODE);
         panel.setMaximumSize(new Dimension(310, 90));
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         
-        JButton saveBtn = createButton("Save", new Color(76, 175, 80));
-        JButton editBtn = createButton("Edit", new Color(255, 193, 7)); // Gold color
-        JButton deleteBtn = createButton("Delete", new Color(244, 67, 54));
-        JButton clearBtn = createButton("Clear", new Color(158, 158, 158));
+        JButton saveBtn = createButton("Save", UIColors.PRIMARY_GREEN_LIGHTMODE);
+        JButton editBtn = createButton("Edit", UIColors.LIGHT_GREEN_LIGHTMODE);
+        JButton deleteBtn = createButton("Delete", new Color(244, 67, 54)); // Red for delete
+        JButton clearBtn = createButton("Clear", UIColors.BORDER_GRAY);
         
         saveBtn.addActionListener(e -> saveEmployee());
         editBtn.addActionListener(e -> editEmployee());
@@ -178,9 +179,9 @@ public class ManageEmployeesUI extends JPanel {
     
     private JButton createButton(String text, Color bgColor) {
         JButton btn = new JButton(text);
-        btn.setFont(new Font("Arial", Font.BOLD, 12));
+        btn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         btn.setBackground(bgColor);
-        btn.setForeground(Color.WHITE);
+        btn.setForeground(UIColors.WHITE);
         btn.setFocusPainted(false);
         btn.setBorderPainted(false);
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -188,7 +189,7 @@ public class ManageEmployeesUI extends JPanel {
         
         btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn.setBackground(bgColor.brighter());
+                btn.setBackground(UIColors.adjustBrightness(bgColor, 1.2f));
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn.setBackground(bgColor);
@@ -200,8 +201,8 @@ public class ManageEmployeesUI extends JPanel {
     
     private JPanel createTablePanel() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(new Color(250, 250, 250));
-        panel.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1));
+        panel.setBackground(UIColors.LIGHT_GRAY_LIGHTMODE);
+        panel.setBorder(BorderFactory.createLineBorder(UIColors.BORDER_GRAY, 1));
 
         String[] columnNames = {"ID", "Username", "Full Name", "Gender", "Age", "Contact", "Email"};
         tableModel = new DefaultTableModel(columnNames, 0) {
@@ -212,13 +213,13 @@ public class ManageEmployeesUI extends JPanel {
         };
         
         employeeTable = new JTable(tableModel);
-        employeeTable.setBackground(Color.WHITE);
-        employeeTable.setForeground(Color.BLACK);
-        employeeTable.setFont(new Font("Arial", Font.PLAIN, 13));
+        employeeTable.setBackground(UIColors.WHITE);
+        employeeTable.setForeground(UIColors.BLACK);
+        employeeTable.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         employeeTable.setRowHeight(35);
-        employeeTable.setGridColor(new Color(220, 220, 220));
-        employeeTable.setSelectionBackground(new Color(76, 175, 80, 100));
-        employeeTable.setSelectionForeground(Color.BLACK);
+        employeeTable.setGridColor(UIColors.LIGHT_GRAY_LIGHTMODE);
+        employeeTable.setSelectionBackground(UIColors.adjustBrightness(UIColors.LIGHT_GREEN_LIGHTMODE, 1.2f));
+        employeeTable.setSelectionForeground(UIColors.BLACK);
         employeeTable.setShowVerticalLines(true);
         employeeTable.setShowHorizontalLines(true);
 
@@ -229,15 +230,15 @@ public class ManageEmployeesUI extends JPanel {
         });
         
         JTableHeader header = employeeTable.getTableHeader();
-        header.setBackground(new Color(230, 230, 230));
-        header.setForeground(new Color(76, 175, 80));
-        header.setFont(new Font("Arial", Font.BOLD, 14));
+        header.setBackground(UIColors.PRIMARY_GREEN_LIGHTMODE);
+        header.setForeground(UIColors.WHITE);
+        header.setFont(new Font("Segoe UI", Font.BOLD, 14));
         header.setPreferredSize(new Dimension(0, 40));
-        header.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(76, 175, 80)));
+        header.setBorder(BorderFactory.createEmptyBorder());
         
         JScrollPane scrollPane = new JScrollPane(employeeTable);
-        scrollPane.setBackground(new Color(250, 250, 250));
-        scrollPane.getViewport().setBackground(Color.WHITE);
+        scrollPane.setBackground(UIColors.LIGHT_GRAY_LIGHTMODE);
+        scrollPane.getViewport().setBackground(UIColors.WHITE);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         
         panel.add(scrollPane, BorderLayout.CENTER);
