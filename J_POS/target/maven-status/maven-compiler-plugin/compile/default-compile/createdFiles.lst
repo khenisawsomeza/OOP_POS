@@ -3,7 +3,8 @@ com\mycompany\j_pos\ui\components\InventoryUI.class
 com\mycompany\j_pos\ui\components\SalesUI.class
 com\mycompany\j_pos\ui\components\inventory_sections\InventoryHeaderPanel.class
 com\mycompany\j_pos\ui\components\ManageEmployeesUI.class
-com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\InventoryItemListPanel$Item.class
+com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\InventoryItemPanel.class
 com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\FilterPanel.class
 com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\InventoryItemListPanel.class
+com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\FilterPanel$1.class
 com\mycompany\j_pos\ui\components\inventory_sections\InventoryContentPanel.class
