@@ -5,7 +5,7 @@ import com.mycompany.j_pos.ui.builders.ButtonBuilder;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.builders.TextFieldBuilder;
-import com.mycompany.j_pos.ui.components.cashier_sections.cashier_functions.SearchFunction;
+import com.mycompany.j_pos.ui.components.cashier_sections.items_functions.SearchFunction;
 import com.mycompany.j_pos.ui.utils.LoadResources;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;

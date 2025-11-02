@@ -36,6 +36,10 @@ public class SaleLineItem implements SaleComponent {
     public int getQuantity() {
         return quantity;
     }
+    
+    public double getItemTotal() {
+        return price * quantity;
+    }
 
     @Override
     public String toString() {

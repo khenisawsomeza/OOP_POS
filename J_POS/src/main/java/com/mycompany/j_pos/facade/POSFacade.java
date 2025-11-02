@@ -93,20 +93,20 @@ public class POSFacade {
             return null;
         }
 
-        // 1️⃣ Create sale from cart
+        // Create sale from cart
         Sale sale = saleService.createSaleFromCart(cart);
 
-        // 2️⃣ Save sale record
+        // Save sale record
         saleService.saveSale(sale);
 
-        // 3️⃣ Print receipt
+        // Print receipt
         receiptService.printReceiptToPDF(
             sale,
             cart.getTaxAmount(),
-            cart.getDiscountAmount()
+            sale.getDiscountAmount()
         );
 
-        // 4️⃣ Clear cart
+        // Clear cart
         cart.clearCart();
         System.out.println("Checkout completed successfully!");
 
