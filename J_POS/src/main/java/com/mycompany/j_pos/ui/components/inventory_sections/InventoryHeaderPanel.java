@@ -5,10 +5,12 @@
 package com.mycompany.j_pos.ui.components.inventory_sections;
 
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
+import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -38,9 +40,12 @@ public class InventoryHeaderPanel extends JPanel {
         JLabel title = new LabelBuilder()
                 .withText("Inventory")
                 .withFont(Font.BOLD, 30)
+                .withBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0))
                 .withForeground(themeManager.getInstance().getTextForeground())
                 .build();
         
         return title;
     }
+    
+    
 }

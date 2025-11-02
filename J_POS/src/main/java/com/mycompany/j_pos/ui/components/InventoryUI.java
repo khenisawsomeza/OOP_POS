@@ -5,6 +5,7 @@
 package com.mycompany.j_pos.ui.components;
 
 import com.mycompany.j_pos.ui.components.inventory_sections.InventoryHeaderPanel;
+import com.mycompany.j_pos.ui.components.inventory_sections.InventoryContentPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,5 +29,6 @@ public class InventoryUI extends JPanel {
     
     private void createComponents(){
         add(new InventoryHeaderPanel(), BorderLayout.NORTH);
+        add(new InventoryContentPanel(), BorderLayout.CENTER);
     }
 }
