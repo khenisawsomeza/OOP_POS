@@ -32,4 +32,8 @@ com\mycompany\j_pos\payments\gcash\GCashPaymentFactory.class
 com\mycompany\j_pos\ui\components\inventory_sections\inventory_content_panel_components\FilterPanel$1.class
 >>>>>>> main
 com\mycompany\j_pos\ui\components\inventory_sections\InventoryContentPanel.class
+<<<<<<< HEAD
 com\mycompany\j_pos\models\sale\DiscountType.class
+=======
+com\mycompany\j_pos\ui\components\SalesUI$1.class
+>>>>>>> jhoe-updates
