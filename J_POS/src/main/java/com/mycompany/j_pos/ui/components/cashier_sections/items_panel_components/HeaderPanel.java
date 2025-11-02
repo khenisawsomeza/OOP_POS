@@ -1,12 +1,10 @@
 package com.mycompany.j_pos.ui.components.cashier_sections.items_panel_components;
 
 import com.mycompany.j_pos.models.items.Item;
-import com.mycompany.j_pos.ui.MainFrame;
 import com.mycompany.j_pos.ui.builders.ButtonBuilder;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.builders.TextFieldBuilder;
-import com.mycompany.j_pos.ui.components.cashier_sections.MenuBurgerSidebar;
 import com.mycompany.j_pos.ui.components.cashier_sections.cashier_functions.SearchFunction;
 import com.mycompany.j_pos.ui.utils.LoadResources;
 import com.mycompany.j_pos.ui.utils.commons.Icons;
@@ -60,14 +58,6 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
                 .withLayout(new FlowLayout(FlowLayout.LEFT, 15, 10))
                 .transparent()
                 .build();
-
-        menuButton = createIconButton(() -> theme.getMenuIcon());
-        attachSidebarToggle();
-        navigationPanel.add(menuButton);
-
-        darkModeButton = createIconButton(() -> theme.getDarkModeToggleIcon());
-        darkModeButton.addActionListener(e -> theme.toggleDarkMode());
-        navigationPanel.add(darkModeButton);
 
         searchButton = createIconButton(() -> theme.getSearchIcon());
         attachSearchToggle();
@@ -145,8 +135,8 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
     private JTextField createSearchField() {
         
         JTextField field = new TextFieldBuilder()
-                .withPlaceholder("", 20)
-                .withFont(Font.PLAIN, 16)
+                .withPlaceholder("", 16)
+                .withFont(Font.PLAIN, 12)
                 .withBackground(Color.WHITE)
                 .withForeground(theme.getStaticBlack())
                 .build();       
@@ -180,14 +170,5 @@ public class HeaderPanel extends JPanel implements themeManager.ThemeChangeListe
     @Override
     public void onThemeChange(boolean isDarkMode) {
         applyTheme();
-    }
-
-    private void attachSidebarToggle() {
-        menuButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent e) {
-                MenuBurgerSidebar.getInstance().onSidebar();
-            }
-        });
     }
 }
