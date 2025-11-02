@@ -6,6 +6,7 @@ package com.mycompany.j_pos.ui.components.cashier_sections.items_panel_component
 
 import com.mycompany.j_pos.models.cart.Cart;
 import com.mycompany.j_pos.models.items.Item;
+import com.mycompany.j_pos.models.sale.Sale;
 import com.mycompany.j_pos.ui.builders.LabelBuilder;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.components.cashier_sections.CartPanel;
@@ -34,6 +35,7 @@ public class ItemCard extends JPanel implements themeManager.ThemeChangeListener
     private final JPanel picturePanel;
     private final Item item;
     private final CartPanel cartPanel = CartPanel.getInstance(); 
+    private final Sale sale = Sale.getInstance(); 
 
     public ItemCard(Item item) {
         this.item = item;
@@ -41,7 +43,6 @@ public class ItemCard extends JPanel implements themeManager.ThemeChangeListener
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        setToolTipText("Click to add " + item.getName() + " to cart");
 
         pictureLabel = createPictureLabel();
         promptLabel = createPromptLabel();
@@ -122,6 +123,7 @@ public class ItemCard extends JPanel implements themeManager.ThemeChangeListener
             @Override
             public void mouseClicked(MouseEvent e) {
                 cart.addItem(item);
+                sale.refreshDiscount();
                 cartPanel.refreshCartDisplay();
             }
 

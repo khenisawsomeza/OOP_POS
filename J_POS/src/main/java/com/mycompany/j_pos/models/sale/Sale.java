@@ -13,6 +13,7 @@ public class Sale implements SaleComponent {
     private final Cart cart = Cart.getInstance();
     private final List<SaleComponent> lineItems;
     private static Sale instance;
+    private DiscountType discountType;
     private double discountAmount;
     private String transactionId;
     
@@ -45,8 +46,30 @@ public class Sale implements SaleComponent {
         lineItems.remove(item);
     }
 
-    public void applyDiscount(double amount) {
-        this.discountAmount += amount;
+    public void applyDiscount(double amount, DiscountType discounttype) {
+        this.discountType = discounttype;
+
+        if (discountType == DiscountType.PERCENTAGE) {
+            this.discountAmount = amount; // Store the percentage value
+            cart.setDiscountAmount(cart.getSubtotal() * (amount/100.0));
+        } else {
+            this.discountAmount = amount; // Store the fixed amount
+            cart.setDiscountAmount(amount);
+        }
+    }
+    
+    public void refreshDiscount(){
+        if (discountType == DiscountType.PERCENTAGE) {
+            cart.setDiscountAmount(cart.getSubtotal() * (this.discountAmount/100.0));
+        } else {
+            cart.setDiscountAmount(this.discountAmount);
+        }
+    }
+    
+    public void clearDiscount() {
+        this.discountAmount = 0.0;
+        this.discountType = null;
+        cart.setDiscountAmount(0.0);
     }
     
     public void removeDiscount(double amount) {
@@ -57,12 +80,12 @@ public class Sale implements SaleComponent {
         return discountAmount;
     }
     
+    public String getDiscountType() {
+        return ""+discountType;
+    }
+    
     public double getSubtotal() {
-        double subtotal = 0;
-        for (SaleComponent item : lineItems) {
-            subtotal += item.getTotal();
-        }
-        return subtotal;
+        return cart.getSubtotal();
     }
     
     public List<SaleComponent> getItems() {

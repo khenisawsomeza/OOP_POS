@@ -84,7 +84,8 @@ public class CartSummaryPanel extends JPanel implements themeManager.ThemeChange
         subtotalAmountLabel.setText(cart.getFormattedSubtotal());
         discountAmountLabel.setText(cart.getFormattedDiscount());
         
-
+        revalidate();
+        repaint();
     }
 
     private void applyTheme() {

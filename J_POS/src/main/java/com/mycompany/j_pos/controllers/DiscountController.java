@@ -1,7 +1,6 @@
 package com.mycompany.j_pos.controllers;
 
 import com.mycompany.j_pos.core.CommandInvoker;
-import com.mycompany.j_pos.models.cart.Cart;
 import com.mycompany.j_pos.models.sale.DiscountType;
 import com.mycompany.j_pos.models.sale.Sale;
 import com.mycompany.j_pos.services.ApplyDiscountCommandService;
@@ -73,6 +72,8 @@ public class DiscountController {
                 "Discount Applied",
                 JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        
         
         return success;
     }

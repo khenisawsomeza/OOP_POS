@@ -1,40 +1,33 @@
 package com.mycompany.j_pos.services;
 
 import com.mycompany.j_pos.core.BaseCommand;
+import com.mycompany.j_pos.models.cart.Cart;
 import com.mycompany.j_pos.models.sale.DiscountType;
 import com.mycompany.j_pos.models.sale.Sale;
+import com.mycompany.j_pos.ui.components.cashier_sections.CartPanel;
+
 import javax.swing.JOptionPane;
 
 public class ApplyDiscountCommandService extends BaseCommand {
     private Sale sale;
+    private Cart cart;
     private DiscountType discountType;
     private double discountValue;
     private String reason;
-    private String authorizationCode;
     private double calculatedDiscount;
+    private CartPanel cartpanel = CartPanel.getInstance();
     
-    public ApplyDiscountCommandService(Sale sale,
-                                DiscountType discountType,
-                                double discountValue,
-                                String reason,
-                                String executedBy,
-                                String authorizationCode) {
-        super(executedBy);
-        this.sale = sale;
-        this.discountType = discountType;
-        this.discountValue = discountValue;
-        this.reason = reason;
-        this.authorizationCode = authorizationCode;
-        this.calculatedDiscount = 0.0;
-    }
-    
-    // Overloaded constructor without authorization code
     public ApplyDiscountCommandService(Sale sale,
                                 DiscountType discountType,
                                 double discountValue,
                                 String reason,
                                 String executedBy) {
-        this(sale, discountType, discountValue, reason, executedBy, null);
+        super(executedBy);
+        this.sale = sale;
+        this.discountType = discountType;
+        this.discountValue = discountValue;
+        this.reason = reason;
+        this.calculatedDiscount = 0.0;
     }
     
     @Override
@@ -43,15 +36,14 @@ public class ApplyDiscountCommandService extends BaseCommand {
             System.out.println("Command already executed");
             return false;
         }
-        
-        // Calculate actual discount amount
+
+        // Validate input
         if (discountType == DiscountType.PERCENTAGE) {
             if (discountValue < 0 || discountValue > 100) {
                 System.out.println("Invalid percentage: must be between 0 and 100");
                 return false;
             }
-            JOptionPane.showMessageDialog(null, sale.getTotal());
-            calculatedDiscount = sale.getTotal() * (discountValue / 100.0);
+            calculatedDiscount = sale.getSubtotal() * (discountValue / 100.0);
         } else {
             if (discountValue < 0) {
                 System.out.println("Invalid discount amount: cannot be negative");
@@ -59,15 +51,17 @@ public class ApplyDiscountCommandService extends BaseCommand {
             }
             calculatedDiscount = discountValue;
         }
-        
+
         // Validate discount doesn't exceed subtotal
         if (calculatedDiscount > sale.getSubtotal()) {
             System.out.println("Discount cannot exceed subtotal");
             return false;
         }
-        
-        sale.applyDiscount(calculatedDiscount);
+
+        // Pass the original discount value (percentage or fixed amount), not the calculated amount
+        sale.applyDiscount(discountValue, discountType);
         executed = true;
+        cartpanel.refreshCartDisplay();
         System.out.println("Discount applied: ₱" + String.format("%.2f", calculatedDiscount));
         return true;
     }
@@ -78,8 +72,9 @@ public class ApplyDiscountCommandService extends BaseCommand {
             System.out.println("Command was not executed, cannot undo");
             return false;
         }
-        
-        sale.removeDiscount(calculatedDiscount);
+
+        sale.clearDiscount(); // Assuming Sale has a clearDiscount() method
+        cartpanel.refreshCartDisplay();
         executed = false;
         System.out.println("Discount undone: ₱" + String.format("%.2f", calculatedDiscount));
         return true;
@@ -92,10 +87,9 @@ public class ApplyDiscountCommandService extends BaseCommand {
             : "₱" + String.format("%.2f", discountValue);
         
         return String.format("[%s] APPLY_DISCOUNT | Transaction: %s | Type: %s | Value: %s | " +
-                           "Calculated: ₱%.2f | Reason: %s | Auth: %s | By: %s",
+                           "Calculated: ₱%.2f | Reason: %s | By: %s",
             timestamp, sale.getTransactionId(), discountType, discountDesc,
-            calculatedDiscount, reason,
-            authorizationCode != null ? authorizationCode : "N/A", executedBy);
+            calculatedDiscount, reason, executedBy);
     }
     
     public double getCalculatedDiscount() {

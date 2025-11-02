@@ -20,6 +20,7 @@ public class POSFacade {
     private static POSFacade instance;
 
     private final Cart cart;
+    private final Sale sale;
 //    private final ItemService itemService;
     private final SaleService saleService;
     private final ReceiptService receiptService;
@@ -28,6 +29,7 @@ public class POSFacade {
 
     private POSFacade() {
         this.cart = Cart.getInstance();
+        this.sale = Sale.getInstance();
 //        this.itemService = new ItemService();
         this.saleService = new SaleService();
         this.receiptService = new ReceiptService();
@@ -76,10 +78,6 @@ public class POSFacade {
         return cart.getTotalItemCount();
     }
 
-    public void applyDiscount(double amount) {
-        cart.setDiscountAmount(amount);
-    }
-
     /** Finalizes the sale: creates Sale, saves it, prints receipt, clears cart. */
     public Sale checkout() {
         if (cart.isEmpty()) {
@@ -103,7 +101,7 @@ public class POSFacade {
         receiptService.printReceiptToPDF(
             sale,
             cart.getTaxAmount(),
-            sale.getDiscountAmount()
+            cart.getDiscountAmount()
         );
 
         // Clear cart

@@ -6,6 +6,7 @@ import com.mycompany.j_pos.ui.components.cashier_sections.cart_panel_components.
 import com.mycompany.j_pos.ui.components.cashier_sections.cart_panel_components.top_section.cashierPanel;
 import com.mycompany.j_pos.ui.components.cashier_sections.cart_panel_components.top_section.CartTitlePanel;
 import com.mycompany.j_pos.models.cart.Cart;
+import com.mycompany.j_pos.models.sale.Sale;
 import com.mycompany.j_pos.ui.builders.PanelBuilder;
 import com.mycompany.j_pos.ui.utils.commons.themes.themeManager;
 import javax.swing.*;
@@ -102,10 +103,11 @@ public class CartPanel extends JPanel implements themeManager.ThemeChangeListene
 
     // refreshes the current cart
     public void refreshCartDisplay() {
+        Sale.getInstance().refreshDiscount();
         if (itemsSection != null) itemsSection.refreshItems();
         if (summarySection != null) summarySection.refreshSummary();
         if (checkoutSection != null) checkoutSection.refreshCheckout();
-    }   
+    }
 
     // apply theme
     private void applyTheme() {

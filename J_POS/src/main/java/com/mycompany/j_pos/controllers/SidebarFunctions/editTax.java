@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author Marc Jacob
  */
-public class editTax {
+public class EditTax {
     public static void setTax() {
         try {
             String input = JOptionPane.showInputDialog(null, "Input new tax rate (e.g., 12 for 12%)");
