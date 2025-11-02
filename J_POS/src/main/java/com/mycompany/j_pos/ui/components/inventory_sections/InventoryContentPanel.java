@@ -32,7 +32,15 @@ public class InventoryContentPanel extends JPanel{
     
     public void createComponents(){
         add(new FilterPanel(), BorderLayout.NORTH);
-        add(new InventoryItemListPanel(), BorderLayout.CENTER);
+        add(InventoryItemListPanel.getInstance(), BorderLayout.CENTER);
+        
+        JPanel leftMargin = new JPanel();
+        leftMargin.setPreferredSize(new Dimension(50, Integer.MAX_VALUE));
+        JPanel rightMargin = new JPanel();
+        rightMargin.setPreferredSize(new Dimension(50, Integer.MAX_VALUE));
+        
+        add(leftMargin, BorderLayout.WEST);
+        add(rightMargin, BorderLayout.EAST);
     }
 
 }
