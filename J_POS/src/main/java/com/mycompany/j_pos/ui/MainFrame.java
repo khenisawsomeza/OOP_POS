@@ -68,9 +68,10 @@ public class MainFrame extends JFrame{
          displayPanel.add(new SalesUI(), "SALES");
          displayPanel.add(new InventoryUI(), "INVENTORY");
          displayPanel.add(new ManageEmployeesUI(), "EMPLOYEES");
+         displayPanel.add(new CashierUI(), "CASHIER");
          
 //         changeCard("LOGIN");
-         changeCard("INVENTORY");
+         changeCard("CASHIER");
          
          mainPanel.add(navigation, BorderLayout.WEST);
          mainPanel.add(displayPanel, BorderLayout.CENTER);

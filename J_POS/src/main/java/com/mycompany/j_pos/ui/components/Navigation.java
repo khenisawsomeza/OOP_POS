@@ -58,7 +58,8 @@ public class Navigation extends JPanel{
         contentPanel.add(navigationPanel, "NAVIGATION");
         contentPanel.add(createBlankPanel(), "BLANK");
         
-        cardLayout.show(contentPanel, "BLANK");
+//        cardLayout.show(contentPanel, "BLANK");
+        cardLayout.show(contentPanel, "NAVIGATION");
         this.add(contentPanel, BorderLayout.CENTER);
     }
     
